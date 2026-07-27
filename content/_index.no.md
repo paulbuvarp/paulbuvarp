@@ -2,6 +2,8 @@
 
 ## title: "Paul M. H. Buvarp"
 
+\---
+
 <p class="lede">Jeg studerer hva som skjer med kunnskap når maskineriet som bærer den, endrer seg.</p>
 
 Jeg er seniorforsker ved Forsvarets forskningsinstitutt, der jeg arbeider med desinformasjon, påvirkningsoperasjoner og kognitiv sikkerhet. Forskningen min handler om den epistemiske ordenen boktrykkerkunsten bygde over fem hundre år, og om betingelsene som nå demonterer den.
