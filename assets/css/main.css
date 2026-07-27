@@ -41,6 +41,8 @@
   --muted: #6a6e67;
   --mark: #2e4b3c;
   --mark-tint: rgba(46, 75, 60, 0.09);
+  --link: #2f6b52;                      /* inline links inside prose */
+  --link-rule: rgba(47, 107, 82, 0.38);
 
   --display: "Fraunces", Georgia, serif;
   --text: "Spectral", Georgia, "Times New Roman", serif;
@@ -71,6 +73,8 @@
     --muted: #9aa094;
     --mark: #8fb69c;
     --mark-tint: rgba(143, 182, 156, 0.12);
+    --link: #a3cdb2;
+    --link-rule: rgba(163, 205, 178, 0.42);
   }
 }
 
@@ -103,6 +107,11 @@ body {
   margin: 0 auto;
   padding: 0 1.5rem;
 }
+
+/* Padding rather than margin: a top margin on the first heading collapses
+   through the article and vanishes, which left every page but the homepage
+   with its title jammed against the masthead. */
+main.wrap { padding-top: 4rem; }
 
 /* Pages with a sidebar widen by exactly the rail plus its gap, so the
    reading column is the same width as on every other page rather than
@@ -199,7 +208,7 @@ nav.nav a[aria-current="page"] {
 
 .parenthetical {
   position: relative;
-  margin: 4.5rem 0 5rem;
+  margin: 0.5rem 0 5rem;
 }
 
 .parenthetical::before,
@@ -250,8 +259,9 @@ nav.nav a[aria-current="page"] {
     display: none;
   }
   .parenthetical {
-    margin: 2.75rem 0 3.5rem;
+    margin: 0 0 3.5rem;
   }
+  main.wrap { padding-top: 2.5rem; }
 }
 
 /* The name is set quietly and the opening line is the loud element.
@@ -306,7 +316,7 @@ h3 {
   font-size: clamp(1.75rem, 4.6vw, 2.2rem);
   line-height: 1.24;
   letter-spacing: 0.012em;
-  margin: 3.5rem 0 0.6rem;
+  margin: 0 0 0.6rem;
   text-wrap: balance;
 }
 
@@ -569,7 +579,7 @@ footer.foot a:hover {
   color: var(--muted);
   margin: 0.15rem 0 0;
 }
-.eyebrow--top { margin-top: 3.5rem; }
+.eyebrow--top { margin-top: 0; }
 .page-title--tight { margin-top: 0; }
 
 /* --- Language toggle ----------------------------------------------------- */
@@ -846,7 +856,7 @@ footer.foot a:hover {
   .rail {
     position: sticky;
     top: 2.75rem;
-    margin-top: 5.4rem;
+    margin-top: 1.9rem;
     border-top: 0;
     padding-top: 0;
     text-align: right;
@@ -860,7 +870,7 @@ footer.foot a:hover {
     margin-right: -0.75rem;
   }
   .railmain .page-title,
-  .railmain .eyebrow--top { margin-top: 3.5rem; }
+  .railmain .eyebrow--top { margin-top: 0; }
 }
 
 .prevnext {
@@ -999,4 +1009,34 @@ footer.foot a:hover {
   .rule-heading { flex-wrap: wrap; }
   .rule-line { min-width: 1.5rem; }
   .rule-more { margin-left: auto; }
+}
+
+/* --- Inline links -------------------------------------------------------
+   Links inside running text carry a colour of their own, so they are
+   recognisable without hovering. Navigation, footers and index rows keep
+   the quieter treatment: colouring those would make the page busy.
+   ----------------------------------------------------------------------- */
+
+.parenthetical-text a,
+article.prose p a,
+article.prose li a,
+article.prose blockquote a,
+.definition a,
+.standfirst a,
+.attribution a,
+.aftertext a {
+  color: var(--link);
+  background-image: linear-gradient(var(--link-rule), var(--link-rule));
+}
+
+.parenthetical-text a:hover,
+article.prose p a:hover,
+article.prose li a:hover,
+article.prose blockquote a:hover,
+.definition a:hover,
+.standfirst a:hover,
+.attribution a:hover,
+.aftertext a:hover {
+  color: var(--mark);
+  background-image: linear-gradient(var(--mark), var(--mark));
 }
