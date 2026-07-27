@@ -1,6 +1,6 @@
 ---
 title: "The Gutenberg Parenthesis"
-order: 4
+order: 5
 eyebrow: "Concept"
 gloss: "The five centuries of print-shaped knowledge now closing behind us. Sauerberg's and Pettitt's term, not mine."
 definition: "The Gutenberg Parenthesis is the proposition that the print era was a bounded interval in the history of communication rather than its destination."

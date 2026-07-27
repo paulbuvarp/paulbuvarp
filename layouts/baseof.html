@@ -13,6 +13,7 @@
             <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>
           {{ end }}
         </nav>
+        {{ partial "social-icons.html" . }}
         {{ partial "langswitch.html" . }}
       </div>
     </div>
@@ -20,7 +21,7 @@
 
   {{ partial "lang-suggest.html" . }}
 
-  <main class="wrap">
+  <main class="wrap{{ if and (eq .Kind "page") (eq .Section "concepts") }} wrap--rail{{ end }}">
     {{ block "main" . }}{{ end }}
   </main>
 

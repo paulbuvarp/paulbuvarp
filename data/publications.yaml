@@ -13,65 +13,124 @@
 # and marked the entries whose exact titles I could not vouch for.
 # ---------------------------------------------------------------------------
 
+# =========================================================================
+#  Built from your ORCID record, cross-checked against live sources.
+#  Verified = I opened it or the URL resolved to your piece.
+#  TODO     = I will not guess a title. Fill these four in.
+# =========================================================================
+
+# --- ESSAYS AND COMMENTARY ---
+
 - title: "Maktens oversettelsesmaskin"
   venue: "Vagant"
   year: 2026
   kind: essay
   featured: true
-  url: ""
-  note: "On Palantir"
+  url: "https://www.vagant.no/maktens-oversettelsesmaskin/"
+  note: "ORCID: The Translation Machine of Power, mai 2026. Likely Maktens oversettelsesmaskin — confirm."
 
-- title: "Synets uutholdelige glatthet"
-  venue: "Vagant"
-  year: 2025
+- title: "Klikk er ikke en inngangsport til viktig journalistikk"
+  venue: "Medier24"
+  year: 2026
   kind: essay
-  featured: true
-  url: ""
-  note: "On the recursion of text, image and video"
+  featured: false
+  url: "https://www.m24.no/debatt-forskning-mediekritikk/klikk-er-ikke-en-inngangsport/905061"
 
-- title: "TODO — Aftenposten piece on social media age limits"
-  venue: "Aftenposten"
+- title: "Når bildet mister evnen til å være metafor"
+  venue: "Samtiden"
   year: 2026
   kind: essay
   featured: true
-  url: ""
+  url: "https://www.samtiden.no/essay/nar-bildet-mister-evnen-til-a-vaere-metafor/1392699"
+  note: "Om fotografiet, KI og Gaza-krigen"
 
-- title: "TODO — Klassekampen piece on social media age limits"
+- title: "Den aletheiske krisen: Hvordan digital teknologi ødela vårt sannhetsmaskineri"
+  venue: "Samtiden"
+  year: 2025
+  kind: essay
+  featured: true
+  url: "https://www.samtiden.no/essay/den-aletheiske-krisen-hvordan-digital-teknologi-odela-vart-sannhetsmaskineri/1295059"
+
+- title: "Gaza, Tiktok og det ­umiddelbares paradoks"
   venue: "Klassekampen"
-  year: 2026
+  year: 2025
   kind: essay
   featured: false
-  url: ""
+  url: "https://klassekampen.no/artikkel/2025-01-25/gaza-tiktok-og-det-umiddelbares-paradoks"
+  note: "ORCID: Gaza, TikTok and the Paradox of Immediacy, januar 2025"
 
-- title: "TODO — Altinget commentary"
-  venue: "Altinget"
-  year: 2026
+- title: "Det er ikke nok med mobilfrie skoler"
+  venue: "NRK"
+  year: 2025
   kind: essay
   featured: false
-  url: ""
+  url: "https://www.ffi.no/aktuelt/kronikker/det-er-ikke-nok-med-mobilfrie-skoler"
+  note: "Publisert 27. mai 2025"
 
-- title: "Brytningsteknologi og det kognitive trussellandskapet"
-  venue: "FFI-rapport"
+- title: "NRK må være der kampen om demokratiet står"
+  venue: "NRK"
+  year: 2024
+  kind: essay
+  featured: false
+  url: "https://www.ffi.no/aktuelt/kronikker/nrk-ma-vaere-der-kampen-om-demokratiet-star"
+
+# --- ACADEMIC ---
+
+- title: "Examining Information Dissemination and Manipulation"
+  venue: "Journal of Intelligence, Conflict and Warfare / West Coast Security Conference"
   year: 2026
-  kind: report
+  kind: academic
+  featured: false
+  url: "https://www.researchgate.net/publication/403741217_EXAMINING_INFORMATION_DISSEMINATION_AND_MANIPULATION_DEMAND-SIDE_DISINFORMATION"
+
+- title: "Cognitive Warfare Indicators and Warnings Identification Framework"
+  venue: "Meaningful Human Control in Information Warfare"
+  year: 2025
+  kind: academic
+  featured: false
+  url: "https://www.sto.nato.int/document/cognitive-warfare-indicators-and-warnings-identification-framework/"
+
+- title: "The Space of Influence: Developing a New Method to Conceptualise Foreign Influence in Social Media"
+  venue: "Journal of Information Warfare"
+  year: 2023
+  kind: academic
   featured: true
-  url: ""
-  note: "For the Ministry of Defence"
+  url: "https://www.jinfowar.com/authors/paul-magnus-hjertvik-buvarp"
 
-- title: "Valgpåvirkning i 2023 og 2024"
-  venue: "FFI-rapport 25/003"
+- title: "Rowland Kenney and British Propaganda in Norway, 1916–1942"
+  venue: "PhD thesis, University of St Andrews"
+  year: 2016
+  kind: academic
+  featured: true
+  url: "https://research-repository.st-andrews.ac.uk/handle/10023/8647?show=full"
+
+# --- REPORTS ---
+
+- title: "Valgpåvirkning i 2023 og 2024 – en trendstudie"
+  venue: "FFI-rapport"
   year: 2025
   kind: report
-  featured: false
+  featured: true
   coauthors: "Eskil Grendahl Sivertsen"
-  url: ""
+  url: "https://www.ffi.no/publikasjoner/arkiv/valgpavirkning-i-2023-og-2024-en-trendstudie"
 
-- title: "TODO — chapter title"
-  venue: "Journalism safety volume, ed. Kristin Skare Orgeret (Routledge)"
-  year: 2026
-  kind: chapter
+- title: "Kartlegging av utenlandsk informasjons-påvirkning på sosiale medier før, under og etter kommunestyre- og fylkestingsvalget 2023"
+  venue: "FFI-rapport"
+  year: 2023
+  kind: report
   featured: false
-  url: ""
+  coauthors: "Eskil Grendahl Sivertsen, et al."
+  url: "https://www.ffi.no/publikasjoner/arkiv/kartlegging-av-utenlandsk-informasjons-pavirkning-pa-sosiale-medier-for-under-og-etter-kommunestyre-og-fylkestingsvalget-2023"
+  note: "ORCID: Mapping Foreign Information Influence on Social Media Before, During, and After the 2023 Local Elections"
+
+- title: "Observasjoner hos Fylkesmannen i Nordland under øvelse Trident Juncture 2018"
+  venue: "FFI-rapport"
+  year: 2020
+  kind: report
+  featured: false
+  url: "https://www.ffi.no/publikasjoner/arkiv/observasjoner-hos-fylkesmannen-i-nordland-under-ovelse-trident-juncture-2018"
+
+# --- BROADCAST ---
 
 - title: "Debatten"
   venue: "NRK"
@@ -79,12 +138,27 @@
   kind: broadcast
   featured: false
   url: ""
-  note: "On age limits for social media"
+  note: "April 2026"
 
-- title: "P2-pulsen"
-  venue: "NRK P2"
+- title: "Slik endrer kunstig intelligens påvirkning på nett"
+  venue: "Ugradert (FFI-podkast)"
   year: 2026
   kind: broadcast
   featured: false
-  url: ""
-  note: "On Russian influence operations"
+  url: "https://www.ffi.no/aktuelt/podkaster/slik-endrer-kunstig-intelligens-pavirkning-pa-nett"
+
+- title: "Valgpåvirkning – bør vi være bekymret?"
+  venue: "Ugradert (FFI-podkast)"
+  year: 2025
+  kind: broadcast
+  featured: false
+  coauthors: "Eskil Grendahl Sivertsen"
+  url: "https://www.ffi.no/aktuelt/podkaster/valgpavirkning--bor-vi-vaere-bekymret"
+
+- title: "Russlands feilslåtte påvirkningsforsøk - hvordan prøver de å påvirke nordmenn?"
+  venue: "Ukrainapodden"
+  year: 2025
+  kind: broadcast
+  featured: false
+  url: "https://open.spotify.com/episode/03i39ZXe57oHtxeEYwUGFY"
+  note: "Februar 2025"

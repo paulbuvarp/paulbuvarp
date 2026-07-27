@@ -3,6 +3,7 @@
 <section class="parenthetical{{ if and site.Params.portraitOnHome site.Params.portrait }} has-bleed{{ end }}">
   {{ if and site.Params.portraitOnHome site.Params.portrait }}
   <div class="portrait-bleed" aria-hidden="true" style="background-image:url('{{ site.Params.portrait }}')"></div>
+  {{ with site.Params.portraitCredit }}<span class="bleed-credit" aria-hidden="true">{{ . }}</span>{{ end }}
   {{ end }}
   <div class="parenthetical-text">
     <h1 class="name">{{ site.Params.displayName }}</h1>
@@ -10,9 +11,7 @@
   </div>
 </section>
 
-{{ if and site.Params.portraitOnHome site.Params.portrait site.Params.portraitCredit }}
-<p class="bleed-credit">{{ site.Params.portraitCredit }}</p>
-{{ end }}
+
 
 {{ $today := now.Format "2006-01-02" }}
 {{ $next := first 3 (sort (where site.Data.talks "date" "ge" $today) "date" "asc") }}

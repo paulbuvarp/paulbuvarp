@@ -1,6 +1,6 @@
 ---
 title: "Gutenberg-parentesen"
-order: 4
+order: 5
 eyebrow: "Begrep"
 gloss: "De fem hundre årene med trykkformet kunnskap som nå lukker seg bak oss. Sauerbergs og Pettitts begrep, ikke mitt."
 definition: "Gutenberg-parentesen er påstanden om at boktrykkerkunstens tid var et avgrenset intervall i kommunikasjonens historie snarere enn dens endestasjon."

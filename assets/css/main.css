@@ -52,7 +52,7 @@
   /* Homepage portrait bleed. Tune these four and nothing else. */
   --bleed-w: 30rem;
   --bleed-h: 25rem;
-  --bleed-left: -19rem;
+  --bleed-right: -19rem;   /* more negative pushes it further off the right */
   --bleed-top: 0.5rem;
   --bleed-opacity: 0.5;
   --bleed-fade: 76%;
@@ -77,10 +77,12 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
 }
 
 body {
   margin: 0;
+  overflow-x: clip;   /* the photograph runs past the right edge by design */
   background: var(--paper);
   color: var(--ink);
   font-family: var(--text);
@@ -95,6 +97,15 @@ body {
   max-width: var(--wide);
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+/* Pages with a sidebar widen by exactly the rail plus its gap, so the
+   reading column is the same width as on every other page rather than
+   being eaten by the sidebar. */
+@media (min-width: 62rem) {
+  .wrap--rail {
+    max-width: min(calc(var(--wide) + 14.25rem), calc(100vw - 3rem));
+  }
 }
 
 @media (min-width: 82rem) {
@@ -151,6 +162,13 @@ article.prose > .attribution,
 nav.nav {
   display: flex;
   gap: 1.35rem;
+  flex-wrap: wrap;
+  row-gap: 0.5rem;
+}
+
+@media (max-width: 34rem) {
+  nav.nav { gap: 0.95rem; row-gap: 0.45rem; }
+  .masthead-right { gap: 0.9rem; }
 }
 
 nav.nav a {
@@ -814,6 +832,10 @@ footer.foot a:hover {
     gap: 0 3.25rem;
     align-items: start;
   }
+  /* Explicit placement. Without this the order values above put the
+     article in the rail column and the rail in the article column. */
+  .rail { grid-column: 1; order: 0; }
+  .railmain { grid-column: 2; order: 0; }
   .rail {
     position: sticky;
     top: 2.75rem;
@@ -870,7 +892,7 @@ footer.foot a:hover {
     position: absolute;
     z-index: 0;
     top: var(--bleed-top);
-    left: var(--bleed-left);
+    right: var(--bleed-right);
     width: var(--bleed-w);
     height: var(--bleed-h);
     background-size: cover;
@@ -879,13 +901,37 @@ footer.foot a:hover {
     filter: grayscale(1) contrast(1.06);
     opacity: var(--bleed-opacity);
     -webkit-mask-image:
-      linear-gradient(to right, #000 0%, #000 20%, transparent var(--bleed-fade)),
+      linear-gradient(to left, #000 0%, #000 20%, transparent var(--bleed-fade)),
       linear-gradient(to bottom, #000 0%, #000 58%, transparent 100%);
     mask-image:
-      linear-gradient(to right, #000 0%, #000 20%, transparent var(--bleed-fade)),
+      linear-gradient(to left, #000 0%, #000 20%, transparent var(--bleed-fade)),
       linear-gradient(to bottom, #000 0%, #000 58%, transparent 100%);
     -webkit-mask-composite: source-in;
     mask-composite: intersect;
+  }
+
+  /* The closing bracket sits over the photograph. Quieten it so the two
+     do not argue with each other. */
+  .parenthetical.has-bleed::after { opacity: 0.16; }
+
+  /* Credit: set small and pale, running vertically down the outer edge of
+     the photograph and settling at its foot, as a print credit would. */
+  .bleed-credit {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    z-index: 2;
+    top: var(--bleed-top);
+    right: calc(var(--bleed-right) + 0.5rem);
+    height: var(--bleed-h);
+    writing-mode: vertical-rl;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.55;
+    white-space: nowrap;
+    pointer-events: none;
   }
 }
 
@@ -893,10 +939,53 @@ footer.foot a:hover {
   .portrait-bleed { opacity: calc(var(--bleed-opacity) * 0.62); }
 }
 
-.bleed-credit {
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+@media (max-width: 77.99rem) {
+  .bleed-credit { display: none; }
+}
+
+/* --- Social feed icons ---------------------------------------------------- */
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
   color: var(--muted);
-  margin: 0 0 1rem;
+  background: none;
+  border: 1px solid transparent;
+  transition: color 0.14s ease, border-color 0.14s ease, background-color 0.14s ease;
+}
+
+.socials svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  display: block;
+}
+
+.socials a:hover,
+.socials a:focus-visible {
+  color: var(--mark);
+  border-color: var(--rule);
+  background: var(--mark-tint);
+}
+
+@media (max-width: 34rem) {
+  .socials { gap: 0.35rem; }
+  .socials a { width: 1.45rem; height: 1.45rem; }
+}
+
+/* Very narrow screens: let the continuation link drop below the rule
+   rather than run off the edge. */
+@media (max-width: 27rem) {
+  .rule-heading { flex-wrap: wrap; }
+  .rule-line { min-width: 1.5rem; }
+  .rule-more { margin-left: auto; }
 }
