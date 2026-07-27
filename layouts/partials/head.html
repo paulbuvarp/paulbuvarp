@@ -14,7 +14,14 @@
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ site.Params.displayName }}">
 <meta property="og:locale" content="{{ or site.Language.Params.ogLocale "en_GB" }}">
-<meta name="twitter:card" content="summary">
+{{- $ogimg := absURL (or .Params.image site.Params.ogImage "/og-default.png") }}
+<meta property="og:image" content="{{ $ogimg }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="{{ site.Params.displayName }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ $ogimg }}">
 
 {{- with .Params.date }}<meta property="article:published_time" content="{{ time.Format "2006-01-02" . }}">{{ end }}
 
