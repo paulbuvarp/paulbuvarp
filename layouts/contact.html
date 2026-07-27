@@ -1,14 +1,15 @@
 {{ define "main" }}
-<article class="prose">
-  <h1 class="page-title">{{ .Title }}</h1>
-  {{ with .Params.standfirst }}<p class="standfirst">{{ . | markdownify }}</p>{{ end }}
-
+<article class="prose contact">
   {{ with site.Params.portrait }}
   <figure class="portrait">
     <img src="{{ . }}" alt="{{ site.Params.portraitAlt }}" width="1200" height="1500" loading="lazy">
     {{ with site.Params.portraitCredit }}<figcaption>{{ . }}</figcaption>{{ end }}
   </figure>
   {{ end }}
+
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{ with .Params.standfirst }}<p class="standfirst">{{ . | markdownify }}</p>{{ end }}
+
 
   {{ .Content }}
 

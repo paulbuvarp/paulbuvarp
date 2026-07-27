@@ -63,7 +63,7 @@
   --bleed-top: 0.5rem;
   --bleed-opacity: 0.5;
   --bleed-fade: 86%;       /* where the leftward fade completes */
-  --portrait-w: 14rem;     /* the contact-page portrait */
+  --portrait-w: 16rem;     /* the contact-page portrait */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -665,12 +665,23 @@ footer.foot a:hover {
   margin: 0.5rem 0 2.5rem;
 }
 
+/* The figure sits before the heading in the markup, because a float begins
+   where it appears — that is what lines its top edge up with the title
+   rather than with the first paragraph. Below the float breakpoint the
+   order is restored so the title still leads. */
+@media (max-width: 61.99rem) {
+  article.prose.contact { display: flex; flex-direction: column; }
+  .contact .page-title { order: -3; }
+  .contact .standfirst { order: -2; }
+  .contact .portrait   { order: -1; }
+}
+
 /* Above 62rem the page is wider than its reading column, so the portrait
    sits in the right-hand gutter beside the text rather than above it. */
 @media (min-width: 62rem) {
   .portrait {
     float: right;
-    margin: 0.4rem 0 1.5rem 3rem;
+    margin: 0 0 1.5rem 3rem;
     shape-outside: margin-box;
   }
   /* Sections must start below the float rather than wrapping round it. */
