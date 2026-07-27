@@ -30,15 +30,15 @@ params:
   # Fill in every one you have; delete the ones you do not.
   sameAs:
     - name: "FFI"
-      url: ""
-    - name: "Google Scholar"
-      url: ""
+      url: "https://www.ffi.no/forskning/forskere/paul-m.h.buvarp"
+    - name: "Altinget"
+      url: "https://www.altinget.no/person/paul-m-h-buvarp"
     - name: "ORCID"
-      url: ""
-    - name: "Bluesky"
-      url: ""
+      url: "https://orcid.org/0000-0002-3678-1406"
+    - name: "Facebook"
+      url: "https://www.facebook.com/paulmhbuvarp/"
     - name: "LinkedIn"
-      url: ""
+      url: "www.linkedin.com/in/paulbuvarp"
 
 menu:
   main:
