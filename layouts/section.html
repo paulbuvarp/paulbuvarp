@@ -1,0 +1,28 @@
+{{ define "main" }}
+<article class="prose">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{ with .Params.standfirst }}<p class="standfirst">{{ . | markdownify }}</p>{{ end }}
+  {{ .Content }}
+
+  {{ if eq .Section "concepts" }}
+    <ul class="concept-list">
+      {{ range sort .Pages "Params.order" }}
+      <li>
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <p>{{ .Params.gloss }}</p>
+      </li>
+      {{ end }}
+    </ul>
+  {{ else }}
+    <ul class="note-list">
+      {{ range .Pages.ByDate.Reverse }}
+      <li>
+        <span class="date">{{ .Date.Format "2 January 2006" }}</span>
+        <p class="entry-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+        {{ with .Params.standfirst }}<p class="entry-meta">{{ . }}</p>{{ end }}
+      </li>
+      {{ end }}
+    </ul>
+  {{ end }}
+</article>
+{{ end }}

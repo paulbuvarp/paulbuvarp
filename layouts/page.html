@@ -1,0 +1,10 @@
+{{ define "main" }}
+<article class="prose">
+  {{ with .Params.eyebrow }}<p class="eyebrow eyebrow--top">{{ . }}</p>{{ end }}
+  <h1 class="page-title{{ if .Params.eyebrow }} page-title--tight{{ end }}">{{ .Title }}</h1>
+  {{ with .Params.definition }}<p class="definition">{{ . | markdownify }}</p>{{ end }}
+  {{ with .Params.standfirst }}<p class="standfirst">{{ . | markdownify }}</p>{{ end }}
+  {{ .Content }}
+  {{ with .Params.attribution }}<p class="attribution">{{ . | markdownify }}</p>{{ end }}
+</article>
+{{ end }}

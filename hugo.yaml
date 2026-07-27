@@ -1,0 +1,53 @@
+baseURL: "https://paulbuvarp.com/"
+languageCode: "en-gb"
+title: "Paul M. H. Buvarp"
+enableRobotsTXT: true
+enableGitInfo: false
+disableKinds: ["taxonomy", "term"]
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+
+params:
+  # --- Identity. These feed the JSON-LD Person schema. ---
+  fullName: "Paul Magnus Hjertvik Buvarp"
+  displayName: "Paul M. H. Buvarp"
+  alternateNames:
+    - "Paul Buvarp"
+    - "Paul Magnus Hjertvik Buvarp"
+  jobTitle: "Senior Research Scientist"
+  affiliation: "Norwegian Defence Research Establishment (FFI)"
+  affiliationURL: "https://www.ffi.no/"
+  description: "Senior research scientist at the Norwegian Defence Research Establishment, working on disinformation, influence operations and cognitive security."
+  email: ""
+
+  # --- sameAs: every profile that is demonstrably you. ---
+  # This is the single most important block on the site for search.
+  # Fill in every one you have; delete the ones you do not.
+  sameAs:
+    - name: "FFI"
+      url: ""
+    - name: "Google Scholar"
+      url: ""
+    - name: "ORCID"
+      url: ""
+    - name: "Bluesky"
+      url: ""
+    - name: "LinkedIn"
+      url: ""
+
+menu:
+  main:
+    - name: "Writing"
+      pageRef: /writing
+      weight: 10
+    - name: "Concepts"
+      pageRef: /concepts
+      weight: 20
+    - name: "Notes"
+      pageRef: /notes
+      weight: 30

@@ -1,0 +1,42 @@
+{{ define "main" }}
+
+<section class="parenthetical">
+  <h1 class="name">{{ site.Params.displayName }}</h1>
+  {{ .Content }}
+</section>
+
+{{ $pubs := where site.Data.publications "featured" true }}
+{{ with $pubs }}
+<div class="rule-heading"><p class="eyebrow">Selected writing</p></div>
+<ul class="entries">
+  {{ range sort . "year" "desc" }}
+  <li class="entry">
+    <span class="entry-year">{{ .year }}</span>
+    <div>
+      <p class="entry-title">
+        {{ if .url }}<a href="{{ .url }}" rel="noopener">{{ .title }}</a>{{ else }}<span class="unlinked">{{ .title }}</span>{{ end }}
+      </p>
+      <p class="entry-meta">{{ .venue }}{{ with .note }}<span class="sep">/</span>{{ . }}{{ end }}</p>
+    </div>
+  </li>
+  {{ end }}
+</ul>
+<p class="more"><a href="{{ "/writing/" | relURL }}">The full index</a></p>
+{{ end }}
+
+{{ $concepts := where site.RegularPages "Section" "concepts" }}
+{{ with $concepts }}
+<div class="rule-heading"><p class="eyebrow">Concepts</p></div>
+<ul class="entries">
+  {{ range sort . "Params.order" }}
+  <li class="entry entry--plain">
+    <div>
+      <p class="entry-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+      <p class="entry-gloss">{{ .Params.gloss }}</p>
+    </div>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}
+
+{{ end }}

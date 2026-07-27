@@ -1,0 +1,9 @@
+  <footer class="foot wrap">
+    <span>{{ site.Params.displayName }} &middot; {{ now.Format "2006" }}</span>
+    <span class="elsewhere">
+      {{- range site.Params.sameAs -}}
+        {{- if .url }}<a href="{{ .url }}" rel="me noopener">{{ .name }}</a>{{ end -}}
+      {{- end -}}
+      {{- with site.Params.email }}<a href="mailto:{{ . }}">Email</a>{{ end -}}
+    </span>
+  </footer>

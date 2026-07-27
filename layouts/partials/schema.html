@@ -1,0 +1,18 @@
+{{- $sameAs := slice -}}
+{{- range site.Params.sameAs -}}
+  {{- with .url -}}{{- $sameAs = $sameAs | append . -}}{{- end -}}
+{{- end -}}
+{{- $schema := dict
+  "@context" "https://schema.org"
+  "@type" "Person"
+  "name" site.Params.fullName
+  "alternateName" site.Params.alternateNames
+  "url" site.BaseURL
+  "jobTitle" site.Params.jobTitle
+  "description" site.Params.description
+  "knowsAbout" (slice "Disinformation" "Influence operations" "Cognitive security" "Media theory" "Tertiary orality" "The Gutenberg Parenthesis")
+  "affiliation" (dict "@type" "Organization" "name" site.Params.affiliation "url" site.Params.affiliationURL)
+  "alumniOf" (dict "@type" "CollegeOrUniversity" "name" "University of St Andrews" "url" "https://www.st-andrews.ac.uk/")
+-}}
+{{- if $sameAs }}{{ $schema = merge $schema (dict "sameAs" $sameAs) }}{{ end -}}
+<script type="application/ld+json">{{ $schema | jsonify (dict "indent" "  ") | safeJS }}</script>

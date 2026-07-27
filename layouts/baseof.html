@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="{{ or site.LanguageCode "en-gb" }}">
+<head>
+{{ partial "head.html" . }}
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap masthead-inner">
+      <a class="sitename" href="{{ "/" | relURL }}">{{ site.Params.displayName }}</a>
+      <nav class="nav">
+        {{ range site.Menus.main }}
+          <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>
+        {{ end }}
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  {{ partial "footer.html" . }}
+</body>
+</html>

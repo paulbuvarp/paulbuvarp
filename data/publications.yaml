@@ -1,0 +1,90 @@
+# ---------------------------------------------------------------------------
+# THE ONLY FILE YOU EDIT REGULARLY.
+#
+# Add a piece the same session you publish it. Four lines. Then push.
+#
+#   kind:      essay | academic | report | chapter | broadcast
+#   featured:  true puts it on the homepage. Keep to five or six.
+#   url:       leave empty and the entry renders unlinked, which is correct
+#              for paywalled or vanished pieces.
+#
+# SEEDED FROM MEMORY — verify every title, year and venue below before
+# you push. I have deliberately left every URL blank rather than guess at one,
+# and marked the entries whose exact titles I could not vouch for.
+# ---------------------------------------------------------------------------
+
+- title: "Maktens oversettelsesmaskin"
+  venue: "Vagant"
+  year: 2026
+  kind: essay
+  featured: true
+  url: ""
+  note: "On Palantir"
+
+- title: "Synets uutholdelige glatthet"
+  venue: "Vagant"
+  year: 2025
+  kind: essay
+  featured: true
+  url: ""
+  note: "On the recursion of text, image and video"
+
+- title: "TODO — Aftenposten piece on social media age limits"
+  venue: "Aftenposten"
+  year: 2026
+  kind: essay
+  featured: true
+  url: ""
+
+- title: "TODO — Klassekampen piece on social media age limits"
+  venue: "Klassekampen"
+  year: 2026
+  kind: essay
+  featured: false
+  url: ""
+
+- title: "TODO — Altinget commentary"
+  venue: "Altinget"
+  year: 2026
+  kind: essay
+  featured: false
+  url: ""
+
+- title: "Brytningsteknologi og det kognitive trussellandskapet"
+  venue: "FFI-rapport"
+  year: 2026
+  kind: report
+  featured: true
+  url: ""
+  note: "For the Ministry of Defence"
+
+- title: "Valgpåvirkning i 2023 og 2024"
+  venue: "FFI-rapport 25/003"
+  year: 2025
+  kind: report
+  featured: false
+  coauthors: "Eskil Grendahl Sivertsen"
+  url: ""
+
+- title: "TODO — chapter title"
+  venue: "Journalism safety volume, ed. Kristin Skare Orgeret (Routledge)"
+  year: 2026
+  kind: chapter
+  featured: false
+  url: ""
+
+- title: "Debatten"
+  venue: "NRK"
+  year: 2026
+  kind: broadcast
+  featured: false
+  url: ""
+  note: "On age limits for social media"
+
+- title: "P2-pulsen"
+  venue: "NRK P2"
+  year: 2026
+  kind: broadcast
+  featured: false
+  url: ""
+  note: "On Russian influence operations"

@@ -1,0 +1,497 @@
+/* ==========================================================================
+   paulbuvarp.com
+   Palette : bone paper, letterpress ink, spruce mark
+   Type    : Fraunces (display, one instance) / Spectral (text)
+   Device  : the parenthesis, used structurally rather than decoratively
+   ========================================================================== */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fonts/fraunces-display.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Spectral";
+  src: url("/fonts/spectral-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Spectral";
+  src: url("/fonts/spectral-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Spectral";
+  src: url("/fonts/spectral-semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --paper: #edede7;
+  --ink: #191c19;
+  --rule: #c9c9c0;
+  --muted: #6a6e67;
+  --mark: #2e4b3c;
+  --mark-tint: rgba(46, 75, 60, 0.09);
+
+  --display: "Fraunces", Georgia, serif;
+  --text: "Spectral", Georgia, "Times New Roman", serif;
+
+  --measure: 34rem;
+  --step: 1.55rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #141714;
+    --ink: #e2e3dd;
+    --rule: #35392f;
+    --muted: #9aa094;
+    --mark: #8fb69c;
+    --mark-tint: rgba(143, 182, 156, 0.12);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 1.1875rem;
+  line-height: 1.62;
+  font-variant-numeric: oldstyle-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.wrap {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* --- Masthead ----------------------------------------------------------- */
+
+.masthead {
+  padding: 3.25rem 0 0;
+}
+
+.masthead-inner {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.sitename {
+  font-family: var(--text);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-variant-numeric: lining-nums;
+  color: var(--muted);
+  text-decoration: none;
+}
+.sitename:hover {
+  color: var(--mark);
+}
+
+nav.nav {
+  display: flex;
+  gap: 1.35rem;
+}
+
+nav.nav a {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+nav.nav a:hover,
+nav.nav a[aria-current="page"] {
+  color: var(--ink);
+  border-bottom-color: var(--mark);
+}
+
+/* --- The parenthesis ----------------------------------------------------
+   The homepage biography sits inside a pair of brackets. Unlabelled: it
+   reads as a frame to anyone who does not know the argument, and as the
+   argument itself to anyone who does.
+   ----------------------------------------------------------------------- */
+
+.parenthetical {
+  position: relative;
+  margin: 4.5rem 0 5rem;
+}
+
+.parenthetical::before,
+.parenthetical::after {
+  font-family: var(--display);
+  font-size: 15rem;
+  line-height: 1;
+  color: var(--mark);
+  opacity: 0.28;
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+}
+
+.parenthetical::before {
+  content: "(";
+  top: -3.2rem;
+  left: -4.25rem;
+}
+
+.parenthetical::after {
+  content: ")";
+  bottom: -5.4rem;
+  right: -4.25rem;
+}
+
+@media (max-width: 62rem) {
+  .parenthetical::before,
+  .parenthetical::after {
+    font-size: 7rem;
+    opacity: 0.2;
+  }
+  .parenthetical::before {
+    top: -2.4rem;
+    left: -1.6rem;
+  }
+  .parenthetical::after {
+    bottom: -3.4rem;
+    right: -1.6rem;
+  }
+}
+
+@media (max-width: 34rem) {
+  .parenthetical::before,
+  .parenthetical::after {
+    display: none;
+  }
+  .parenthetical {
+    margin: 2.75rem 0 3.5rem;
+  }
+}
+
+h1.name {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2.35rem, 7.5vw, 3.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.012em;
+  margin: 0 0 1.6rem;
+}
+
+.parenthetical p {
+  margin: 0 0 1.15rem;
+}
+.parenthetical p:last-child {
+  margin-bottom: 0;
+}
+
+.lede {
+  font-size: 1.2em;
+  line-height: 1.5;
+}
+
+/* --- Typography ---------------------------------------------------------- */
+
+h2,
+h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  letter-spacing: -0.008em;
+}
+
+h2 {
+  font-size: 1.6rem;
+  line-height: 1.2;
+  margin: 3rem 0 1rem;
+}
+
+h3 {
+  font-size: 1.22rem;
+  margin: 2.25rem 0 0.6rem;
+}
+
+.page-title {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+  margin: 3.5rem 0 0.5rem;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-variant-numeric: lining-nums;
+  color: var(--muted);
+  margin: 0 0 0.35rem;
+}
+
+.standfirst {
+  color: var(--muted);
+  font-size: 1.02rem;
+  margin: 0 0 2.5rem;
+  max-width: 30rem;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+  background-image: linear-gradient(var(--rule), var(--rule));
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  transition: background-image 0.12s ease;
+}
+a:hover {
+  background-image: linear-gradient(var(--mark), var(--mark));
+  color: var(--mark);
+}
+
+:focus-visible {
+  outline: 2px solid var(--mark);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+blockquote {
+  margin: 1.75rem 0;
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--rule);
+  color: var(--muted);
+  font-style: italic;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 3rem 0;
+}
+
+code {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.86em;
+  background: var(--mark-tint);
+  padding: 0.1em 0.35em;
+  border-radius: 2px;
+}
+
+/* --- Section headings ---------------------------------------------------- */
+
+.rule-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 3.5rem 0 1.25rem;
+}
+.rule-heading .eyebrow {
+  margin: 0;
+  white-space: nowrap;
+}
+.rule-heading::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* --- Writing index ------------------------------------------------------- */
+
+.entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 3.25rem 1fr;
+  gap: 0 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid var(--rule);
+}
+.entry:first-child {
+  border-top: 0;
+}
+
+.entry-year {
+  font-variant-numeric: lining-nums tabular-nums;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding-top: 0.42em;
+}
+
+.entry-title {
+  font-size: 1.02rem;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.entry-title a {
+  background-position: 0 96%;
+}
+
+.entry-meta {
+  font-size: 0.86rem;
+  color: var(--muted);
+  font-style: italic;
+  margin: 0.15rem 0 0;
+}
+
+.entry-meta .sep {
+  font-style: normal;
+  padding: 0 0.4em;
+  color: var(--rule);
+}
+
+.unlinked {
+  color: var(--muted);
+}
+
+/* --- Concept cards ------------------------------------------------------- */
+
+.concept-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+}
+
+.concept-list li {
+  padding: 1.35rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.concept-list h2 {
+  font-size: 1.32rem;
+  margin: 0 0 0.35rem;
+}
+
+.concept-list p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.definition {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  line-height: 1.4;
+  margin: 0 0 2rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.attribution {
+  font-size: 0.92rem;
+  color: var(--muted);
+  border-left: 1px solid var(--rule);
+  padding-left: 1.1rem;
+  margin: 2.5rem 0 0;
+}
+
+/* --- Notes --------------------------------------------------------------- */
+
+.note-list {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+}
+.note-list li {
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--rule);
+}
+.note-list .date {
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-variant-numeric: lining-nums;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.prose > *:first-child {
+  margin-top: 0;
+}
+
+article.prose {
+  margin-bottom: 4rem;
+}
+
+/* --- Footer -------------------------------------------------------------- */
+
+footer.foot {
+  border-top: 1px solid var(--rule);
+  margin-top: 4rem;
+  padding: 1.75rem 0 4rem;
+  font-size: 0.84rem;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+footer.foot a {
+  color: var(--muted);
+  background: none;
+}
+footer.foot a:hover {
+  color: var(--mark);
+}
+
+.elsewhere {
+  display: flex;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* --- Small utilities ----------------------------------------------------- */
+
+.more { margin-top: 1.5rem; }
+.entry--plain { grid-template-columns: 1fr; }
+.entry-gloss {
+  font-size: 0.86rem;
+  color: var(--muted);
+  margin: 0.15rem 0 0;
+}
+.eyebrow--top { margin-top: 3.5rem; }
+.page-title--tight { margin-top: 0; }
