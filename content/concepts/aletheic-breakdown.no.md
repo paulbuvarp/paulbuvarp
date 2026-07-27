@@ -1,5 +1,4 @@
-\---
-
+---
 title: "Aletheisk krise"
 order: 3
 eyebrow: "Begrep"
@@ -17,4 +16,3 @@ Verifikasjon kostet noe en gang, og kostnaden gjorde et stille arbeid. Trykking 
 Jeg behandler derfor friksjon som en demokratisk ressurs snarere enn en ineffektivitet. Det er en umoderne posisjon i et fagfelt organisert rundt hastighet, rekkevidde og sømløshet, og jeg mener den er riktig.
 
 Argumentet er utfoldet i essayet [«Den aletheiske krisen»](https://www.samtiden.no/essay/den-aletheiske-krisen-hvordan-digital-teknologi-odela-vart-sannhetsmaskineri/1295059), Samtiden, januar 2025.
-

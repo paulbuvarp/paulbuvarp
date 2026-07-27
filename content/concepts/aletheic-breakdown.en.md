@@ -1,5 +1,4 @@
-\---
-
+---
 title: "Aletheic crisis"
 order: 3
 eyebrow: "Concept"
@@ -17,4 +16,3 @@ Removing the friction removed the safeguard. Here is the part that most reform p
 I therefore treat friction as a democratic resource rather than an inefficiency. This is an unfashionable position in a field organised around speed, reach and seamlessness, and I think it is correct.
 
 Set out at length in "Den aletheiske krisen", [Samtiden](https://www.samtiden.no/essay/den-aletheiske-krisen-hvordan-digital-teknologi-odela-vart-sannhetsmaskineri/1295059), January 2025, in Norwegian.
-
