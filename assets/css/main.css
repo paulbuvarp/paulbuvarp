@@ -55,8 +55,8 @@
   /* Width scales with the window, so the faded tail reaches behind the
      text by roughly the same amount on a laptop and on a large monitor. */
   --bleed-reach: 8rem;     /* how far left of the window's midpoint it starts */
-  --bleed-h: 36rem;        /* taller: 30rem cropped the face below the nose */
-  --bleed-hold: 76%;       /* how far down before the bottom fade begins */
+  --bleed-h: 42rem;        /* the frame's height; the fade is a share of it */
+  --bleed-hold: 78%;       /* how far down before the bottom fade begins */
   --bleed-focus: 50% 22%;  /* which part of the photograph is centred */
   --bleed-filter: grayscale(1) contrast(1.06);
   --bleed-overhang: 3rem;  /* how far past the right edge it runs */
@@ -154,7 +154,7 @@ article.prose > .attribution,
 
 .masthead-inner {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
   flex-wrap: wrap;
@@ -1148,3 +1148,30 @@ article.prose blockquote a:hover,
   margin-top: 0;
 }
 .fourohfour hr { margin: 3.25rem 0 2.5rem; }
+
+/* --- Wordmark ------------------------------------------------------------ */
+
+.sitemark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: none;
+  color: var(--mark);
+  text-decoration: none;
+  line-height: 1;
+}
+.sitemark .mark {
+  height: 1.5rem;
+  /* The brackets descend below the baseline, so the glyph box centres
+     higher than the mark looks. Nudge it onto the nav's optical line. */
+  transform: translateY(3px);
+  width: auto;
+  display: block;
+  transition: color 0.14s ease;
+}
+.sitemark:hover .mark { color: var(--ink); }
+.sitemark:focus-visible { outline-offset: 5px; }
+
+@media (max-width: 34rem) {
+  .sitemark .mark { height: 1.25rem; }
+}

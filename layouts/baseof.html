@@ -6,7 +6,7 @@
 <body>
   <header class="masthead">
     <div class="wrap masthead-inner">
-      <a class="sitename" href="{{ "/" | relLangURL }}">{{ site.Params.displayName }}</a>
+      {{ partial "wordmark.html" . }}
       <div class="masthead-right">
         <nav class="nav">
           {{ range site.Menus.main }}

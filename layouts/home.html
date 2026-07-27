@@ -1,8 +1,9 @@
 {{ define "main" }}
 
-<section class="parenthetical{{ if and site.Params.portraitOnHome site.Params.portrait }} has-bleed{{ end }}">
-  {{ if and site.Params.portraitOnHome site.Params.portrait }}
-  <div class="portrait-bleed" aria-hidden="true" style="background-image:url('{{ site.Params.portrait }}')"></div>
+{{- $bleedimg := or site.Params.portraitWide site.Params.portrait -}}
+<section class="parenthetical{{ if and site.Params.portraitOnHome $bleedimg }} has-bleed{{ end }}">
+  {{ if and site.Params.portraitOnHome $bleedimg }}
+  <div class="portrait-bleed" aria-hidden="true" style="background-image:url('{{ $bleedimg }}')"></div>
   {{ with site.Params.portraitCredit }}<span class="bleed-credit" aria-hidden="true">{{ . }}</span>{{ end }}
   {{ end }}
   <div class="parenthetical-text">
