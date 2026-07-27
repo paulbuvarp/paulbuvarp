@@ -53,7 +53,10 @@
   /* Width scales with the window, so the faded tail reaches behind the
      text by roughly the same amount on a laptop and on a large monitor. */
   --bleed-reach: 8rem;     /* how far left of the window's midpoint it starts */
-  --bleed-h: 30rem;
+  --bleed-h: 36rem;        /* taller: 30rem cropped the face below the nose */
+  --bleed-hold: 76%;       /* how far down before the bottom fade begins */
+  --bleed-focus: 50% 22%;  /* which part of the photograph is centred */
+  --bleed-filter: grayscale(1) contrast(1.06);
   --bleed-overhang: 3rem;  /* how far past the right edge it runs */
   --bleed-top: 0.5rem;
   --bleed-opacity: 0.5;
@@ -902,17 +905,17 @@ footer.foot a:hover {
     width: calc(50vw + var(--bleed-reach));
     height: var(--bleed-h);
     background-size: cover;
-    background-position: 50% 18%;
+    background-position: var(--bleed-focus);
     background-repeat: no-repeat;
-    filter: grayscale(1) contrast(1.06);
+    filter: var(--bleed-filter);
     opacity: var(--bleed-opacity);
     /* Faded on three sides. The fourth is off-screen. */
     -webkit-mask-image:
       linear-gradient(to left, #000 0%, #000 20%, transparent var(--bleed-fade)),
-      linear-gradient(to bottom, transparent 0%, #000 15%, #000 60%, transparent 100%);
+      linear-gradient(to bottom, transparent 0%, #000 12%, #000 var(--bleed-hold), transparent 100%);
     mask-image:
       linear-gradient(to left, #000 0%, #000 20%, transparent var(--bleed-fade)),
-      linear-gradient(to bottom, transparent 0%, #000 15%, #000 60%, transparent 100%);
+      linear-gradient(to bottom, transparent 0%, #000 12%, #000 var(--bleed-hold), transparent 100%);
     -webkit-mask-composite: source-in;
     mask-composite: intersect;
   }
@@ -939,7 +942,12 @@ footer.foot a:hover {
 }
 
 @media (prefers-color-scheme: dark) {
-  .portrait-bleed { opacity: calc(var(--bleed-opacity) * 0.62); }
+  :root {
+    /* A greyscale photograph on a near-black ground loses its midtones.
+       Lift them rather than dimming the whole thing further. */
+    --bleed-filter: grayscale(1) contrast(1.22) brightness(1.45);
+  }
+  .portrait-bleed { opacity: calc(var(--bleed-opacity) * 1.35); }
 }
 
 @media (max-width: 77.99rem) {
