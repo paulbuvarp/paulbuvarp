@@ -1,6 +1,6 @@
 \---
 
-## title: "Paul M. H. Buvarp"
+title: "Paul M. H. Buvarp"
 
 \---
 
