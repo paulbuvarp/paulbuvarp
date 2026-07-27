@@ -1,0 +1,23 @@
+{{/* Event structured data, so talks can surface in search results. */}}
+{{- $today := now.Format "2006-01-02" -}}
+{{- $up := where site.Data.talks "date" "ge" $today -}}
+{{- with $up }}
+{{- $events := slice -}}
+{{- range . -}}
+  {{- $e := dict
+      "@context" "https://schema.org"
+      "@type" "Event"
+      "name" .title
+      "startDate" .date
+      "eventStatus" "https://schema.org/EventScheduled"
+      "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode"
+      "location" (dict "@type" "Place" "name" (or .event "") "address" (dict "@type" "PostalAddress" "addressLocality" (or .city "") "addressCountry" "NO"))
+      "performer" (dict "@type" "Person" "name" site.Params.fullName "url" site.BaseURL)
+      "organizer" (dict "@type" "Organization" "name" (or .organizer .event ""))
+  -}}
+  {{- with .until }}{{ $e = merge $e (dict "endDate" .) }}{{ end -}}
+  {{- with .url }}{{ $e = merge $e (dict "url" .) }}{{ end -}}
+  {{- $events = $events | append $e -}}
+{{- end }}
+<script type="application/ld+json">{{ $events | jsonify (dict "indent" "  ") | safeJS }}</script>
+{{- end }}

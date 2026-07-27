@@ -1,0 +1,39 @@
+# ---------------------------------------------------------------------------
+# RECOMMENDED READING. Books that inform the work, with a line on why.
+#
+#   tag:  groups the list. Use as few groups as you can bear.
+#   note: one sentence. The note is the whole value of the page — a bare
+#         list of titles is a Goodreads profile.
+#   url:  optional. A publisher page is better than a shop.
+#
+# Replace these. They are drawn from what you have cited, and the notes are
+# mine, which means they are not yet yours.
+# ---------------------------------------------------------------------------
+
+- title: "Orality and Literacy"
+  author: "Walter J. Ong"
+  year: 1982
+  tag: "print"
+  note: "The book everything here argues with. Ong's account of what literacy did to consciousness is the baseline against which any third condition has to be measured."
+  url: ""
+
+- title: "The Printing Press as an Agent of Change"
+  author: "Elizabeth Eisenstein"
+  year: 1979
+  tag: "print"
+  note: "The case that fixity was an achievement rather than a property of the world."
+  url: ""
+
+- title: "God, Human, Animal, Machine"
+  author: "Meghan O'Gieblyn"
+  year: 2021
+  tag: "machines"
+  note: "The best account I know of what happens to metaphysics when the machines get good at speaking."
+  url: ""
+
+- title: "When We Cease to Understand the World"
+  author: "Benjamín Labatut"
+  year: 2020
+  tag: "machines"
+  note: "Fiction doing epistemology. On knowledge that arrives faster than the capacity to hold it."
+  url: ""

@@ -1,0 +1,24 @@
+{{/* Correct attribution made easier than incorrect attribution.
+     Set `since: 2025` in a concept's front matter to fix the year. */}}
+{{- $year := or .Params.since (now.Format "2006") -}}
+{{- $url := replaceRE "^https?://" "" (strings.TrimSuffix "/" .Permalink) -}}
+<div class="citation">
+  <p class="eyebrow">{{ i18n "cite_this" }}</p>
+  <p class="citation-text">Buvarp, P. M. H. ({{ $year }}). <em>{{ .Title }}</em>. {{ $url }}</p>
+  <button type="button" class="citation-copy" data-done="{{ i18n "copied" }}">{{ i18n "copy" }}</button>
+</div>
+<script>
+(function(){
+  document.querySelectorAll('.citation-copy').forEach(function(b){
+    b.addEventListener('click', function(){
+      var t = b.parentNode.querySelector('.citation-text').textContent.trim().replace(/\s+/g,' ');
+      navigator.clipboard.writeText(t).then(function(){
+        var old = b.textContent;
+        b.textContent = b.dataset.done;
+        b.disabled = true;
+        setTimeout(function(){ b.textContent = old; b.disabled = false; }, 1800);
+      });
+    });
+  });
+})();
+</script>

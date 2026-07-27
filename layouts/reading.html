@@ -1,0 +1,29 @@
+{{ define "main" }}
+<article class="prose">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{ with .Params.standfirst }}<p class="standfirst">{{ . | markdownify }}</p>{{ end }}
+  {{ .Content }}
+
+  {{ $all := site.Data.reading }}
+  {{ range .Params.groups }}
+    {{ $tag := .tag }}
+    {{ $rows := where $all "tag" $tag }}
+    {{ with $rows }}
+      {{ partial "sectionhead.html" (dict "label" (index $.Params.labels $tag | default $tag)) }}
+      <ul class="entries reading">
+        {{ range sort . "year" "desc" }}
+        <li class="entry entry--plain">
+          <div>
+            <p class="entry-title">
+              {{ if .url }}<a href="{{ .url }}" rel="noopener">{{ .title }}</a>{{ else }}<span class="unlinked">{{ .title }}</span>{{ end }}
+              <span class="read-meta">{{ .author }}{{ with .year }}, {{ . }}{{ end }}</span>
+            </p>
+            {{ with .note }}<p class="entry-gloss read-note">{{ . }}</p>{{ end }}
+          </div>
+        </li>
+        {{ end }}
+      </ul>
+    {{ end }}
+  {{ end }}
+</article>
+{{ end }}

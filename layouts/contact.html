@@ -70,6 +70,8 @@
   </script>
   {{ end }}
 
+  {{ partial "subscribe.html" . }}
+
   {{ $links := where site.Params.sameAs "url" "!=" "" }}
   {{ with $links }}
   {{ partial "sectionhead.html" (dict "label" (i18n "elsewhere")) }}

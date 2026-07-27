@@ -1,0 +1,14 @@
+{{/* Buttondown. Set buttondownUser in hugo.yaml; empty hides the whole block. */}}
+{{- with site.Params.buttondownUser }}
+<div class="subscribe">
+  {{ partial "sectionhead.html" (dict "label" (i18n "subscribe")) }}
+  <p class="subscribe-note">{{ i18n "subscribe_note" }}</p>
+  <form class="subform"
+        action="https://buttondown.com/api/emails/embed-subscribe/{{ . }}"
+        method="post" target="popupwindow"
+        onsubmit="window.open('https://buttondown.com/{{ . }}', 'popupwindow')">
+    <input type="email" name="email" placeholder="{{ i18n "form_email" }}" required>
+    <button type="submit">{{ i18n "subscribe_button" }}</button>
+  </form>
+</div>
+{{- end }}

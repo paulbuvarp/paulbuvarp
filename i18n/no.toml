@@ -48,3 +48,19 @@ other = "Takk. Jeg leser alt som kommer inn her."
 other = "Det gikk ikke gjennom. Send e-post direkte i stedet."
 [elsewhere]
 other = "Andre steder"
+[cite_this]
+other = "Sitér denne"
+[copy]
+other = "Kopier"
+[copied]
+other = "Kopiert"
+[subscribe]
+other = "På e-post"
+[subscribe_note]
+other = "En sjelden beskjed når jeg publiserer noe. Ingen fast frekvens, ingen sporing, avmelding med ett klikk."
+[subscribe_button]
+other = "Abonner"
+[press_kit]
+other = "For redaksjoner og arrangører"
+[feed]
+other = "Strøm"
