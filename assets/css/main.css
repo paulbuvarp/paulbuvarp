@@ -63,6 +63,7 @@
   --bleed-top: 0.5rem;
   --bleed-opacity: 0.5;
   --bleed-fade: 86%;       /* where the leftward fade completes */
+  --portrait-w: 14rem;     /* the contact-page portrait */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -658,7 +659,25 @@ footer.foot a:hover {
 /* --- Portrait ------------------------------------------------------------ */
 
 .portrait {
-  margin: 2.5rem 0 2.75rem;
+  /* It was spanning the full container, which on a wide screen rendered an
+     upright photograph about a thousand pixels tall. */
+  max-width: var(--portrait-w);
+  margin: 0.5rem 0 2.5rem;
+}
+
+/* Above 62rem the page is wider than its reading column, so the portrait
+   sits in the right-hand gutter beside the text rather than above it. */
+@media (min-width: 62rem) {
+  .portrait {
+    float: right;
+    margin: 0.4rem 0 1.5rem 3rem;
+    shape-outside: margin-box;
+  }
+  /* Sections must start below the float rather than wrapping round it. */
+  .prose .rule-heading,
+  .prose .mailrow,
+  .prose .aftertext,
+  .prose .subscribe { clear: right; }
 }
 .portrait img {
   display: block;
