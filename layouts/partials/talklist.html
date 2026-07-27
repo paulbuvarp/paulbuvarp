@@ -10,7 +10,7 @@
         {{ if .url }}<a href="{{ .url }}" rel="noopener">{{ .title }}</a>{{ else }}<span class="unlinked">{{ .title }}</span>{{ end }}
       </p>
       <p class="entry-meta">
-        {{ .event }}{{ with .city }}<span class="sep">/</span>{{ . }}{{ end }}{{ with .role }}<span class="sep">/</span>{{ . }}{{ end }}
+        {{ .event }}{{ with .organizer }}<span class="sep">/</span>{{ . }}{{ end }}{{ with .city }}<span class="sep">/</span>{{ . }}{{ end }}{{ with .role }}<span class="sep">/</span>{{ . }}{{ end }}
         {{- with .lang }} <span class="talk-lang">{{ upper . }}</span>{{ end }}
       </p>
     </div>

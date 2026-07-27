@@ -83,19 +83,19 @@ params:
 
   # --- Portrait. Drop the file at static/img/portrait.jpg and name it here.
   # Leave empty and every photo slot simply disappears.
-  portrait: ""
+  portrait: "/img/portrait.jpg"
   portraitAlt: "Paul M. H. Buvarp"
-  portraitCredit: ""
-  portraitOnHome: false
+  portraitCredit: "Anders Halvorsen Fehn, FFI"
+  portraitOnHome: true
 
   # --- Contact form. Sign up at formspree.io, create a form, paste the ID.
   # Looks like "xdorbgpz". Leave empty and the form is hidden, leaving
   # the email address and the social links.
-  formspreeID: ""
+  formspreeID: "xrenryaz"
 
   # --- Public address. Written in two halves so scrapers have to work.
   # Use a Cloudflare Email Routing alias, never your real inbox.
-  contactUser: ""
+  contactUser: "post"
   contactDomain: "paulbuvarp.com"
 
   # Soft language prompt. A dismissible bar, never a forced redirect.
