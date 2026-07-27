@@ -18,7 +18,8 @@
               {{ if .url }}<a href="{{ .url }}" rel="noopener">{{ .title }}</a>{{ else }}<span class="unlinked">{{ .title }}</span>{{ end }}
               <span class="read-meta">{{ .author }}{{ with .year }}, {{ . }}{{ end }}</span>
             </p>
-            {{ with .note }}<p class="entry-gloss read-note">{{ . }}</p>{{ end }}
+            {{- $n := or (index . (printf "note_%s" site.Language.Lang)) .note -}}
+            {{ with $n }}<p class="entry-gloss read-note">{{ . }}</p>{{ end }}
           </div>
         </li>
         {{ end }}

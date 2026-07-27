@@ -1,39 +1,46 @@
 # ---------------------------------------------------------------------------
-# RECOMMENDED READING. Books that inform the work, with a line on why.
+# RECOMMENDED READING.
 #
-#   tag:  groups the list. Use as few groups as you can bear.
-#   note: one sentence. The note is the whole value of the page — a bare
-#         list of titles is a Goodreads profile.
-#   url:  optional. A publisher page is better than a shop.
+#   title / author / year / url / tag   shared between both languages
+#   note_no                             the Norwegian note
+#   note_en                             the English note
+#   note                                fallback, used if the language-specific
+#                                       one is missing. Handy while drafting.
 #
-# Replace these. They are drawn from what you have cited, and the notes are
-# mine, which means they are not yet yours.
+# The note is the whole value of this page. A list of titles without them is
+# a Goodreads profile.
+#
+# EVERY NOTE BELOW IS MINE, NOT YOURS. Replace them.
 # ---------------------------------------------------------------------------
 
 - title: "Orality and Literacy"
   author: "Walter J. Ong"
   year: 1982
   tag: "print"
-  note: "The book everything here argues with. Ong's account of what literacy did to consciousness is the baseline against which any third condition has to be measured."
   url: ""
+  note_no: "Boken alt dette diskuterer med. Ongs beskrivelse av hva skriftkulturen gjorde med bevisstheten er grunnlinjen enhver tredje tilstand må måles mot."
+  note_en: "The book everything here argues with. Ong's account of what literacy did to consciousness is the baseline against which any third condition has to be measured."
 
 - title: "The Printing Press as an Agent of Change"
   author: "Elizabeth Eisenstein"
   year: 1979
   tag: "print"
-  note: "The case that fixity was an achievement rather than a property of the world."
   url: ""
+  note_no: "Argumentet for at fastheten var en bragd, og ikke en egenskap ved verden."
+  note_en: "The case that fixity was an achievement rather than a property of the world."
 
 - title: "God, Human, Animal, Machine"
   author: "Meghan O'Gieblyn"
   year: 2021
   tag: "machines"
-  note: "The best account I know of what happens to metaphysics when the machines get good at speaking."
   url: ""
+  note_no: "Den beste fremstillingen jeg kjenner av hva som skjer med metafysikken når maskinene blir gode til å snakke."
+  note_en: "The best account I know of what happens to metaphysics when the machines get good at speaking."
 
 - title: "When We Cease to Understand the World"
   author: "Benjamín Labatut"
   year: 2020
   tag: "machines"
-  note: "Fiction doing epistemology. On knowledge that arrives faster than the capacity to hold it."
   url: ""
+  note_no: "Skjønnlitteratur som driver erkjennelsesteori. Om kunnskap som kommer fortere enn evnen til å bære den."
+  note_en: "Fiction doing epistemology. On knowledge that arrives faster than the capacity to hold it."
