@@ -1,0 +1,50 @@
+[kind_essay]
+other = "Essayistikk og kommentar"
+[kind_academic]
+other = "Vitenskapelige arbeider"
+[kind_report]
+other = "Rapporter"
+[kind_chapter]
+other = "Bokkapitler"
+[kind_broadcast]
+other = "Radio, fjernsyn og podkast"
+[selected_writing]
+other = "Utvalgte tekster"
+[concepts]
+other = "Begreper"
+[full_index]
+other = "Hele oversikten"
+[with_coauthor]
+other = "med"
+[lang_suggest]
+other = "Denne siden finnes på engelsk."
+[lang_suggest_cta]
+other = "Read in English"
+[lang_dismiss]
+other = "Lukk"
+[talks]
+other = "Foredrag"
+[talks_upcoming]
+other = "Kommende"
+[talks_past]
+other = "Tidligere"
+[talks_none]
+other = "Ingenting er offentlig oppsatt for øyeblikket."
+[contact]
+other = "Kontakt"
+[form_name]
+other = "Navn"
+[form_email]
+other = "E-postadresse"
+[form_message]
+other = "Melding"
+[form_send]
+other = "Send"
+[form_sending]
+other = "Sender …"
+[form_thanks]
+other = "Takk. Jeg leser alt som kommer inn her."
+[form_error]
+other = "Det gikk ikke gjennom. Send e-post direkte i stedet."
+[elsewhere]
+other = "Andre steder"

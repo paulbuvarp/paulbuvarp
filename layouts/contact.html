@@ -1,0 +1,83 @@
+{{ define "main" }}
+<article class="prose">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{ with .Params.standfirst }}<p class="standfirst">{{ . | markdownify }}</p>{{ end }}
+
+  {{ with site.Params.portrait }}
+  <figure class="portrait">
+    <img src="{{ . }}" alt="{{ site.Params.portraitAlt }}" width="1200" height="1500" loading="lazy">
+    {{ with site.Params.portraitCredit }}<figcaption>{{ . }}</figcaption>{{ end }}
+  </figure>
+  {{ end }}
+
+  {{ .Content }}
+
+  {{ with site.Params.contactUser }}
+  <p class="mailrow">
+    <span class="eyebrow">Email</span>
+    <a id="mailto" href="#" data-u="{{ . }}" data-d="{{ site.Params.contactDomain }}">
+      <noscript>{{ . }} [at] {{ site.Params.contactDomain }}</noscript>
+      <span class="mailtext">{{ . }}&#8203;@&#8203;{{ site.Params.contactDomain }}</span>
+    </a>
+  </p>
+  <script>
+  (function(){
+    var a=document.getElementById("mailto");
+    if(!a) return;
+    a.setAttribute("href","mail"+"to:"+a.dataset.u+String.fromCharCode(64)+a.dataset.d);
+  })();
+  </script>
+  {{ end }}
+
+  {{ with site.Params.formspreeID }}
+  <div class="rule-heading"><p class="eyebrow">{{ i18n "form_send" }}</p></div>
+  <div id="formwrap">
+    <form id="contactform" action="https://formspree.io/f/{{ . }}" method="POST" class="cform">
+      <label>
+        <span>{{ i18n "form_name" }}</span>
+        <input type="text" name="name" required autocomplete="name">
+      </label>
+      <label>
+        <span>{{ i18n "form_email" }}</span>
+        <input type="email" name="email" required autocomplete="email">
+      </label>
+      <label>
+        <span>{{ i18n "form_message" }}</span>
+        <textarea name="message" rows="7" required></textarea>
+      </label>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="gotcha">
+      <input type="hidden" name="_subject" value="paulbuvarp.com">
+      <button type="submit">{{ i18n "form_send" }}</button>
+      <p class="formnote" id="formnote" role="status"></p>
+    </form>
+  </div>
+  <script>
+  (function(){
+    var f=document.getElementById("contactform"), n=document.getElementById("formnote");
+    if(!f) return;
+    f.addEventListener("submit", function(ev){
+      ev.preventDefault();
+      var btn=f.querySelector("button");
+      btn.disabled=true; n.textContent={{ i18n "form_sending" }};
+      fetch(f.action,{method:"POST",body:new FormData(f),headers:{Accept:"application/json"}})
+        .then(function(r){
+          if(r.ok){ f.innerHTML='<p class="formthanks">'+{{ i18n "form_thanks" }}+'</p>'; }
+          else { n.textContent={{ i18n "form_error" }}; btn.disabled=false; }
+        })
+        .catch(function(){ n.textContent={{ i18n "form_error" }}; btn.disabled=false; });
+    });
+  })();
+  </script>
+  {{ end }}
+
+  {{ $links := where site.Params.sameAs "url" "!=" "" }}
+  {{ with $links }}
+  <div class="rule-heading"><p class="eyebrow">{{ i18n "elsewhere" }}</p></div>
+  <ul class="sociallist">
+    {{ range . }}<li><a href="{{ .url }}" rel="me noopener">{{ .name }}</a></li>{{ end }}
+  </ul>
+  {{ end }}
+
+  {{ with .Params.aftertext }}<div class="aftertext">{{ . | markdownify }}</div>{{ end }}
+</article>
+{{ end }}

@@ -1,19 +1,75 @@
 baseURL: "https://paulbuvarp.com/"
-languageCode: "en-gb"
 title: "Paul M. H. Buvarp"
 enableRobotsTXT: true
-enableGitInfo: false
 disableKinds: ["taxonomy", "term"]
+
+defaultContentLanguage: "no"
+defaultContentLanguageInSubdir: false
+
+languages:
+  en:
+    languageCode: "en-gb"
+    languageName: "English"
+    languageDirection: "ltr"
+    weight: 1
+    title: "Paul M. H. Buvarp"
+    params:
+      hreflang: "en"
+      ogLocale: "en_GB"
+      description: "Senior research scientist at the Norwegian Defence Research Establishment, working on disinformation, influence operations and cognitive security."
+    menu:
+      main:
+        - name: "Writing"
+          pageRef: /writing
+          weight: 10
+        - name: "Concepts"
+          pageRef: /concepts
+          weight: 20
+        - name: "Talks"
+          pageRef: /talks
+          weight: 30
+        - name: "Notes"
+          pageRef: /notes
+          weight: 40
+        - name: "Contact"
+          pageRef: /contact
+          weight: 50
+
+  "no":
+    languageCode: "nb-NO"
+    languageName: "Norsk"
+    languageDirection: "ltr"
+    weight: 2
+    title: "Paul M. H. Buvarp"
+    params:
+      hreflang: "nb"
+      ogLocale: "nb_NO"
+      description: "Seniorforsker ved Forsvarets forskningsinstitutt, med desinformasjon, påvirkningsoperasjoner og kognitiv sikkerhet som fagfelt."
+    menu:
+      main:
+        - name: "Tekster"
+          pageRef: /writing
+          weight: 10
+        - name: "Begreper"
+          pageRef: /concepts
+          weight: 20
+        - name: "Foredrag"
+          pageRef: /talks
+          weight: 30
+        - name: "Notater"
+          pageRef: /notes
+          weight: 40
+        - name: "Kontakt"
+          pageRef: /contact
+          weight: 50
 
 markup:
   goldmark:
     renderer:
       unsafe: true
-  highlight:
-    noClasses: false
 
 params:
-  # --- Identity. These feed the JSON-LD Person schema. ---
+  # --- Identity. Feeds the JSON-LD Person schema. ---
   fullName: "Paul Magnus Hjertvik Buvarp"
   displayName: "Paul M. H. Buvarp"
   alternateNames:
@@ -25,29 +81,38 @@ params:
   description: "Senior research scientist at the Norwegian Defence Research Establishment, working on disinformation, influence operations and cognitive security."
   email: ""
 
+  # --- Portrait. Drop the file at static/img/portrait.jpg and name it here.
+  # Leave empty and every photo slot simply disappears.
+  portrait: ""
+  portraitAlt: "Paul M. H. Buvarp"
+  portraitCredit: ""
+  portraitOnHome: false
+
+  # --- Contact form. Sign up at formspree.io, create a form, paste the ID.
+  # Looks like "xdorbgpz". Leave empty and the form is hidden, leaving
+  # the email address and the social links.
+  formspreeID: ""
+
+  # --- Public address. Written in two halves so scrapers have to work.
+  # Use a Cloudflare Email Routing alias, never your real inbox.
+  contactUser: ""
+  contactDomain: "paulbuvarp.com"
+
+  # Soft language prompt. A dismissible bar, never a forced redirect.
+  # Set to false to switch it off entirely.
+  languageSuggestion: true
+
   # --- sameAs: every profile that is demonstrably you. ---
-  # This is the single most important block on the site for search.
-  # Fill in every one you have; delete the ones you do not.
   sameAs:
     - name: "FFI"
-      url: "https://www.ffi.no/forskning/forskere/paul-m.h.buvarp"
-    - name: "Altinget"
-      url: "https://www.altinget.no/person/paul-m-h-buvarp"
+      url: ""
+    - name: "Google Scholar"
+      url: ""
     - name: "ORCID"
-      url: "https://orcid.org/0000-0002-3678-1406"
-    - name: "Facebook"
-      url: "https://www.facebook.com/paulmhbuvarp/"
+      url: ""
+    - name: "Bluesky"
+      url: ""
     - name: "LinkedIn"
-      url: "www.linkedin.com/in/paulbuvarp"
-
-menu:
-  main:
-    - name: "Writing"
-      pageRef: /writing
-      weight: 10
-    - name: "Concepts"
-      pageRef: /concepts
-      weight: 20
-    - name: "Notes"
-      pageRef: /notes
-      weight: 30
+      url: ""
+    - name: "Facebook"
+      url: ""

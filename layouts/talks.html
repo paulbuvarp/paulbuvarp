@@ -1,0 +1,24 @@
+{{ define "main" }}
+<article class="prose">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{ with .Params.standfirst }}<p class="standfirst">{{ . | markdownify }}</p>{{ end }}
+  {{ .Content }}
+
+  {{ $today := now.Format "2006-01-02" }}
+  {{ $all := site.Data.talks }}
+  {{ $upcoming := where $all "date" "ge" $today }}
+  {{ $past := where $all "date" "lt" $today }}
+
+  <div class="rule-heading"><p class="eyebrow">{{ i18n "talks_upcoming" }}</p></div>
+  {{ if $upcoming }}
+    {{ partial "talklist.html" (dict "items" (sort $upcoming "date" "asc")) }}
+  {{ else }}
+    <p class="standfirst">{{ i18n "talks_none" }}</p>
+  {{ end }}
+
+  {{ with $past }}
+    <div class="rule-heading"><p class="eyebrow">{{ i18n "talks_past" }}</p></div>
+    {{ partial "talklist.html" (dict "items" (sort . "date" "desc") "past" true) }}
+  {{ end }}
+</article>
+{{ end }}

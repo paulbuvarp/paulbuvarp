@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-<html lang="{{ or site.LanguageCode "en-gb" }}">
+<html lang="{{ or site.Language.Params.hreflang site.Language.Lang }}">
 <head>
 {{ partial "head.html" . }}
 </head>
 <body>
   <header class="masthead">
     <div class="wrap masthead-inner">
-      <a class="sitename" href="{{ "/" | relURL }}">{{ site.Params.displayName }}</a>
-      <nav class="nav">
-        {{ range site.Menus.main }}
-          <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>
-        {{ end }}
-      </nav>
+      <a class="sitename" href="{{ "/" | relLangURL }}">{{ site.Params.displayName }}</a>
+      <div class="masthead-right">
+        <nav class="nav">
+          {{ range site.Menus.main }}
+            <a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a>
+          {{ end }}
+        </nav>
+        {{ partial "langswitch.html" . }}
+      </div>
     </div>
   </header>
+
+  {{ partial "lang-suggest.html" . }}
 
   <main class="wrap">
     {{ block "main" . }}{{ end }}

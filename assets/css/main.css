@@ -196,13 +196,16 @@ nav.nav a[aria-current="page"] {
   }
 }
 
+/* The name is set quietly and the opening line is the loud element.
+   The idea is bigger than the person; the page should say so. */
 h1.name {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(2.35rem, 7.5vw, 3.4rem);
-  line-height: 1.06;
-  letter-spacing: -0.012em;
-  margin: 0 0 1.6rem;
+  font-size: clamp(1.9rem, 5.2vw, 2.5rem);
+  line-height: 1.24;
+  letter-spacing: 0.015em;
+  margin: 0 0 1.9rem;
+  text-wrap: balance;
 }
 
 .parenthetical p {
@@ -213,8 +216,10 @@ h1.name {
 }
 
 .lede {
-  font-size: 1.2em;
-  line-height: 1.5;
+  font-size: 1.34em;
+  line-height: 1.42;
+  letter-spacing: -0.003em;
+  margin-bottom: 1.6rem;
 }
 
 /* --- Typography ---------------------------------------------------------- */
@@ -240,10 +245,11 @@ h3 {
 .page-title {
   font-family: var(--display);
   font-weight: 400;
-  font-size: clamp(2rem, 6vw, 2.6rem);
-  line-height: 1.1;
-  letter-spacing: -0.012em;
-  margin: 3.5rem 0 0.5rem;
+  font-size: clamp(1.75rem, 4.6vw, 2.2rem);
+  line-height: 1.24;
+  letter-spacing: 0.012em;
+  margin: 3.5rem 0 0.6rem;
+  text-wrap: balance;
 }
 
 .eyebrow {
@@ -495,3 +501,225 @@ footer.foot a:hover {
 }
 .eyebrow--top { margin-top: 3.5rem; }
 .page-title--tight { margin-top: 0; }
+
+/* --- Language toggle ----------------------------------------------------- */
+
+.masthead-right {
+  display: flex;
+  align-items: baseline;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+}
+
+.langswitch {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.langswitch a {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  background: none;
+  padding: 0.1rem 0.3rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+.langswitch a:hover {
+  color: var(--mark);
+}
+.langswitch a[aria-current="true"] {
+  color: var(--ink);
+  border-color: var(--rule);
+  background: var(--mark-tint);
+}
+
+/* --- Soft language offer -------------------------------------------------- */
+
+.langsuggest {
+  border-bottom: 1px solid var(--rule);
+  background: var(--mark-tint);
+  margin-top: 1.75rem;
+}
+.langsuggest[hidden] { display: none; }
+
+.langsuggest-inner {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.langsuggest-inner a {
+  color: var(--mark);
+  background-image: linear-gradient(var(--mark), var(--mark));
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 94%;
+}
+
+.langsuggest-inner button {
+  margin-left: auto;
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.2rem;
+  font-family: var(--text);
+}
+.langsuggest-inner button:hover { color: var(--ink); }
+
+/* --- Portrait ------------------------------------------------------------ */
+
+.portrait {
+  margin: 2.5rem 0 2.75rem;
+}
+.portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: grayscale(1) contrast(1.04);
+}
+.portrait figcaption {
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.55rem;
+}
+.portrait--home {
+  margin: 3rem 0 0;
+  max-width: 15rem;
+}
+
+/* --- Talks --------------------------------------------------------------- */
+
+.talk-date {
+  line-height: 1.25;
+  padding-top: 0.5em;
+}
+.talk-year {
+  opacity: 0.62;
+}
+.talk-lang {
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.05em 0.3em;
+  margin-left: 0.5em;
+  font-style: normal;
+  vertical-align: 0.08em;
+}
+.talks--past .entry-title,
+.talks--past .entry-meta,
+.talks--past .talk-date {
+  opacity: 0.66;
+}
+
+/* --- Contact ------------------------------------------------------------- */
+
+.mailrow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  margin: 2rem 0 0;
+}
+.mailrow .eyebrow { margin: 0; }
+.mailtext { word-break: break-word; }
+
+.cform {
+  display: block;
+  max-width: 30rem;
+  margin-top: 0.5rem;
+}
+.cform label {
+  display: block;
+  margin-bottom: 1.15rem;
+}
+.cform label span {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+.cform input[type="text"],
+.cform input[type="email"],
+.cform textarea {
+  width: 100%;
+  font-family: var(--text);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 0.55rem 0.7rem;
+}
+.cform input:focus,
+.cform textarea:focus {
+  border-color: var(--mark);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--mark-tint);
+}
+.cform textarea { resize: vertical; }
+.cform button {
+  font-family: var(--text);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--mark);
+  border: 0;
+  border-radius: 2px;
+  padding: 0.7rem 1.6rem;
+  cursor: pointer;
+}
+.cform button:hover { opacity: 0.88; }
+.cform button[disabled] { opacity: 0.5; cursor: default; }
+.gotcha {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+.formnote, .formthanks {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-top: 0.9rem;
+}
+.formthanks {
+  border-left: 1px solid var(--mark);
+  padding-left: 1rem;
+  color: var(--ink);
+}
+
+.sociallist {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.4rem;
+}
+.sociallist a { font-size: 0.98rem; }
+
+.aftertext {
+  margin-top: 3.5rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 0.5rem;
+}
+.aftertext blockquote {
+  font-style: normal;
+  color: var(--ink);
+  font-size: 0.96rem;
+}

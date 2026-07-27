@@ -1,158 +1,211 @@
 # paulbuvarp.com
 
-A Hugo site. No theme submodule, no build dependencies beyond Hugo itself, no
-JavaScript, no third-party requests. Four self-hosted fonts, 85 KB total.
+A Hugo site in two languages. No theme, no build dependencies beyond Hugo, no
+third-party requests except the contact form. Four self-hosted fonts, 85 KB.
+
+- `paulbuvarp.com` — Norwegian
+- `paulbuvarp.com/en/` — English
+- **EN / NO** toggle on every page, landing on the same page in the other language
 
 ---
 
-## Run it locally
+## Editing without touching code
 
-```bash
-brew install hugo        # macOS
-# or: sudo apt install hugo   (needs 0.146+; check with hugo version)
+You never need to open GitHub to change a word. Three things, once:
 
-hugo server
+1. **GitHub Desktop** — you have this. It is the publish button.
+2. **A markdown editor.** [Obsidian](https://obsidian.md) is free, opens a folder
+   of `.md` files directly, and shows formatting as you type. Point it at your
+   cloned repo folder and the whole site becomes a set of documents.
+3. That is it.
+
+The loop: edit in Obsidian → save → GitHub Desktop shows what changed → type a
+summary → **Commit to main** → **Push origin**. Live in ninety seconds.
+
+Markdown is three rules: `#` for a heading, `*text*` for italic, blank line
+between paragraphs. Everything above the `---` line at the top of a file is
+settings; everything below it is prose.
+
+> A hosted CMS with a login page is possible — Sveltia or Decap — but on GitHub
+> Pages it needs an OAuth broker running somewhere, which is a moving part that
+> will break in eighteen months when you have forgotten it exists. The folder of
+> text files will not.
+
+---
+
+## What lives where
+
+| I want to change… | Open this |
+|---|---|
+| The Norwegian front page | `content/_index.no.md` |
+| The English front page | `content/_index.en.md` |
+| A publication entry | `data/publications.yaml` |
+| An upcoming talk | `data/talks.yaml` |
+| The contact page | `content/contact.no.md` / `.en.md` |
+| A concept page | `content/concepts/*.no.md` / `*.en.md` |
+| Your address, socials, portrait | `hugo.yaml` |
+
+`.no.md` is Norwegian, `.en.md` is English. To translate anything, copy the file
+and swap the suffix. Hugo pairs them and the toggle appears by itself.
+
+---
+
+## Setting up contact — do this first
+
+### 1. An address you can throw away
+
+Do not publish your real inbox. In **Cloudflare → your domain → Email → Email
+Routing**, enable it, accept the MX records it offers, and create a single
+address — `hei@paulbuvarp.com` or `post@paulbuvarp.com` — forwarding to wherever
+you actually read mail.
+
+Two advantages. Editors can write to you from their own mail client and attach
+things, which is what editors want to do. And if it is ever buried in spam, you
+delete the alias and make another; your real address was never exposed.
+
+Then in `hugo.yaml`:
+
+```yaml
+  contactUser: "hei"
+  contactDomain: "paulbuvarp.com"
 ```
 
-Open <http://localhost:1313>. Edits reload instantly.
+The page assembles the address in the browser rather than printing it in the
+HTML, which stops the low-effort harvesters. Leave `contactUser` empty and the
+whole row disappears.
 
----
+### 2. A form, for people who would rather not open their mail
 
-## Deploy, in order
+Sign up at [formspree.io](https://formspree.io), create a form, and it gives you
+an ID that looks like `xdorbgpz`. Paste it in:
 
-The DNS step is the only one you cannot hurry, so start it early.
-
-**1. Repository.** Create a public GitHub repo called `paulbuvarp`. Then, from
-this directory:
-
-```bash
-git init
-git add .
-git commit -m "Initial site"
-git branch -M main
-git remote add origin git@github.com:YOURNAME/paulbuvarp.git
-git push -u origin main
+```yaml
+  formspreeID: "xdorbgpz"
 ```
 
-**2. Pages.** Repo → Settings → Pages → Source: **GitHub Actions**. The workflow
-in `.github/workflows/hugo.yml` handles the rest. Watch the Actions tab; the
-first build takes about ninety seconds.
+Free tier is 50 messages a month, which is more than a personal site receives.
+Submissions arrive as email. There is a hidden honeypot field already in place,
+which removes most bot traffic. Leave the ID empty and the form is simply not
+rendered.
 
-**3. DNS in Cloudflare.** For `paulbuvarp.com`:
+### 3. Socials
 
-| Type  | Name | Content                  | Proxy    |
-|-------|------|--------------------------|----------|
-| A     | `@`  | `185.199.108.153`        | **DNS only** |
-| A     | `@`  | `185.199.109.153`        | **DNS only** |
-| A     | `@`  | `185.199.110.153`        | **DNS only** |
-| A     | `@`  | `185.199.111.153`        | **DNS only** |
-| CNAME | `www`| `YOURNAME.github.io`     | **DNS only** |
-
-The grey cloud matters. GitHub cannot issue its Let's Encrypt certificate
-through Cloudflare's proxy, and you will lose an evening to this if you leave
-the orange cloud on. Once Pages reports HTTPS as active, turn the proxy on if
-you want it.
-
-**4. Custom domain.** Settings → Pages → Custom domain → `paulbuvarp.com`. Tick
-*Enforce HTTPS* once the certificate appears. `static/CNAME` is already in place.
+Fill in the `sameAs` block in `hugo.yaml` — LinkedIn, Facebook, FFI staff page,
+Google Scholar, ORCID, Bluesky. These do double duty: they appear on the contact
+page and in the footer, and they feed the JSON-LD identity block that tells
+Google all these profiles are one person. Delete the rows you have no URL for.
 
 ---
 
-## Before you push: fill these in
+## The portrait
 
-- `hugo.yaml` → **`sameAs`**. Every profile URL you have: FFI staff page, Google
-  Scholar, ORCID, Bluesky, LinkedIn. This block does more for your search
-  visibility than anything else on the site. Blank entries are skipped safely.
-- `hugo.yaml` → `email`, if you want one published.
-- `data/publications.yaml` → the entries marked `TODO`, and **verify every year
-  and title**. I seeded this from what I knew of your work and left every URL
-  blank rather than invent one.
-- `content/_index.md` → the biography. Read it in your own voice and change what
-  is not.
+Save it as `static/img/portrait.jpg` and switch it on in `hugo.yaml`:
+
+```yaml
+  portrait: "/img/portrait.jpg"
+  portraitCredit: "Photo: NAME"
+  portraitOnHome: false
+```
+
+What to supply: **1200 × 1500 px**, portrait orientation, under 300 KB, saved at
+about 80% JPEG quality. Head and shoulders, plain or quiet background, looking at
+the camera. The site renders it in greyscale, so do not spend effort on colour —
+and do check it works in monochrome before committing.
+
+`portraitOnHome: false` is the default and I would leave it there. The front page
+works because it is only type; a face competes with the parentheses and the whole
+thing gets busier. The contact page is where a reader has already decided they
+want to know who you are. Set it to `true` if you disagree — it renders small and
+quietly on the left.
 
 ---
 
-## Adding a piece
+## Talks
 
-One stanza in `data/publications.yaml`:
+`data/talks.yaml`. One stanza per engagement:
+
+```yaml
+- date: "2026-08-13"
+  title: "Universities and democratic resilience"
+  event: "Arendalsuka"
+  city: "Arendal"
+  role: "Moderator"
+  lang: "no"
+  url: ""
+```
+
+`date` is the only field that must be right. Anything in the future appears under
+*Kommende*; the moment it passes it moves itself to *Tidligere* and drops off the
+front page. Nothing needs deleting and nothing goes stale.
+
+Delete the two `EXAMPLE` entries before you push.
+
+---
+
+## Adding a publication
+
+`data/publications.yaml`, one stanza, same session you publish the piece:
 
 ```yaml
 - title: "Å gå god for"
   venue: "Samtiden"
   year: 2026
   kind: essay          # essay | academic | report | chapter | broadcast
-  featured: true       # homepage; keep to five or six
-  url: "https://..."   # empty renders unlinked, which is right for paywalls
-  note: "On trust and liability"
+  featured: true       # front page; keep to five or six
+  url: ""              # empty renders unlinked, right for paywalls
 ```
 
-Commit, push, done in ninety seconds.
-
-**The rule:** you add the entry in the same session you publish the piece, as
-the last act of publishing it. Not a task for later. Later is where personal
-sites go to die.
+The list is shared between both languages — a Norwegian essay has one title, in
+Norwegian, on both. Only the section headings translate.
 
 ---
 
-## Making Google agree that you exist
+## Two traps
 
-Ranking for "Paul Buvarp" is not a competitive problem — the name is rare.
-The problem is *entity consolidation*: teaching Google that the FFI staff page,
-the Scholar profile, the Vagant bylines and this site are one person. That is
-what the following do.
+**YAML reads bare `no` as false.** The language key in `hugo.yaml` is written
+`"no":` with quotes. Remove them and Hugo silently builds a language called
+"false" and mangles the site. Leave the quotes.
 
-1. **Search Console.** Add `paulbuvarp.com`, verify by DNS TXT record in
-   Cloudflare, submit `https://paulbuvarp.com/sitemap.xml`. Hugo generates the
-   sitemap already.
-2. **Fill in `sameAs`.** The JSON-LD `Person` block on the homepage is built
-   from it, and the footer links carry `rel="me"`. Both are signals.
-3. **Reciprocate.** Ask FFI to link this site from your staff page. A `.no`
-   institutional domain is the highest-authority inbound link available to you,
-   and it costs one email. Add the URL to your ORCID, your Scholar profile, your
-   Bluesky bio, and your contributor note at Vagant.
-4. **One name, everywhere.** You appear variously as Paul Buvarp, Paul M. H.
-   Buvarp and Paul Magnus Hjertvik Buvarp. Pick one for bylines. The other two
-   are declared as `alternateName` in the schema, which is how you get the
-   benefit of all three without the dilution.
-5. **The concept pages are the long game.** Nobody is competing for "tertiary
-   orality". A dated, indexed, definitional page under your own domain is how
-   you hold the term while the paper is still in review.
+**Indentation is meaningful** in `.yaml` files. Two spaces, never a tab. If a
+build fails after you edit one, this is why.
 
-Expect four to eight weeks to rank first for the exact name, and rather longer
-for the concepts. There is nothing further to do once the above is in place.
+---
+
+## Search
+
+Ranking for your name is not competitive; the work is entity consolidation.
+
+1. Fill in `sameAs`. This is the highest-leverage thing on the site.
+2. Google Search Console: add the domain, verify by DNS TXT record, submit
+   `https://paulbuvarp.com/sitemap.xml`.
+3. Ask FFI to link the site from your staff page. A `.no` institutional link is
+   the strongest inbound link available to you and costs one email.
+4. hreflang tags are already in place on every page, reciprocal and validated,
+   with `x-default` pointing at English. This is what lets Google serve the
+   Norwegian page to a Norwegian search and the English page to an English one,
+   before the click, while keeping both indexed.
+5. The concept pages are the long game. Nobody is competing for "tertiær
+   oralitet".
 
 ---
 
 ## Structure
 
 ```
-hugo.yaml                    config, identity, sameAs
-data/publications.yaml       the only file you edit regularly
+hugo.yaml                    config, identity, contact, portrait
+data/publications.yaml       writing index, both languages
+data/talks.yaml              upcoming and past talks
 content/
-  _index.md                  homepage biography
-  writing.md                 renders from the data file
-  presentasjon.md            Norwegian press presentation
-  concepts/                  four definitional pages
+  _index.no.md / .en.md      front pages
+  contact.no.md / .en.md
+  talks.no.md / .en.md
+  writing.no.md / .en.md
+  concepts/                  four concepts, two languages each
   notes/                     empty, deliberately
-layouts/                     six templates, no theme
+i18n/no.toml, en.toml        interface words
+layouts/                     ten templates, no theme
 assets/css/main.css          one stylesheet
 static/fonts/                Fraunces + Spectral, subset, self-hosted
+static/img/                  portrait goes here
 static/robots.txt            a decision about AI crawlers awaits you
 ```
-
----
-
-## Design notes
-
-Palette is bone paper, letterpress ink, and a spruce mark used only for links
-and the brackets. Fraunces for display, pinned to a single optical instance;
-Spectral for text, at a 34rem measure. Both are self-hosted rather than pulled
-from Google's CDN — a German court has held that the CDN's IP logging is an
-unlawful transfer under the GDPR, and you should not be leaking your readers to
-Mountain View.
-
-The homepage biography sits inside an enormous pair of parentheses. They are
-unlabelled: a visitor who does not know the argument sees a typographic frame,
-and an editor who does knows exactly what they are looking at. Dark mode is
-handled, keyboard focus is visible, reduced motion is respected, and there is no
-analytics. If you must have numbers, GoatCounter is cookieless and EU-hosted.

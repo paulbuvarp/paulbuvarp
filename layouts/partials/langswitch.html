@@ -1,0 +1,21 @@
+{{/* Persistent language toggle. Always shows both languages so the
+     reader can see the choice exists, rather than discovering it. */}}
+{{- $cur := . -}}
+<nav class="langswitch" aria-label="Language">
+  {{- range site.Languages -}}
+    {{- $lang := . -}}
+    {{- $target := "" -}}
+    {{- if eq $lang.Lang site.Language.Lang -}}
+      {{- $target = $cur.RelPermalink -}}
+    {{- else -}}
+      {{- range $cur.Translations -}}
+        {{- if eq .Language.Lang $lang.Lang }}{{ $target = .RelPermalink }}{{ end -}}
+      {{- end -}}
+      {{- if not $target }}{{ $target = printf "/%s/" $lang.Lang | replaceRE "^/en/$" "/" }}{{ end -}}
+    {{- end -}}
+    <a href="{{ $target }}"
+       hreflang="{{ or $lang.Params.hreflang $lang.Lang }}"
+       {{ if eq $lang.Lang site.Language.Lang }}aria-current="true"{{ end }}
+       >{{ if eq $lang.Lang "en" }}EN{{ else }}NO{{ end }}</a>
+  {{- end -}}
+</nav>

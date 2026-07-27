@@ -1,0 +1,19 @@
+<ul class="entries talks{{ if .past }} talks--past{{ end }}">
+  {{ range .items }}
+  <li class="entry">
+    <span class="entry-year talk-date">
+      {{- $d := time.AsTime .date -}}
+      {{ $d.Format "2 Jan" }}<br><span class="talk-year">{{ $d.Format "2006" }}</span>
+    </span>
+    <div>
+      <p class="entry-title">
+        {{ if .url }}<a href="{{ .url }}" rel="noopener">{{ .title }}</a>{{ else }}<span class="unlinked">{{ .title }}</span>{{ end }}
+      </p>
+      <p class="entry-meta">
+        {{ .event }}{{ with .city }}<span class="sep">/</span>{{ . }}{{ end }}{{ with .role }}<span class="sep">/</span>{{ . }}{{ end }}
+        {{- with .lang }} <span class="talk-lang">{{ upper . }}</span>{{ end }}
+      </p>
+    </div>
+  </li>
+  {{ end }}
+</ul>

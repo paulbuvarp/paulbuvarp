@@ -1,0 +1,14 @@
+{{/* hreflang: how you let Google do the geographic routing for you,
+     without breaking indexing of either version. */}}
+{{- $pages := slice . -}}
+{{- range .Translations }}{{ $pages = $pages | append . }}{{ end -}}
+{{- range $pages }}
+<link rel="alternate" hreflang="{{ or .Language.Params.hreflang .Language.Lang }}" href="{{ .Permalink }}">
+{{- end }}
+{{- if eq site.Language.Lang "en" }}
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+{{- else }}
+  {{- range .Translations }}{{ if eq .Language.Lang "en" }}
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+  {{- end }}{{ end }}
+{{- end }}

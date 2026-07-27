@@ -3,7 +3,7 @@
 
 {{- $isHome := .IsHome -}}
 {{- $title := cond $isHome site.Params.displayName (printf "%s — %s" .Title site.Params.displayName) -}}
-{{- $desc := or .Description .Summary site.Params.description -}}
+{{- $desc := or .Description .Summary site.Language.Params.description site.Params.description -}}
 <title>{{ $title }}</title>
 <meta name="description" content="{{ $desc | plainify | truncate 180 }}">
 <link rel="canonical" href="{{ .Permalink }}">
@@ -13,7 +13,7 @@
 <meta property="og:description" content="{{ $desc | plainify | truncate 180 }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ site.Params.displayName }}">
-<meta property="og:locale" content="en_GB">
+<meta property="og:locale" content="{{ or site.Language.Params.ogLocale "en_GB" }}">
 <meta name="twitter:card" content="summary">
 
 {{- with .Params.date }}<meta property="article:published_time" content="{{ time.Format "2006-01-02" . }}">{{ end }}
@@ -29,5 +29,7 @@
 {{ with .OutputFormats.Get "rss" -}}
   <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Params.displayName }}">
 {{- end }}
+
+{{ partial "hreflang.html" . }}
 
 {{ if $isHome }}{{ partial "schema.html" . }}{{ end }}

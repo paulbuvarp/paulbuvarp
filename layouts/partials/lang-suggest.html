@@ -1,0 +1,39 @@
+{{/* A one-line, dismissible offer — never a redirect.
+
+     Fires only if: a translation of THIS page exists, the visitor's browser
+     is set to the other language, and they have not dismissed it before.
+     Search engines run no JavaScript, so both versions stay indexable.
+
+     Switch off with `languageSuggestion: false` in hugo.yaml. */}}
+{{- if site.Params.languageSuggestion -}}
+{{- $alt := "" -}}
+{{- range .Translations }}{{ $alt = .RelPermalink }}{{ end -}}
+{{- if $alt -}}
+{{- $isEN := eq site.Language.Lang "en" -}}
+<div id="langsuggest" class="langsuggest" hidden>
+  <div class="wrap langsuggest-inner">
+    <span>{{ i18n "lang_suggest" }}</span>
+    <a href="{{ $alt }}">{{ i18n "lang_suggest_cta" }}</a>
+    <button type="button" id="langsuggest-close" aria-label="{{ i18n "lang_dismiss" }}">&times;</button>
+  </div>
+</div>
+<script>
+(function () {
+  var KEY = "lang-pref-dismissed";
+  var bar = document.getElementById("langsuggest");
+  if (!bar) return;
+  var wantsNorwegian = (navigator.languages || [navigator.language || ""])
+    .some(function (l) { return /^(nb|nn|no)\b/i.test(l); });
+  var onEnglishPage = {{ $isEN }};
+  var relevant = onEnglishPage ? wantsNorwegian : !wantsNorwegian;
+  try { if (localStorage.getItem(KEY)) return; } catch (e) {}
+  if (!relevant) return;
+  bar.hidden = false;
+  document.getElementById("langsuggest-close").addEventListener("click", function () {
+    bar.hidden = true;
+    try { localStorage.setItem(KEY, "1"); } catch (e) {}
+  });
+})();
+</script>
+{{- end -}}
+{{- end -}}

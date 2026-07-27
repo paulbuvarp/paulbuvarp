@@ -3,11 +3,25 @@
 <section class="parenthetical">
   <h1 class="name">{{ site.Params.displayName }}</h1>
   {{ .Content }}
+  {{ if and site.Params.portraitOnHome site.Params.portrait }}
+  <figure class="portrait portrait--home">
+    <img src="{{ site.Params.portrait }}" alt="{{ site.Params.portraitAlt }}" loading="lazy">
+    {{ with site.Params.portraitCredit }}<figcaption>{{ . }}</figcaption>{{ end }}
+  </figure>
+  {{ end }}
 </section>
+
+{{ $today := now.Format "2006-01-02" }}
+{{ $next := first 3 (sort (where site.Data.talks "date" "ge" $today) "date" "asc") }}
+{{ with $next }}
+<div class="rule-heading"><p class="eyebrow">{{ i18n "talks_upcoming" }}</p></div>
+{{ partial "talklist.html" (dict "items" .) }}
+<p class="more"><a href="{{ "/talks/" | relLangURL }}">{{ i18n "talks" }}</a></p>
+{{ end }}
 
 {{ $pubs := where site.Data.publications "featured" true }}
 {{ with $pubs }}
-<div class="rule-heading"><p class="eyebrow">Selected writing</p></div>
+<div class="rule-heading"><p class="eyebrow">{{ i18n "selected_writing" }}</p></div>
 <ul class="entries">
   {{ range sort . "year" "desc" }}
   <li class="entry">
@@ -21,12 +35,12 @@
   </li>
   {{ end }}
 </ul>
-<p class="more"><a href="{{ "/writing/" | relURL }}">The full index</a></p>
+<p class="more"><a href="{{ "/writing/" | relLangURL }}">{{ i18n "full_index" }}</a></p>
 {{ end }}
 
 {{ $concepts := where site.RegularPages "Section" "concepts" }}
 {{ with $concepts }}
-<div class="rule-heading"><p class="eyebrow">Concepts</p></div>
+<div class="rule-heading"><p class="eyebrow">{{ i18n "concepts" }}</p></div>
 <ul class="entries">
   {{ range sort . "Params.order" }}
   <li class="entry entry--plain">

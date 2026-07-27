@@ -1,0 +1,50 @@
+[kind_essay]
+other = "Essays and commentary"
+[kind_academic]
+other = "Academic"
+[kind_report]
+other = "Reports"
+[kind_chapter]
+other = "Book chapters"
+[kind_broadcast]
+other = "Broadcast and podcasts"
+[selected_writing]
+other = "Selected writing"
+[concepts]
+other = "Concepts"
+[full_index]
+other = "The full index"
+[with_coauthor]
+other = "with"
+[lang_suggest]
+other = "This page is also available in Norwegian."
+[lang_suggest_cta]
+other = "Les på norsk"
+[lang_dismiss]
+other = "Dismiss"
+[talks]
+other = "Talks"
+[talks_upcoming]
+other = "Upcoming"
+[talks_past]
+other = "Previously"
+[talks_none]
+other = "Nothing scheduled publicly at the moment."
+[contact]
+other = "Contact"
+[form_name]
+other = "Your name"
+[form_email]
+other = "Your email address"
+[form_message]
+other = "Message"
+[form_send]
+other = "Send"
+[form_sending]
+other = "Sending…"
+[form_thanks]
+other = "Thank you. I read everything that arrives here."
+[form_error]
+other = "That did not send. Email me directly instead."
+[elsewhere]
+other = "Elsewhere"

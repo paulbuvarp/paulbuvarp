@@ -12,4 +12,4 @@ The proposition is that the five centuries between Gutenberg and the network wer
 
 Before the parenthesis opened, knowledge was performed, variable, composite and re-authored at every telling. As it closes, a good deal of that returns: text that flows rather than sits, works without stable editions, authorship distributed to the point of vanishing.
 
-I use the frame for a specific purpose. It supplies the historical baseline against which [tertiary orality](/concepts/tertiary-orality/) can be recognised as a genuine third condition rather than a novelty of the present decade.
+I use the frame for a specific purpose. It supplies the historical baseline against which [tertiary orality](/en/concepts/tertiary-orality/) can be recognised as a genuine third condition rather than a novelty of the present decade.

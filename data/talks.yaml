@@ -1,0 +1,29 @@
+# ---------------------------------------------------------------------------
+# UPCOMING TALKS. Past entries move to the bottom of the Talks page by
+# themselves — nothing here needs deleting, and nothing goes stale on the
+# homepage. The only thing that matters is that `date` is correct.
+#
+#   date:   YYYY-MM-DD. Required. Everything hinges on it.
+#   until:  YYYY-MM-DD. Optional, for multi-day events.
+#   role:   what you are doing there. Optional.
+#   url:    programme or registration page. Optional.
+#   lang:   "no" or "en". Optional; shown as a small marker.
+#
+# Delete the two examples below once you have real entries.
+# ---------------------------------------------------------------------------
+
+- date: "2026-08-13"
+  title: "EXAMPLE — Universities and democratic resilience"
+  event: "Arendalsuka"
+  city: "Arendal"
+  role: "Moderator"
+  lang: "no"
+  url: ""
+
+- date: "2026-10-02"
+  title: "EXAMPLE — Tertiary orality and the literate order"
+  event: "Guest lecture"
+  city: "Oslo"
+  role: "Speaker"
+  lang: "en"
+  url: ""

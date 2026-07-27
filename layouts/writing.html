@@ -9,7 +9,7 @@
     {{ $kind := .kind }}
     {{ $rows := where $all "kind" $kind }}
     {{ with $rows }}
-      <div class="rule-heading"><p class="eyebrow">{{ $.Scratch.Set "x" "" }}{{ index (dict "essay" "Essays and commentary" "academic" "Academic" "report" "Reports" "broadcast" "Broadcast and podcasts" "chapter" "Book chapters") $kind | default $kind }}</p></div>
+      <div class="rule-heading"><p class="eyebrow">{{ i18n (printf "kind_%s" $kind) | default $kind }}</p></div>
       <ul class="entries">
         {{ range sort . "year" "desc" }}
         <li class="entry">
@@ -18,7 +18,7 @@
             <p class="entry-title">
               {{ if .url }}<a href="{{ .url }}" rel="noopener">{{ .title }}</a>{{ else }}<span class="unlinked">{{ .title }}</span>{{ end }}
             </p>
-            <p class="entry-meta">{{ .venue }}{{ with .coauthors }}<span class="sep">/</span>with {{ . }}{{ end }}{{ with .note }}<span class="sep">/</span>{{ . }}{{ end }}</p>
+            <p class="entry-meta">{{ .venue }}{{ with .coauthors }}<span class="sep">/</span>{{ i18n "with_coauthor" }} {{ . }}{{ end }}{{ with .note }}<span class="sep">/</span>{{ . }}{{ end }}</p>
           </div>
         </li>
         {{ end }}
