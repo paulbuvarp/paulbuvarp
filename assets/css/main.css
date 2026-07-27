@@ -45,8 +45,17 @@
   --display: "Fraunces", Georgia, serif;
   --text: "Spectral", Georgia, "Times New Roman", serif;
 
-  --measure: 34rem;
+  --measure: 34rem;        /* prose column — do not widen, it is the reading measure */
+  --wide: 46rem;           /* page container — indexes and lists use all of it */
   --step: 1.55rem;
+
+  /* Homepage portrait bleed. Tune these four and nothing else. */
+  --bleed-w: 30rem;
+  --bleed-h: 25rem;
+  --bleed-left: -19rem;
+  --bleed-top: 0.5rem;
+  --bleed-opacity: 0.5;
+  --bleed-fade: 76%;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -83,9 +92,33 @@ body {
 }
 
 .wrap {
-  max-width: var(--measure);
+  max-width: var(--wide);
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+@media (min-width: 82rem) {
+  :root { --wide: 52rem; }
+}
+@media (min-width: 100rem) {
+  :root { --wide: 56rem; }
+}
+
+/* Prose keeps a readable measure inside the wider page. Lists and indexes
+   spread to the full container, which is what makes the page feel less
+   like a phone column on a desktop. */
+article.prose > p,
+article.prose > h2,
+article.prose > h3,
+article.prose > blockquote,
+article.prose > ol,
+article.prose > .definition,
+article.prose > .standfirst,
+article.prose > .attribution,
+.aftertext > *,
+.parenthetical-text > p,
+.parenthetical > p {
+  max-width: var(--measure);
 }
 
 /* --- Masthead ----------------------------------------------------------- */
@@ -322,12 +355,24 @@ code {
   margin: 0;
   white-space: nowrap;
 }
-.rule-heading::after {
-  content: "";
+.rule-line {
   flex: 1;
   height: 1px;
   background: var(--rule);
 }
+
+/* The continuation link lives on the rule, not under the list. Under the
+   list it read as a heading for the section below it. */
+.rule-more {
+  font-size: 0.7rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: none;
+  white-space: nowrap;
+}
+.rule-more:hover { color: var(--mark); }
+.rule-more .arrow { padding-left: 0.45em; opacity: 0.65; }
 
 /* --- Writing index ------------------------------------------------------- */
 
@@ -722,4 +767,136 @@ footer.foot a:hover {
   font-style: normal;
   color: var(--ink);
   font-size: 0.96rem;
+}
+
+/* --- Concept sidebar ----------------------------------------------------- */
+
+.withrail {
+  display: flex;
+  flex-direction: column;
+}
+.rail { order: 2; }
+.railmain { order: 1; }
+
+.rail {
+  margin-top: 3rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 1rem;
+}
+.rail-label { margin: 0 0 0.7rem; }
+.rail ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.rail li {
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.rail a {
+  font-size: 0.92rem;
+  color: var(--muted);
+  background: none;
+}
+.rail a:hover { color: var(--mark); }
+.rail li.here a {
+  color: var(--ink);
+  border-left: 2px solid var(--mark);
+  padding-left: 0.6rem;
+  margin-left: -0.75rem;
+  display: inline-block;
+}
+
+@media (min-width: 62rem) {
+  .withrail {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 1fr);
+    gap: 0 3.25rem;
+    align-items: start;
+  }
+  .rail {
+    position: sticky;
+    top: 2.75rem;
+    margin-top: 5.4rem;
+    border-top: 0;
+    padding-top: 0;
+    text-align: right;
+  }
+  .rail li.here a {
+    border-left: 0;
+    border-right: 2px solid var(--mark);
+    padding-left: 0;
+    padding-right: 0.6rem;
+    margin-left: 0;
+    margin-right: -0.75rem;
+  }
+  .railmain .page-title,
+  .railmain .eyebrow--top { margin-top: 3.5rem; }
+}
+
+.prevnext {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 3.5rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.1rem;
+  font-size: 0.88rem;
+}
+.pn {
+  color: var(--muted);
+  background: none;
+}
+.pn:hover { color: var(--mark); }
+.pn .arrow { opacity: 0.6; padding: 0 0.45em; }
+.pn.next { text-align: right; margin-left: auto; }
+
+/* --- Homepage portrait bleed --------------------------------------------
+   The photograph sits behind the text, fading to nothing before it reaches
+   the reading column, and runs off the left margin. Desktop only: below
+   78rem there is no margin to run into, so it is simply not drawn.
+   ------------------------------------------------------------------------ */
+
+.parenthetical.has-bleed { position: relative; }
+.parenthetical-text { position: relative; z-index: 2; }
+.parenthetical::before,
+.parenthetical::after { z-index: 1; }
+
+.portrait-bleed { display: none; }
+
+@media (min-width: 78rem) {
+  .portrait-bleed {
+    display: block;
+    position: absolute;
+    z-index: 0;
+    top: var(--bleed-top);
+    left: var(--bleed-left);
+    width: var(--bleed-w);
+    height: var(--bleed-h);
+    background-size: cover;
+    background-position: 50% 20%;
+    background-repeat: no-repeat;
+    filter: grayscale(1) contrast(1.06);
+    opacity: var(--bleed-opacity);
+    -webkit-mask-image:
+      linear-gradient(to right, #000 0%, #000 20%, transparent var(--bleed-fade)),
+      linear-gradient(to bottom, #000 0%, #000 58%, transparent 100%);
+    mask-image:
+      linear-gradient(to right, #000 0%, #000 20%, transparent var(--bleed-fade)),
+      linear-gradient(to bottom, #000 0%, #000 58%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .portrait-bleed { opacity: calc(var(--bleed-opacity) * 0.62); }
+}
+
+.bleed-credit {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 1rem;
 }

@@ -9,7 +9,7 @@
     {{ $kind := .kind }}
     {{ $rows := where $all "kind" $kind }}
     {{ with $rows }}
-      <div class="rule-heading"><p class="eyebrow">{{ i18n (printf "kind_%s" $kind) | default $kind }}</p></div>
+      {{ partial "sectionhead.html" (dict "label" (i18n (printf "kind_%s" $kind) | default $kind)) }}
       <ul class="entries">
         {{ range sort . "year" "desc" }}
         <li class="entry">

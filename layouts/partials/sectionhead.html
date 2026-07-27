@@ -1,0 +1,8 @@
+{{/* A section rule with an optional continuation link on the right.
+     Putting "more" here rather than under the list stops it reading as a
+     heading for whatever comes next. */}}
+<div class="rule-heading">
+  <p class="eyebrow">{{ .label }}</p>
+  <span class="rule-line"></span>
+  {{ with .url }}<a class="rule-more" href="{{ . }}">{{ $.linktext }}<span class="arrow" aria-hidden="true">&#8594;</span></a>{{ end }}
+</div>

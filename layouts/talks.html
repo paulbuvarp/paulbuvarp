@@ -9,7 +9,7 @@
   {{ $upcoming := where $all "date" "ge" $today }}
   {{ $past := where $all "date" "lt" $today }}
 
-  <div class="rule-heading"><p class="eyebrow">{{ i18n "talks_upcoming" }}</p></div>
+  {{ partial "sectionhead.html" (dict "label" (i18n "talks_upcoming")) }}
   {{ if $upcoming }}
     {{ partial "talklist.html" (dict "items" (sort $upcoming "date" "asc")) }}
   {{ else }}
@@ -17,7 +17,7 @@
   {{ end }}
 
   {{ with $past }}
-    <div class="rule-heading"><p class="eyebrow">{{ i18n "talks_past" }}</p></div>
+    {{ partial "sectionhead.html" (dict "label" (i18n "talks_past")) }}
     {{ partial "talklist.html" (dict "items" (sort . "date" "desc") "past" true) }}
   {{ end }}
 </article>

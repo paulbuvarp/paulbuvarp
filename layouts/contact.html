@@ -30,7 +30,7 @@
   {{ end }}
 
   {{ with site.Params.formspreeID }}
-  <div class="rule-heading"><p class="eyebrow">{{ i18n "form_send" }}</p></div>
+  {{ partial "sectionhead.html" (dict "label" (i18n "form_send")) }}
   <div id="formwrap">
     <form id="contactform" action="https://formspree.io/f/{{ . }}" method="POST" class="cform">
       <label>
@@ -72,7 +72,7 @@
 
   {{ $links := where site.Params.sameAs "url" "!=" "" }}
   {{ with $links }}
-  <div class="rule-heading"><p class="eyebrow">{{ i18n "elsewhere" }}</p></div>
+  {{ partial "sectionhead.html" (dict "label" (i18n "elsewhere")) }}
   <ul class="sociallist">
     {{ range . }}<li><a href="{{ .url }}" rel="me noopener">{{ .name }}</a></li>{{ end }}
   </ul>

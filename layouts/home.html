@@ -1,27 +1,29 @@
 {{ define "main" }}
 
-<section class="parenthetical">
-  <h1 class="name">{{ site.Params.displayName }}</h1>
-  {{ .Content }}
+<section class="parenthetical{{ if and site.Params.portraitOnHome site.Params.portrait }} has-bleed{{ end }}">
   {{ if and site.Params.portraitOnHome site.Params.portrait }}
-  <figure class="portrait portrait--home">
-    <img src="{{ site.Params.portrait }}" alt="{{ site.Params.portraitAlt }}" loading="lazy">
-    {{ with site.Params.portraitCredit }}<figcaption>{{ . }}</figcaption>{{ end }}
-  </figure>
+  <div class="portrait-bleed" aria-hidden="true" style="background-image:url('{{ site.Params.portrait }}')"></div>
   {{ end }}
+  <div class="parenthetical-text">
+    <h1 class="name">{{ site.Params.displayName }}</h1>
+    {{ .Content }}
+  </div>
 </section>
+
+{{ if and site.Params.portraitOnHome site.Params.portrait site.Params.portraitCredit }}
+<p class="bleed-credit">{{ site.Params.portraitCredit }}</p>
+{{ end }}
 
 {{ $today := now.Format "2006-01-02" }}
 {{ $next := first 3 (sort (where site.Data.talks "date" "ge" $today) "date" "asc") }}
 {{ with $next }}
-<div class="rule-heading"><p class="eyebrow">{{ i18n "talks_upcoming" }}</p></div>
+{{ partial "sectionhead.html" (dict "label" (i18n "talks_upcoming") "url" ("/talks/" | relLangURL) "linktext" (i18n "talks")) }}
 {{ partial "talklist.html" (dict "items" .) }}
-<p class="more"><a href="{{ "/talks/" | relLangURL }}">{{ i18n "talks" }}</a></p>
 {{ end }}
 
 {{ $pubs := where site.Data.publications "featured" true }}
 {{ with $pubs }}
-<div class="rule-heading"><p class="eyebrow">{{ i18n "selected_writing" }}</p></div>
+{{ partial "sectionhead.html" (dict "label" (i18n "selected_writing") "url" ("/writing/" | relLangURL) "linktext" (i18n "full_index")) }}
 <ul class="entries">
   {{ range sort . "year" "desc" }}
   <li class="entry">
@@ -35,12 +37,12 @@
   </li>
   {{ end }}
 </ul>
-<p class="more"><a href="{{ "/writing/" | relLangURL }}">{{ i18n "full_index" }}</a></p>
 {{ end }}
 
 {{ $concepts := where site.RegularPages "Section" "concepts" }}
 {{ with $concepts }}
-<div class="rule-heading"><p class="eyebrow">{{ i18n "concepts" }}</p></div>
+{{/* every concept is listed here, so no continuation link */}}
+{{ partial "sectionhead.html" (dict "label" (i18n "concepts")) }}
 <ul class="entries">
   {{ range sort . "Params.order" }}
   <li class="entry entry--plain">
