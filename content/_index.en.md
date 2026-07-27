@@ -6,7 +6,7 @@ title: "Paul M. H. Buvarp"
 
 <p class="lede">I study what happens to knowledge when the machinery that carries it changes.</p>
 
-I am a senior research scientist at the Norwegian Defence Research Establishment, where I work on disinformation, influence operations and cognitive security. My research concerns the epistemic order that print built over five centuries, and the conditions now dismantling it.
+I am a senior research scientist at the \[Norwegian Defence Research Establishment](https://www.ffi.no/en/), where I work on disinformation, influence operations and cognitive security. My research concerns the epistemic order that print built over five centuries, and the conditions now dismantling it.
 
 Much of that work turns on a single claim: that the internet and what has been built on it (social media, artificial intelligence) is drastically altering society at a deeper level than we normally suggest.
 

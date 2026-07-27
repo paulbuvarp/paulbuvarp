@@ -4,7 +4,7 @@ title: "Paul M. H. Buvarp"
 
 <p class="lede">Jeg studerer hva som skjer med kunnskap når maskineriet som bærer den, endrer seg.</p>
 
-Jeg er seniorforsker ved Forsvarets forskningsinstitutt, der jeg arbeider med desinformasjon, påvirkningsoperasjoner og kognitiv sikkerhet. Forskningen min handler om den epistemiske ordenen boktrykkerkunsten bygde over fem hundre år, og om betingelsene som nå demonterer den.
+Jeg er seniorforsker ved [Forsvarets forskningsinstitutt](https://www.ffi.no/), der jeg arbeider med desinformasjon, påvirkningsoperasjoner og kognitiv sikkerhet. Forskningen min handler om den epistemiske ordenen boktrykkerkunsten bygde over fem hundre år, og om betingelsene som nå demonterer den.
 
 Mye av arbeidet hviler på én påstand: at internettet og det som er bygget på det (sosiale medier, kunstig intelligens) endrer samfunnet drastisk på et dypere nivå enn vi vanligvis antar.
 
