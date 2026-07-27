@@ -1,0 +1,37 @@
+{{- $pctx := . -}}
+{{- if .IsHome -}}{{ $pctx = site }}{{- end -}}
+{{- $pages := slice -}}
+{{/* The site feed carries Marginalia only. Without this it lists the contact
+     page, the reading list and the concept definitions — navigation and
+     reference, which nobody wants arriving in a reader. To include concepts
+     too: | append (where site.RegularPages "Section" "concepts") */}}
+{{- if $.IsHome -}}{{ $pages = where site.RegularPages "Section" "notes" }}
+{{- else if $.IsSection -}}{{ $pages = $pctx.RegularPages }}
+{{- else -}}{{ $pages = $pctx.Pages }}{{- end -}}
+{{- $limit := site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 -}}{{ $pages = $pages | first $limit }}{{- end -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+{{- printf "<?xml-stylesheet type=\"text/xsl\" href=\"%s\"?>" ("/feed.xsl" | absURL) | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ if not .IsHome }}{{ with .Title }}{{ . }} — {{ end }}{{ end }}{{ site.Params.displayName }}</title>
+    <link>{{ .Permalink }}</link>
+    <description>{{ or site.Language.Params.description site.Params.description }}</description>
+    <generator>Hugo</generator>
+    <language>{{ site.Language.LanguageCode }}</language>
+    <copyright>{{ site.Params.fullName }}</copyright>
+    <lastBuildDate>{{ now.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+    {{- with .OutputFormats.Get "rss" }}
+    {{ printf "<atom:link href=%q rel=\"self\" type=%q/>" .Permalink .MediaType | safeHTML }}
+    {{- end }}
+    {{- range $pages }}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      <guid>{{ .Permalink }}</guid>
+      <description>{{ or .Params.standfirst .Params.gloss .Summary | plainify | htmlUnescape | truncate 400 }}</description>
+    </item>
+    {{- end }}
+  </channel>
+</rss>
