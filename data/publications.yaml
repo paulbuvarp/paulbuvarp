@@ -21,13 +21,34 @@
 
 # --- ESSAYS AND COMMENTARY ---
 
+
+- title: "Da språkmodellen ble et våpen"
+  venue: "Altinget"
+  year: 2026
+  kind: essay
+  featured: true
+  url: "https://www.altinget.no/artikkel/da-spraakmodellen-ble-et-vaapen"
+
+- title: "Om sosiale medier er skadelig for barn er ikke det viktigste spørsmålet"
+  venue: "Minerva"
+  year: 2026
+  kind: essay
+  featured: true
+  url: "https://www.minerva.no/barn-sosiale-medier-teknologi/om-sosiale-medier-er-skadelig-for-barn-er-ikke-det-viktigste-sporsmalet/509327"
+
 - title: "Maktens oversettelsesmaskin"
   venue: "Vagant"
   year: 2026
   kind: essay
   featured: true
   url: "https://www.vagant.no/maktens-oversettelsesmaskin/"
-  note: "ORCID: The Translation Machine of Power, mai 2026. Likely Maktens oversettelsesmaskin — confirm."
+
+- title: "Plattformene vet allerede hvor gamle barna er"
+  venue: "Klassekampen"
+  year: 2026
+  kind: essay
+  featured: false
+  url: "https://klassekampen.no/utgave/2026-05-06/debatt-plattformene-vet-allerede-hvor-gamle-barna-er"
 
 - title: "Klikk er ikke en inngangsport til viktig journalistikk"
   venue: "Medier24"
@@ -36,6 +57,13 @@
   featured: false
   url: "https://www.m24.no/debatt-forskning-mediekritikk/klikk-er-ikke-en-inngangsport/905061"
 
+- title: "Ja, vi var uenige før også. Men det er ikke det samme."
+  venue: "Aftenposten"
+  year: 2026
+  kind: essay
+  featured: false
+  url: "https://www.aftenposten.no/meninger/debatt/i/Wvq3qa/ja-vi-var-uenige-foer-ogsaa-men-det-er-ikke-det-samme"
+
 - title: "Når bildet mister evnen til å være metafor"
   venue: "Samtiden"
   year: 2026
@@ -43,6 +71,56 @@
   featured: true
   url: "https://www.samtiden.no/essay/nar-bildet-mister-evnen-til-a-vaere-metafor/1392699"
   note: "Om fotografiet, KI og Gaza-krigen"
+
+- title: "Når stil blir mistenkelig"
+  venue: "Aftenposten"
+  year: 2026
+  kind: essay
+  featured: false
+  url: "https://www.aftenposten.no/meninger/debatt/i/Bxl8AE/nei-mitt-innlegg-var-ikke-betydelig-ki-generert"
+  note: "Om KI-anklager i skrivingen min"
+
+- title: "Asle Toje stiller feil spørsmål"
+  venue: "Aftenposten"
+  year: 2025
+  kind: essay
+  featured: false
+  url: "https://www.aftenposten.no/meninger/debatt/i/2pGvrq/asle-toje-stiller-feil-spoersmaal"
+
+- title: "Trump 2.0 - det syntetiske regimet"
+  venue: "Klassekampen"
+  year: 2025
+  kind: essay
+  featured: false
+  url: "https://klassekampen.no/artikkel/2025-11-01/trump-20-det-syntetiske-regimet"
+
+- title: "Hva gjør vi med medier som lyver, Danby Choi?"
+  venue: "Aftenposten"
+  year: 2025
+  kind: essay
+  featured: false
+  url: "https://www.aftenposten.no/meninger/debatt/i/25WQj4/hva-gjoer-vi-med-medier-som-lyver-danby-choi"
+
+- title: "Choi, Rolness og Sandelien bommer. Feilbarlighet gjør mediene sterkere, ikke svakere."
+  venue: "Aftenposten"
+  year: 2025
+  kind: essay
+  featured: false
+  url: "https://www.aftenposten.no/meninger/debatt/i/gwMp0q/choi-rolness-og-sandelien-bommer-feilbarlighet-gjoer-mediene-sterkere-ikke-svakere"
+
+- title: "Jo, desinformasjon er faktisk problemet"
+  venue: "Aftenposten"
+  year: 2025
+  kind: essay
+  featured: false
+  url: "https://www.aftenposten.no/meninger/debatt/i/XjX8lW/seniorforsker-ved-forsvarets-forskningsinstitutt-desinformasjon-er-faktisk-problemet"
+
+- title: "Når nyhetene finner deg"
+  venue: "Klassekampen"
+  year: 2025
+  kind: essay
+  featured: false
+  url: "https://klassekampen.no/artikkel/2025-06-03/nar-nyhetene-finner-deg"
 
 - title: "Den aletheiske krisen: Hvordan digital teknologi ødela vårt sannhetsmaskineri"
   venue: "Samtiden"
@@ -59,20 +137,27 @@
   url: "https://klassekampen.no/artikkel/2025-01-25/gaza-tiktok-og-det-umiddelbares-paradoks"
   note: "ORCID: Gaza, TikTok and the Paradox of Immediacy, januar 2025"
 
-- title: "Det er ikke nok med mobilfrie skoler"
+- title: "Mobilfrie skoler er ikke nok"
   venue: "NRK"
   year: 2025
   kind: essay
   featured: false
-  url: "https://www.ffi.no/aktuelt/kronikker/det-er-ikke-nok-med-mobilfrie-skoler"
+  url: "https://www.nrk.no/ytring/mobilfrie-skoler-er-ikke-nok-1.17417559"
   note: "Publisert 27. mai 2025"
 
 - title: "NRK må være der kampen om demokratiet står"
-  venue: "NRK"
+  venue: "Medier24"
   year: 2024
   kind: essay
   featured: false
-  url: "https://www.ffi.no/aktuelt/kronikker/nrk-ma-vaere-der-kampen-om-demokratiet-star"
+  url: "https://www.m24.no/debatt-hva-na-nrk-nrk/nrk-ma-vaere-der-kampen-om-demokratiet-star/690231"
+
+- title: "Høyrebølgen som ikke finnes"
+  venue: "NRK"
+  year: 2018
+  kind: essay
+  featured: false
+  url: "https://www.nrk.no/ytring/hoyrebolgen-som-ikke-finnes-1.13980699"
 
 # --- ACADEMIC ---
 
@@ -147,6 +232,13 @@
   featured: false
   url: "https://www.ffi.no/aktuelt/podkaster/slik-endrer-kunstig-intelligens-pavirkning-pa-nett"
 
+- title: "På front mot krigspropaganda og desinformasjon"
+  venue: "Goffeng På Leting"
+  year: 2025
+  kind: broadcast
+  featured: false
+  url: "https://podcasts.apple.com/no/podcast/goffeng-p%C3%A5-leting/id1467705200"
+
 - title: "Valgpåvirkning – bør vi være bekymret?"
   venue: "Ugradert (FFI-podkast)"
   year: 2025
@@ -162,3 +254,10 @@
   featured: false
   url: "https://open.spotify.com/episode/03i39ZXe57oHtxeEYwUGFY"
   note: "Februar 2025"
+
+- title: "Driver Forsvaret med propaganda?"
+  venue: "Forsvarspodden"
+  year: 2024
+  kind: broadcast
+  featured: false
+  url: "https://podme.com/no/episode/4671589/"

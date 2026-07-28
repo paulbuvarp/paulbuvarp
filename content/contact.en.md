@@ -17,11 +17,11 @@ aftertext: |
 
   ### Long biography
 
-  > Paul M. H. Buvarp is a senior research scientist at the Norwegian Defence Research Establishment, where he works on disinformation, influence operations and cognitive security. His research concerns the epistemic order that print built over five centuries, and the conditions now dismantling it. He has proposed the term *tertiary orality* for language produced without a composing subject. Buvarp holds a doctorate from the University of St Andrews, writes regularly for Aftenposten, Klassekampen, Samtiden and Vagant, and lectures at Norwegian and international institutions.
+  > Paul M. H. Buvarp is a senior research scientist at the Norwegian Defence Research Establishment, where he works on disinformation, influence operations and cognitive security. His research concerns the epistemic order that print built over five centuries, and the conditions now dismantling it. He has proposed the term *tertiary orality* for language produced without a composing subject. Buvarp holds a doctorate from the University of St Andrews, writes regularly for Norwegian publications including Aftenposten, Klassekampen, Samtiden and Vagant, and lectures at Norwegian and international institutions.
 
   ### Speaking
 
-  Subjects I am glad to speak on:
+  Subjects I am happy to speak on:
 
   - Disinformation and influence operations against Norway
   - Cognitive security and democratic resilience

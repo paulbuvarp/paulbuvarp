@@ -17,7 +17,7 @@ aftertext: |
 
   ### Lang presentasjon
 
-  > Paul M. H. Buvarp er seniorforsker ved Forsvarets forskningsinstitutt, der han arbeider med desinformasjon, påvirkningsoperasjoner og kognitiv sikkerhet. Forskningen hans handler om den epistemiske ordenen boktrykkerkunsten bygde over fem hundre år, og om betingelsene som nå demonterer den. Han har foreslått begrepet *tertiær oralitet* om språk som blir produsert uten et komponerende subjekt. Buvarp har doktorgrad fra University of St Andrews, skriver jevnlig i Aftenposten, Klassekampen, Samtiden og Vagant, og holder foredrag ved norske og internasjonale institusjoner.
+  > Paul M. H. Buvarp er seniorforsker ved Forsvarets forskningsinstitutt, der han arbeider med desinformasjon, påvirkningsoperasjoner og kognitiv sikkerhet. Forskningen hans handler om den epistemiske ordenen boktrykkerkunsten bygde over fem hundre år, og om betingelsene som nå demonterer den. Han har foreslått begrepet *tertiær oralitet* om språk som blir produsert uten et komponerende subjekt. Buvarp har doktorgrad fra University of St Andrews, skriver jevnlig i medier som Aftenposten, Klassekampen, Samtiden og Vagant, og holder foredrag ved norske og internasjonale institusjoner.
 
   ### Foredrag
 
