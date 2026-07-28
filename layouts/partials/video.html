@@ -1,0 +1,33 @@
+{{- /*
+  video.html — a click-to-play façade for a Vimeo embed.
+
+  Nothing is requested from Vimeo until the visitor clicks. Without
+  JavaScript the markup degrades to a plain link to the video page,
+  so there is no broken state.
+
+  Call it like this:
+
+    {{ partial "video.html" (dict
+        "id"      "951408056"
+        "hash"    "bfc6da3aef"
+        "poster"  "paavirkningskonferansen-2024.jpg"
+        "caption" (i18n "talks_video_caption")
+    ) }}
+
+  id       Vimeo video id.
+  hash     The privacy hash. Required for unlisted videos; without it
+           the player returns a grey refusal.
+  poster   Filename inside static/img/.
+  caption  Rendered through markdownify. Optional.
+*/ -}}
+{{- $src := printf "https://player.vimeo.com/video/%s?h=%s&dnt=1&autoplay=1&title=0&byline=0&portrait=0" .id .hash -}}
+<figure class="video">
+  <a class="video__facade" href="https://vimeo.com/{{ .id }}" data-src="{{ $src }}">
+    <img src="{{ "/img/" | relURL }}{{ .poster }}" width="1280" height="720" alt="" loading="lazy" decoding="async">
+    <span class="video__play" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="26" height="26"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+    </span>
+    <span class="video__label">{{ i18n "video_play" }}</span>
+  </a>
+  {{ with .caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>
