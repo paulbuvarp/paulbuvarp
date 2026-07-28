@@ -217,12 +217,12 @@
 
 # --- BROADCAST ---
 
-- title: "Debatten"
+- title: "Debatten - om aldersgrense på sosiale medier"
   venue: "NRK"
   year: 2026
   kind: broadcast
   featured: false
-  url: ""
+  url: "https://www.nrk.no/video/debatten_NNFA51043026?t=1"
   note: "April 2026"
 
 - title: "Slik endrer kunstig intelligens påvirkning på nett"
@@ -231,6 +231,14 @@
   kind: broadcast
   featured: false
   url: "https://www.ffi.no/aktuelt/podkaster/slik-endrer-kunstig-intelligens-pavirkning-pa-nett"
+
+- title: "Dagsrevyen - om 'Droneangrep' mot København flyplass"
+  venue: "NRK"
+  year: 2025
+  kind: broadcast
+  featured: false
+  url: "https://tv.nrk.no/serie/dagsrevyen/sesong/202509/episode/NNFA19092325"
+  note: "April 2026"
 
 - title: "På front mot krigspropaganda og desinformasjon"
   venue: "Goffeng På Leting"
