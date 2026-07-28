@@ -5,6 +5,14 @@
   {{ with .Params.standfirst }}<p class="standfirst">{{ . | markdownify }}</p>{{ end }}
   {{ .Content }}
 
+  {{ partial "sectionhead.html" (dict "label" (i18n "talks_video")) }}
+  {{ partial "video.html" (dict
+      "id" "951408056"
+      "hash" "bfc6da3aef"
+      "poster" "paavirkningskonferansen-2024.jpg"
+      "caption" (i18n "talks_video_caption")
+  ) }}
+
   {{ $today := now.Format "2006-01-02" }}
   {{ $all := site.Data.talks }}
   {{ $upcoming := where $all "date" "ge" $today }}
