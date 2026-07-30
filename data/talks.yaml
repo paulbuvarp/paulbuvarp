@@ -53,11 +53,11 @@
   event: "Arendalsuka"
   organizer: "Folk og forsvar"
   city: "Arendal"
-  role: "Foredrager"
+  role: "Foredragsholder"
   lang: "no"
   url: "https://www.arendalsuka.no/program/stortings-og-sametingsvalget-2025-ble-vi-utsatt-for-mer-uonsket-pavirkning-enn-vi-var-klar-over"
 
-- date: "2026-08-11"
+- date: "2026-08-12"
   title: "Får vi en generasjon som ikke stoler på skolen og media?"
   event: "Arendalsuka"
   organizer: "Utdanningsforbundet og Norsk journalistlag"
@@ -71,7 +71,7 @@
   event: "Dialog- og demokratidag"
   organizer: "EDDA"
   city: "Oslo"
-  role: "Foredrager"
+  role: "Foredragsholder"
   lang: "no"
   url: "https://www.facebook.com/events/chateau-neuf-det-norske-studentersamfund/diadem-dagen-2026/1781138652892405/"
 
@@ -80,7 +80,7 @@
   event: "Sikkerhetsfestivalen"
   organizer: ""
   city: "Lillehammer"
-  role: "Foredrager"
+  role: "Foredragsholder"
   lang: "no"
   url: "https://www.sikkerhetsfestivalen.no/program"
 
