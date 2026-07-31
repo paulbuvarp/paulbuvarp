@@ -1,6 +1,6 @@
 ---
 title: "Demokratiets behov for svak makt"
-date: 2026-07-31
+date: 2026-02-03
 lang_marker: "NO"
 draft: false
 # DRAFT — Claude's wording. Denne setningen bærer teksten i oversikten,

@@ -1,6 +1,6 @@
 ---
 title: "An Artefact of the Mass Media Age"
-date: 2026-07-31
+date: 2025-11-18
 lang_marker: "EN"
 draft: false
 # DRAFT — Claude's wording. This is the sentence that carries the piece in the

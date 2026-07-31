@@ -1311,19 +1311,55 @@ article.prose { counter-reset: sidenote; }
   }
 }
 
-/* Wide: the note lives in the right-hand margin, level with its marker. */
+/* Wide: the note lives in the left-hand margin, level with its marker, out
+   past the masthead. The text column does not move, so the wordmark, the
+   title and every line of prose stay flush on the same vertical — the note
+   hangs into the slack beside the page rather than displacing anything.
+
+   Left rather than right is a deliberate change. The one cost is that in a
+   left-to-right language the left margin is where the eye lands on every
+   return sweep, so a note there is more insistent than the same note on the
+   right. That is the trade: more present, marginally more interrupting.
+   To put them back on the right, swap `left` for `right` in the three
+   properties below and negate the margin the other way round. */
 @media (min-width: 82rem) {
   .sidenote {
     display: block;
+    float: left;
+    clear: left;
+    width: 12.6rem;
+    /* The note is inside the paragraph, so a plain float lands in the text
+       column. The negative margin carries it out into the margin and, because
+       it leaves the float a margin box of zero width, stops the prose
+       wrapping around it. 14.6rem out less 12.6rem of note is the 2rem
+       gutter. */
+    margin: 0.35rem 2rem 1.1rem -14.6rem;
+    position: relative;
+
+    /* The note is enclosed in a pair of parentheses drawn as the element's
+       own left and right edges, so they stretch to whatever height the note
+       turns out to be. A vertical radius of 50% makes each side's two corner
+       arcs meet at the midpoint and become one continuous curve; the
+       horizontal radius is how far it bulges. Top and bottom borders are
+       transparent rather than absent, which is what tapers the curve away at
+       the ends instead of stopping it dead. A glyph would have needed a known
+       height; this does not. */
+    padding: 0 0.95rem;
+    border: 1px solid transparent;
+    border-left-color: var(--rule);
+    border-right-color: var(--rule);
+    border-left-color: color-mix(in srgb, var(--mark) 42%, transparent);
+    border-right-color: color-mix(in srgb, var(--mark) 42%, transparent);
+    border-radius: 1.1rem / 50%;
+  }
+
+  /* Concept pages already spend their left-hand side on the concepts rail,
+     so a note there would land on top of the navigation. Those keep the
+     right-hand margin. */
+  .withrail .sidenote {
     float: right;
     clear: right;
-    width: 11rem;
-    /* The note is inside the paragraph, so a plain right float lands in the
-       text column. The negative margin carries it out into the gutter and,
-       because it makes the float's effective width negative, stops the
-       prose wrapping around it. */
-    margin: 0.35rem -13rem 1.1rem 2rem;
-    position: relative;
+    margin: 0.35rem -14.6rem 1.1rem 2rem;
   }
   .sidenote::before {
     content: counter(sidenote);
@@ -1481,8 +1517,10 @@ body { hanging-punctuation: first last; }
     float: none !important;
     width: auto !important;
     margin: 0.5rem 0 0.9rem !important;
-    padding-left: 0.9rem;
+    padding: 0 0 0 0.9rem;
+    border: 0;
     border-left: 1px solid #ccc;
+    border-radius: 0;
     font-size: 0.86em;
   }
   .sn-marker { pointer-events: none; }
