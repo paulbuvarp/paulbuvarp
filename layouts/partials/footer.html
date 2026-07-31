@@ -5,6 +5,7 @@
         {{- if .url }}<a href="{{ .url }}" rel="me noopener">{{ .name }}</a>{{ end -}}
       {{- end -}}
       {{- with site.Params.email }}<a href="mailto:{{ . }}">Email</a>{{ end -}}
-      {{- with .OutputFormats.Get "rss" }}<a href="{{ .RelPermalink }}">{{ i18n "feed" }}</a>{{ end -}}
+      <a href="{{ "/index.xml" | relLangURL }}">{{ i18n "feed" }}</a>
+      <a href="{{ "/colophon/" | relLangURL }}">{{ i18n "colophon" }}</a>
     </span>
   </footer>

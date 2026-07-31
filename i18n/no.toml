@@ -64,9 +64,6 @@ other = "Abonner"
 other = "For redaksjoner og arrangører"
 [feed]
 other = "RSS"
-[talks_video] 
-other = "From the stage"
-[talks_video_caption]
-other = "'Truth, Lies and Bullshit'. Påvirkningskonferansen 2024, Deichman, Oslo. Arrangert av FFI og Forsvarets høgskole. På engelsk."
-[video_play]
-other = "Play"
+
+[colophon]
+other = "Kolofon"

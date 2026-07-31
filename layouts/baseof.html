@@ -25,20 +25,8 @@
     {{ block "main" . }}{{ end }}
   </main>
 
+  <p class="print-source">{{ .Permalink }}</p>
+
   {{ partial "footer.html" . }}
-
-<script>
-document.querySelectorAll('.video__facade').forEach(function (a) {
-  a.addEventListener('click', function (e) {
-    e.preventDefault();
-    var f = document.createElement('iframe');
-    f.src = a.dataset.src;
-    f.allow = 'autoplay; fullscreen; picture-in-picture';
-    f.allowFullscreen = true;
-    a.replaceWith(f);
-  }, { once: true });
-});
-</script>
-
 </body>
 </html>

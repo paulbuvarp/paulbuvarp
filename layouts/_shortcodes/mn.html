@@ -1,0 +1,5 @@
+{{- /* Margin note: a sidenote with no number, for asides and captions. */ -}}
+{{- $id := printf "mn-%s-%d" (.Page.File.BaseFileName | anchorize) .Ordinal -}}
+<label for="{{ $id }}" class="mn-marker" tabindex="0" role="button">&#8853;</label>
+<input type="checkbox" id="{{ $id }}" class="sn-toggle" aria-hidden="true">
+<span class="sidenote marginnote">{{ .Inner | markdownify }}</span>

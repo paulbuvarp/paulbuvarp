@@ -1,0 +1,7 @@
+{{- /* Sidenote. Usage:  {{< sn >}}The note text.{{< /sn >}}
+   Numbered automatically by CSS. Sits in the right margin above 1312px;
+   below that the marker becomes a toggle and the note opens inline. */ -}}
+{{- $id := printf "sn-%s-%d" (.Page.File.BaseFileName | anchorize) .Ordinal -}}
+<label for="{{ $id }}" class="sn-marker" tabindex="0" role="button" aria-describedby="{{ $id }}-note"></label>
+<input type="checkbox" id="{{ $id }}" class="sn-toggle" aria-hidden="true">
+<span class="sidenote" id="{{ $id }}-note">{{ .Inner | markdownify }}</span>

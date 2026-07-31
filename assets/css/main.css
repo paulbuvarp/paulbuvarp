@@ -1260,3 +1260,204 @@ article.prose blockquote a:hover,
 @media (max-width: 34rem) {
   .sitemark .mark { height: 1.25rem; }
 }
+
+/* --- Sidenotes -----------------------------------------------------------
+   Numbered in the margin beside the line that raises them, rather than
+   banished to the foot of the page. Below 82rem there is no margin to put
+   them in, so the marker becomes a toggle and the note opens inline.
+   No JavaScript: the checkbox is doing the work.
+   ------------------------------------------------------------------------ */
+
+article.prose { counter-reset: sidenote; }
+
+.sn-toggle { display: none; }
+
+.sn-marker,
+.mn-marker {
+  cursor: pointer;
+  color: var(--mark);
+  font-size: 0.72em;
+  vertical-align: super;
+  line-height: 0;
+  padding: 0 0.12em;
+}
+.sn-marker::after {
+  counter-increment: sidenote;
+  content: counter(sidenote);
+}
+.mn-marker { font-size: 0.7em; vertical-align: 0.1em; }
+.sn-marker:hover,
+.mn-marker:hover { color: var(--ink); }
+.sn-marker:focus-visible,
+.mn-marker:focus-visible { outline: 2px solid var(--mark); outline-offset: 2px; }
+
+.sidenote {
+  display: none;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.sidenote p { margin: 0 0 0.5rem; }
+.sidenote p:last-child { margin: 0; }
+
+/* Narrow: the note opens under the line when the marker is tapped. */
+@media (max-width: 81.99rem) {
+  .sn-toggle:checked + .sidenote {
+    display: block;
+    max-width: var(--measure);
+    margin: 0.7rem 0 1.1rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--rule);
+  }
+}
+
+/* Wide: the note lives in the right-hand margin, level with its marker. */
+@media (min-width: 82rem) {
+  .sidenote {
+    display: block;
+    float: right;
+    clear: right;
+    width: 11rem;
+    /* The note is inside the paragraph, so a plain right float lands in the
+       text column. The negative margin carries it out into the gutter and,
+       because it makes the float's effective width negative, stops the
+       prose wrapping around it. */
+    margin: 0.35rem -13rem 1.1rem 2rem;
+    position: relative;
+  }
+  .sidenote::before {
+    content: counter(sidenote);
+    font-size: 0.72em;
+    vertical-align: super;
+    color: var(--mark);
+    padding-right: 0.35em;
+  }
+  .marginnote::before { content: none; }
+  .sn-marker { pointer-events: none; }
+}
+
+/* --- Typographic refinements --------------------------------------------- */
+
+/* Avoid a last line carrying a single word. Ignored where unsupported. */
+article.prose p,
+.parenthetical-text p,
+.standfirst,
+.entry-gloss,
+.read-note,
+.sidenote { text-wrap: pretty; }
+
+h1, h2, h3, .name, .page-title, .definition { text-wrap: balance; }
+
+/* Opening quotes and hyphens hang outside the measure. Safari only, for now,
+   and silently ignored elsewhere. */
+body { hanging-punctuation: first last; }
+
+/* Cross-document view transitions: a quiet cross-fade between pages in
+   browsers that support it, and nothing at all in those that do not. */
+@view-transition { navigation: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) { animation: none !important; }
+}
+
+/* --- Print ---------------------------------------------------------------
+   A site about what print did to knowledge should print properly.
+   ------------------------------------------------------------------------ */
+
+@media print {
+  :root {
+    --paper: #fff;
+    --ink: #000;
+    --rule: #bbb;
+    --muted: #444;
+    --mark: #000;
+    --mark-tint: transparent;
+    --link: #000;
+    --link-rule: transparent;
+  }
+
+  html, body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+    line-height: 1.45;
+  }
+
+  /* Chrome, navigation and anything interactive has no business on paper. */
+  .masthead,
+  footer.foot,
+  .langsuggest,
+  .socials,
+  .langswitch,
+  .rail,
+  .prevnext,
+  .subscribe,
+  .cform,
+  .citation-copy,
+  .portrait-bleed,
+  .bleed-credit,
+  .rule-more,
+  .parenthetical::before,
+  .parenthetical::after { display: none !important; }
+
+  .wrap, main.wrap, .wrap--rail {
+    max-width: 100%;
+    padding: 0;
+  }
+  .withrail { display: block; }
+
+  article.prose > p,
+  .parenthetical-text > p,
+  .standfirst,
+  .definition,
+  .attribution { max-width: 100%; }
+
+  a { color: #000; background: none; text-decoration: none; }
+
+  /* Expand real links, since a printed page cannot be clicked. */
+  article.prose p a[href^="http"]::after,
+  .entry-title a[href^="http"]::after {
+    content: " <" attr(href) ">";
+    font-size: 0.82em;
+    color: #444;
+    word-break: break-all;
+  }
+
+  h1, h2, h3 { break-after: avoid; page-break-after: avoid; }
+  .entry, li, blockquote, figure, .citation { break-inside: avoid; page-break-inside: avoid; }
+  p { orphans: 3; widows: 3; }
+
+  /* Sidenotes become footnotes of a sort: inline, after the line. */
+  .sidenote {
+    display: block !important;
+    float: none !important;
+    width: auto !important;
+    margin: 0.5rem 0 0.9rem !important;
+    padding-left: 0.9rem;
+    border-left: 1px solid #ccc;
+    font-size: 0.86em;
+  }
+  .sn-marker { pointer-events: none; }
+
+  .portrait { max-width: 42mm; float: right; margin: 0 0 6mm 6mm; }
+  .portrait img { filter: grayscale(1); }
+
+  .print-source { display: block !important; }
+
+  @page { margin: 18mm 16mm; }
+}
+
+.print-source { display: none; }
+
+@media print {
+  .print-source {
+    margin-top: 8mm;
+    padding-top: 3mm;
+    border-top: 1px solid #ccc;
+    font-size: 8.5pt;
+    color: #444;
+    word-break: break-all;
+  }
+}
