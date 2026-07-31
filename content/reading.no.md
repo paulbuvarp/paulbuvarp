@@ -9,7 +9,9 @@ standfirst: "Bøker som ligger under arbeidet, med én setning om hvorfor. Liste
 labels:
   print: "Skriften og trykket"
   machines: "Maskinene"
+  norsk: "Den norske debatten"
 groups:
   - tag: print
   - tag: machines
+  - tag: norsk
 ---

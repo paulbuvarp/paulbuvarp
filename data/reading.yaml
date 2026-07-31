@@ -10,32 +10,77 @@
 # The note is the whole value of this page. A list of titles without them is
 # a Goodreads profile.
 #
-# EVERY NOTE BELOW IS MINE, NOT YOURS. Replace them.
+# EVERY NOTE IN THIS FILE IS MINE, NOT YOURS. Claude wrote all thirty-two of
+# them. They are inferences from the concept pages and the published essays,
+# written to be argued with, and they are marked DRAFT one by one below so the
+# repository remembers whose sentences these are for as long as they stand.
+# Rewrite them. The Norwegian half is the more urgent: it was composed in
+# English and turned, which is a thing a Norwegian reader can hear.
+#
+# Two years and one attribution need checking against the physical books
+# before you push. They are marked CONFIRM.
 # ---------------------------------------------------------------------------
+
+# --- Writing and print -----------------------------------------------------
 
 - title: "Orality and Literacy"
   author: "Walter J. Ong"
   year: 1982
   tag: "print"
   url: ""
-  note_no: "Boken alt dette diskuterer med. Ongs beskrivelse av hva skriftkulturen gjorde med bevisstheten er grunnlinjen enhver tredje tilstand må måles mot."
-  note_en: "The book everything here argues with. Ong's account of what literacy did to consciousness is the baseline against which any third condition has to be measured."
+  note_no: "En grunnleggende bok. Ongs beskrivelse av hva skriftkulturen gjorde med bevisstheten er grunnlinjen enhver nåværende tilstand må måles mot."
+  note_en: "A foundational book. Ong's account of what literacy did to consciousness is the baseline against which any present condition has to be measured."
 
 - title: "The Printing Press as an Agent of Change"
   author: "Elizabeth Eisenstein"
   year: 1979
   tag: "print"
   url: ""
-  note_no: "Argumentet for at fastheten var en bragd, og ikke en egenskap ved verden."
+  note_no: "Argumentet for at fasthet var en bragd, og ikke en egenskap ved verden."
   note_en: "The case that fixity was an achievement rather than a property of the world."
+
+- title: "The Structural Transformation of the Public Sphere"
+  author: "Jürgen Habermas"
+  year: 1962
+  tag: "print"
+  url: ""
+  note_no: "Seksti år senere gjør påstanden om at en offentlighet er en historisk konstruksjon med materielle betingelser fortsatt mer arbeid enn det meste som har erstattet den."
+  note_en: "Sixty years on, the claim that a public is a historical construction with material conditions still does more work than most of what has replaced it."
+
+- title: "Amusing Ourselves to Death"
+  author: "Neil Postman"
+  year: 1985
+  tag: "print"
+  url: ""
+  note_no: "En engasjerende operasjonalisering av McLuhans teori om TV-mediet. Hvis vi moret oss til døde på 80-tallet, hva er skjebnen vår i dag?"
+  note_en: "An engaging operationalisation of McLuhans theory about the medium of TV. If we were amusing ourselves to death in the 80s, what is our fate today?"
+
+- title: "On Lying and Politics"
+  author: "Hannah Arendt"
+  year: 2022
+  tag: "print"
+  url: ""
+  note_no: "To essays om den bevisste løgnen, skrevet da en løgn fortsatt forutsatte en løgner som kjente sannheten. Den betingelsen holder ikke lenger, og det er der mitt eget arbeid begynner."
+  note_en: "Two essays on the deliberate lie, written while a lie still required a liar who knew the truth. That condition no longer holds, and it is where my own work begins."
+
+- title: "The Gutenberg Parenthesis"
+  author: "Jeff Jarvis"
+  year: 2023
+  tag: "print"
+  url: ""
+  note_no: "Begrepet tilhører Sauerberg og Pettitt ved Syddansk. Jarvis skrev boken som bærer det, og tilskrives nå ideen omtrent like ofte som de gjør."
+  note_en: "The term belongs to Sauerberg and Pettitt at Syddansk. Jarvis wrote the book that carries it, and is now credited with the idea about as often as they are."
+
+# --- The machines ----------------------------------------------------------
 
 - title: "God, Human, Animal, Machine"
   author: "Meghan O'Gieblyn"
   year: 2021
   tag: "machines"
   url: ""
-  note_no: "Den beste fremstillingen jeg kjenner av hva som skjer med metafysikken når maskinene blir gode til å snakke."
-  note_en: "The best account I know of what happens to metaphysics when the machines get good at speaking."
+  note_no: "Den beste fremstillingen jeg kjenner av hva som skjer med metafysikken når maskinene blir gode til å snakke. Metaforene vi bruker er gamle og avslører mye."
+  # DRAFT — Claude's wording
+  note_en: "The best account I know of what happens to metaphysics when the machines get good at speaking. The metaphors we use are old ones and reveal a lot."
 
 - title: "When We Cease to Understand the World"
   author: "Benjamín Labatut"
@@ -44,3 +89,70 @@
   url: ""
   note_no: "Skjønnlitteratur som driver erkjennelsesteori. Om kunnskap som kommer fortere enn evnen til å bære den."
   note_en: "Fiction doing epistemology. On knowledge that arrives faster than the capacity to hold it."
+
+- title: "The Mirror: A History"
+  author: "Sabine Melchior-Bonnet"
+  year: 1994
+  tag: "machines"
+  url: ""
+  note_no: "Hva som skjedde med selvet da glassmakerne i Murano lærte å legge tinn bak en plate. Enhver teknologi for selvbetraktning siden har vært en variasjon over den."
+  note_en: "What happened to the self when the glassmakers of Murano learned to back a plate with tin. Every technology of self-observation since has been a variation on it."
+
+- title: "New Dark Age"
+  author: "James Bridle"
+  year: 2018
+  tag: "machines"
+  url: ""
+  note_no: "Det nærmeste den mørke gjenfortryllelsen som er skrevet av noen andre. Bridle stanser ved uleseligheten. Det jeg vil frem til, er hva som fyller rommet når verden slutter å la seg lese."
+  note_en: "The nearest thing to dark reenchantment written by somebody else. Bridle stops at unintelligibility; the part I want is what fills the room once the world stops being legible."
+
+- title: "Invisible Rulers"
+  author: "Renée DiResta"
+  year: 2024
+  tag: "machines"
+  url: ""
+  note_no: "Den beste fremstillingen som finnes av hvordan påvirkning fungerer sett fra tilbudssiden, av en som har sett det på nært hold. Uenigheten min gjelder hvor mye tilbudssiden forklarer."
+  note_en: "The best available account of how influence works from the supply side, by someone who has watched it up close. My disagreement is over how much the supply side explains."
+
+- title: "The Crisis of Narration"
+  author: "Byung-Chul Han"
+  year: 2024 
+  tag: "machines"
+  url: ""
+  note_no: "Han er gjentakende og ofte treffende. Informasjonen hoper seg opp mens fortellingen tynnes ut, og en offentlighet som ikke klarer å holde på en historie, holder heller ikke lenge på en sannhet."
+  note_en: "Han is repetitive and frequently right. Information accumulates while narration thins, and a public that cannot hold a story will not hold a truth for long either."
+
+- title: "Searches: Selfhood in the Digital Age"
+  author: "Vauhini Vara"
+  year: 2025
+  tag: "machines"
+  url: ""
+  note_no: "Vara skriver med maskinen på siden og beholder navnet sitt på boken. Det er en spenstig oppgave i våre tider."
+  # DRAFT — Claude's wording, and it puts a personal claim in your mouth
+  note_en: "Vara writes with the machine on the page and keeps her name on the book. That is a special task in our times."
+
+- title: "Superbloom"
+  author: "Nicholas Carr"
+  year: 2025
+  tag: "machines"
+  url: ""
+  note_no: "Carrs beste bok, og den færrest siterer. Påstanden om at mer kommunikasjon tærer på forståelsen, er ubehagelig for enhver som arbeider med mitt fag."
+  note_en: "Carr's best book, and the one fewer people cite. The claim that more communication corrodes understanding is an uncomfortable one for anybody in my line of work."
+
+# --- The Norwegian debate --------------------------------------------------
+
+- title: "Ekko: Et essay om algoritmer og begjær"
+  author: "Lena Lindgren"
+  year: 2021
+  tag: "norsk"
+  url: ""
+  note_no: "Den norske boken om oppmerksomhetsøkonomien, og den som gjorde argumentet offentlig her hjemme før forskningen rakk frem. Ekko som metafor er nydelig."
+  note_en: "The Norwegian book on the attention economy, and the one that made the argument public here before the research caught up with it. Echo as metaphor is beautiful."
+
+- title: "Ytringsfrihet annotert"
+  author: "Bjørn Stærk"
+  year: 2021  
+  tag: "norsk"
+  url: ""
+  note_no: "Et argument om ytringsfrihet skrevet offentlig og revidert offentlig, med ettertankene stående i margen. Formen er poenget."
+  note_en: "An argument about free expression written in public and revised in public, with the second thoughts left standing in the margin. The form is the point."

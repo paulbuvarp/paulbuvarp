@@ -9,7 +9,9 @@ standfirst: "Books that sit underneath the work, with a sentence on why. Persona
 labels:
   print: "Writing and print"
   machines: "The machines"
+  norsk: "The Norwegian debate"
 groups:
   - tag: print
   - tag: machines
+  - tag: norsk
 ---
