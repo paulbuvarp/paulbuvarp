@@ -376,6 +376,29 @@ a:hover {
   color: var(--mark);
 }
 
+/* The global `a` rule paints a gradient underline on every link, and its
+   :hover state outranks `background: none` set on a class. Navigation, the
+   wordmark, the toggle and the footer are chrome, not prose: no underline
+   in either state. */
+.sitemark,
+.sitemark:hover,
+nav.nav a,
+nav.nav a:hover,
+.langswitch a,
+.langswitch a:hover,
+.socials a,
+.socials a:hover,
+.rail a,
+.rail a:hover,
+.rule-more,
+.rule-more:hover,
+.pn,
+.pn:hover,
+footer.foot a,
+footer.foot a:hover {
+  background-image: none;
+}
+
 :focus-visible {
   outline: 2px solid var(--mark);
   outline-offset: 3px;
@@ -1215,6 +1238,7 @@ article.prose blockquote a:hover,
 }
 .sitemark .mark {
   height: 1.5rem;
+  overflow: visible;   /* the brackets travel outside the viewBox on hover */
   /* The brackets descend below the baseline, so the glyph box centres
      higher than the mark looks. Nudge it onto the nav's optical line. */
   transform: translateY(3px);
@@ -1225,12 +1249,12 @@ article.prose blockquote a:hover,
 .sitemark:hover .mark { color: var(--ink); }
 
 /* The two brackets draw apart on hover — the mark opening rather than
-   underlining itself. 140 user units of a 1400-unit viewBox, so roughly
-   two pixels each at the rendered size. */
+   underlining itself. 300 user units of a 1400-unit viewBox, so about four
+   pixels each way at the rendered size — enough to read as ( ) opening. */
 .sitemark .mark .b-l,
 .sitemark .mark .b-r { transition: transform 0.18s ease; }
-.sitemark:hover .mark .b-l { transform: translateX(-140px); }
-.sitemark:hover .mark .b-r { transform: translateX(140px); }
+.sitemark:hover .mark .b-l { transform: translateX(-300px); }
+.sitemark:hover .mark .b-r { transform: translateX(300px); }
 .sitemark:focus-visible { outline-offset: 5px; }
 
 @media (max-width: 34rem) {
