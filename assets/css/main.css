@@ -187,19 +187,44 @@ nav.nav {
 }
 
 nav.nav a {
+  position: relative;
   font-size: 0.78rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
   text-decoration: none;
-  padding-bottom: 2px;
-  border-bottom: 1px solid transparent;
+  padding: 0 0.62em;
+  transition: color 0.16s ease;
 }
+
+/* The brackets are always present and always occupy their space; only their
+   opacity changes. Rendering them on hover alone would shove every label
+   sideways by a few pixels each time the pointer crossed one. */
+nav.nav a::before,
+nav.nav a::after,
+.langswitch a::before,
+.langswitch a::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-53%);
+  font-family: var(--display);
+  font-size: 1.55em;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--mark);
+  opacity: 0;
+  transition: opacity 0.16s ease;
+  pointer-events: none;
+}
+nav.nav a::before, .langswitch a::before { content: "("; left: -0.04em; }
+nav.nav a::after,  .langswitch a::after  { content: ")"; right: -0.04em; }
+
 nav.nav a:hover,
-nav.nav a[aria-current="page"] {
-  color: var(--ink);
-  border-bottom-color: var(--mark);
-}
+nav.nav a[aria-current="page"] { color: var(--ink); }
+nav.nav a:hover::before,
+nav.nav a:hover::after,
+nav.nav a[aria-current="page"]::before,
+nav.nav a[aria-current="page"]::after { opacity: 1; }
 
 /* --- The parenthesis ----------------------------------------------------
    The homepage biography sits inside a pair of brackets. Unlabelled: it
@@ -599,22 +624,20 @@ footer.foot a:hover {
 }
 
 .langswitch a {
+  position: relative;
   font-size: 0.72rem;
   letter-spacing: 0.12em;
   color: var(--muted);
   background: none;
-  padding: 0.1rem 0.3rem;
-  border: 1px solid transparent;
-  border-radius: 2px;
+  padding: 0 0.6em;
+  transition: color 0.16s ease;
 }
-.langswitch a:hover {
-  color: var(--mark);
-}
-.langswitch a[aria-current="true"] {
-  color: var(--ink);
-  border-color: var(--rule);
-  background: var(--mark-tint);
-}
+.langswitch a:hover,
+.langswitch a[aria-current="true"] { color: var(--ink); }
+.langswitch a:hover::before,
+.langswitch a:hover::after,
+.langswitch a[aria-current="true"]::before,
+.langswitch a[aria-current="true"]::after { opacity: 1; }
 
 /* --- Soft language offer -------------------------------------------------- */
 
@@ -1200,48 +1223,16 @@ article.prose blockquote a:hover,
   transition: color 0.14s ease;
 }
 .sitemark:hover .mark { color: var(--ink); }
+
+/* The two brackets draw apart on hover — the mark opening rather than
+   underlining itself. 140 user units of a 1400-unit viewBox, so roughly
+   two pixels each at the rendered size. */
+.sitemark .mark .b-l,
+.sitemark .mark .b-r { transition: transform 0.18s ease; }
+.sitemark:hover .mark .b-l { transform: translateX(-140px); }
+.sitemark:hover .mark .b-r { transform: translateX(140px); }
 .sitemark:focus-visible { outline-offset: 5px; }
 
 @media (max-width: 34rem) {
   .sitemark .mark { height: 1.25rem; }
-}
-
-/* --- Video --------------------------------------------------------------- */
-
-.video { margin: 0 0 3rem; }
-
-.video__facade,
-.video iframe {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border: 0;
-  background: #1b1b1b;
-}
-
-.video__facade { position: relative; }
-.video__facade img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-.video__play {
-  position: absolute; inset: 0; margin: auto;
-  width: 62px; height: 62px;
-  display: grid; place-items: center;
-  border-radius: 50%;
-  background: #2E4B3C; color: #fff;
-  transition: transform .15s ease;
-}
-
-.video__facade:hover .video__play { transform: scale(1.06); }
-.video__facade:focus-visible { outline: 2px solid #2E4B3C; outline-offset: 3px; }
-
-.video__label {
-  position: absolute;
-  width: 1px; height: 1px;
-  overflow: hidden; clip-path: inset(50%);
-}
-
-.video figcaption {
-  margin-top: 0.6rem;
-  font-size: 0.86rem;
-  color: var(--muted);
 }
