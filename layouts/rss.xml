@@ -4,8 +4,27 @@
 {{/* The site feed carries Marginalia only. Without this it lists the contact
      page, the reading list and the concept definitions — navigation and
      reference, which nobody wants arriving in a reader. To include concepts
-     too: | append (where site.RegularPages "Section" "concepts") */}}
-{{- if $.IsHome -}}{{ $pages = where site.RegularPages "Section" "notes" }}
+     too: | append (where site.RegularPages "Section" "concepts")
+
+     Notes are written once, in one language, and shown on both sites, so the
+     feed gathers them from every language tree and de-duplicates on the
+     translation base name. Both /index.xml and /en/index.xml therefore carry
+     the same items, which is what the Marginalia index shows. */}}
+{{- if $.IsHome -}}
+  {{- $seen := slice -}}
+  {{- range where site.RegularPages "Section" "notes" -}}
+    {{- $key := .File.TranslationBaseName -}}
+    {{- if not (in $seen $key) }}{{ $seen = $seen | append $key }}{{ $pages = $pages | append . }}{{ end -}}
+  {{- end -}}
+  {{- range site.Sites -}}
+    {{- if ne .Language.Lang site.Language.Lang -}}
+      {{- range where .RegularPages "Section" "notes" -}}
+        {{- $key := .File.TranslationBaseName -}}
+        {{- if not (in $seen $key) }}{{ $seen = $seen | append $key }}{{ $pages = $pages | append . }}{{ end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $pages = sort $pages "Date" "desc" -}}
 {{- else if $.IsSection -}}{{ $pages = $pctx.RegularPages }}
 {{- else -}}{{ $pages = $pctx.Pages }}{{- end -}}
 {{- $limit := site.Config.Services.RSS.Limit -}}
@@ -26,7 +45,7 @@
     {{- end }}
     {{- range $pages }}
     <item>
-      <title>{{ .Title }}</title>
+      <title>{{ .Title }}{{ if $.IsHome }} [{{ or .Params.lang_marker (upper .Language.Lang) }}]{{ end }}</title>
       <link>{{ .Permalink }}</link>
       <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       <guid>{{ .Permalink }}</guid>

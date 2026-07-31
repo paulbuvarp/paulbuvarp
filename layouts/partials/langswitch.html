@@ -1,9 +1,17 @@
 {{/* Persistent language toggle. Always shows both languages so the
-     reader can see the choice exists, rather than discovering it. */}}
+     reader can see the choice exists, rather than discovering it.
+
+     Marginalia notes are written once, in one language, so from now on there
+     are pages with no translation — the first on the site. The fallback
+     therefore lands the reader on the same section in the other language
+     (an English note sends a Norwegian reader to /notes/, where that note is
+     listed alongside the rest), and only drops to the front page if even the
+     section has no counterpart. */}}
 {{- $cur := . -}}
 <nav class="langswitch" aria-label="Language">
-  {{- range site.Languages -}}
-    {{- $lang := . -}}
+  {{- range site.Sites -}}
+    {{- $s := . -}}
+    {{- $lang := .Language -}}
     {{- $target := "" -}}
     {{- if eq $lang.Lang site.Language.Lang -}}
       {{- $target = $cur.RelPermalink -}}
@@ -11,7 +19,14 @@
       {{- range $cur.Translations -}}
         {{- if eq .Language.Lang $lang.Lang }}{{ $target = .RelPermalink }}{{ end -}}
       {{- end -}}
-      {{- if not $target }}{{ $target = printf "/%s/" $lang.Lang | replaceRE "^/en/$" "/" }}{{ end -}}
+      {{- if not $target -}}
+        {{- with $cur.CurrentSection -}}
+          {{- range .Translations -}}
+            {{- if eq .Language.Lang $lang.Lang }}{{ $target = .RelPermalink }}{{ end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if not $target }}{{ $target = $s.Home.RelPermalink }}{{ end -}}
     {{- end -}}
     <a href="{{ $target }}"
        hreflang="{{ or $lang.Params.hreflang $lang.Lang }}"

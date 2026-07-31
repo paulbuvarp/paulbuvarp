@@ -1,0 +1,12 @@
+{{/* Hugo's time.Format localises month names only for language keys it
+     recognises as locales. This site's Norwegian key is "no", which it does
+     not, so a Norwegian page was rendering "31 July 2026". Renaming the key
+     would change every URL and every hreflang, so the month names live here
+     instead. Pass a page: {{ partial "notedate.html" . }} */}}
+{{- $d := .Date -}}
+{{- if eq site.Language.Lang "en" -}}
+  {{- $d.Format "2 January 2006" -}}
+{{- else -}}
+  {{- $m := index (slice "januar" "februar" "mars" "april" "mai" "juni" "juli" "august" "september" "oktober" "november" "desember") (sub (int ($d.Format "1")) 1) -}}
+  {{- printf "%s. %s %s" ($d.Format "2") $m ($d.Format "2006") -}}
+{{- end -}}

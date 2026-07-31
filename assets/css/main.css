@@ -1362,6 +1362,52 @@ body { hanging-punctuation: first last; }
   ::view-transition-new(*) { animation: none !important; }
 }
 
+/* --- Marginalia ----------------------------------------------------------
+   Added when the section stopped being empty. Three corrections and one
+   deliberate change of weight; nothing above this line is altered.
+   ------------------------------------------------------------------------ */
+
+/* The separator was only ever styled as `.entry-meta .sep`, so in the note
+   page's eyebrow it rendered as a bare slash with nothing around it:
+   "MARGINALIA /31 JULY 2026". */
+.eyebrow .sep {
+  padding: 0 0.5em;
+  color: var(--rule);
+}
+
+/* The EN/NO marker inherits its colour. On the talks list it sits inside
+   muted meta text, which is why it reads correctly there; beside a title it
+   inherited full ink and competed with the title. */
+.entry-title .talk-lang {
+  color: var(--muted);
+}
+
+/* A Marginalia entry is a destination rather than a row in an index, so it
+   carries a little more weight than a line on the writing page. */
+.note-list .entry-title {
+  font-size: 1.18rem;
+  line-height: 1.32;
+}
+.note-list .entry-gloss {
+  margin-top: 0.35rem;
+}
+
+/* The way back out of a note. `.prevnext` is already hidden on paper; this
+   would otherwise print as a stray word under the last paragraph. */
+.noteback {
+  font-size: 0.86rem;
+}
+.noteback a {
+  color: var(--muted);
+  background: none;
+}
+.noteback a:hover { color: var(--mark); }
+.noteback a::before { content: "\2190"; padding-right: 0.5em; opacity: 0.6; }
+
+@media print {
+  .noteback { display: none !important; }
+}
+
 /* --- Print ---------------------------------------------------------------
    A site about what print did to knowledge should print properly.
    ------------------------------------------------------------------------ */

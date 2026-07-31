@@ -1,0 +1,55 @@
+{{ define "main" }}
+{{/* A note page. Every class used here is already defined in main.css —
+     .eyebrow, .page-title, .standfirst, .attribution, .prevnext, .pn,
+     .talk-lang — so the section inherits the site's existing vocabulary
+     rather than introducing a second one. No CSS change is needed.
+
+     Prev/next walks the merged cross-language list, in the same order the
+     index shows, so it does not dead-end on a note written in the other
+     language. */}}
+<article class="prose">
+  <p class="eyebrow eyebrow--top">
+    {{ .CurrentSection.Title }}
+    <span class="sep">/</span>{{ partial "notedate.html" . }}
+    <span class="talk-lang">{{ or .Params.lang_marker (upper .Language.Lang) }}</span>
+  </p>
+
+  <h1 class="page-title page-title--tight">{{ .Title }}</h1>
+  {{ with .Params.standfirst }}<p class="standfirst">{{ . | markdownify }}</p>{{ end }}
+
+  {{ .Content }}
+
+  {{ with .Params.attribution }}<p class="attribution">{{ . | markdownify }}</p>{{ end }}
+
+  {{ $seen := slice }}
+  {{ $notes := slice }}
+  {{ range where site.RegularPages "Section" "notes" }}
+    {{ $key := .File.TranslationBaseName }}
+    {{ if not (in $seen $key) }}{{ $seen = $seen | append $key }}{{ $notes = $notes | append . }}{{ end }}
+  {{ end }}
+  {{ range site.Sites }}
+    {{ if ne .Language.Lang site.Language.Lang }}
+      {{ range where .RegularPages "Section" "notes" }}
+        {{ $key := .File.TranslationBaseName }}
+        {{ if not (in $seen $key) }}{{ $seen = $seen | append $key }}{{ $notes = $notes | append . }}{{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ $ordered := sort $notes "Date" "desc" }}
+  {{ $n := len $ordered }}
+  {{ $here := .RelPermalink }}
+  {{ if gt $n 1 }}
+  {{ range $i, $pg := $ordered }}
+    {{ if eq $pg.RelPermalink $here }}
+    <nav class="prevnext">
+      {{ if lt $i (sub $n 1) }}{{ $older := index $ordered (add $i 1) }}<a class="pn prev" href="{{ $older.RelPermalink }}"><span class="arrow">&#8592;</span>{{ $older.Title }}</a>{{ else }}<span></span>{{ end }}
+      {{ if gt $i 0 }}{{ $newer := index $ordered (sub $i 1) }}<a class="pn next" href="{{ $newer.RelPermalink }}">{{ $newer.Title }}<span class="arrow">&#8594;</span></a>{{ end }}
+    </nav>
+    {{ end }}
+  {{ end }}
+  {{ end }}
+
+  <p class="more noteback"><a href="{{ .CurrentSection.RelPermalink }}">{{ .CurrentSection.Title }}</a></p>
+</article>
+{{ end }}

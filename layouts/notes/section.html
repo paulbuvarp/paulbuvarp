@@ -1,0 +1,56 @@
+{{ define "main" }}
+{{/* Marginalia lists every note from BOTH language trees, so a Norwegian
+     reader and an English one see the same shelf. A note is written once,
+     in whichever language it was written in, and lives at one URL. The
+     EN/NO marker tells the reader what they are about to open.
+
+     site.Sites is every language. Notes that genuinely exist in both
+     languages would otherwise appear twice, so entries are keyed by
+     translation base name and the current language wins the tie. */}}
+<article class="prose">
+  <h1 class="page-title">{{ .Title }}</h1>
+  {{ with .Params.standfirst }}<p class="standfirst">{{ . | markdownify }}</p>{{ end }}
+  {{ .Content }}
+
+  {{ $seen := slice }}
+  {{ $notes := slice }}
+
+  {{/* Current language first, so its version wins any duplicate. */}}
+  {{ range where site.RegularPages "Section" "notes" }}
+    {{ $key := .File.TranslationBaseName }}
+    {{ if not (in $seen $key) }}
+      {{ $seen = $seen | append $key }}
+      {{ $notes = $notes | append . }}
+    {{ end }}
+  {{ end }}
+
+  {{ range site.Sites }}
+    {{ if ne .Language.Lang site.Language.Lang }}
+      {{ range where .RegularPages "Section" "notes" }}
+        {{ $key := .File.TranslationBaseName }}
+        {{ if not (in $seen $key) }}
+          {{ $seen = $seen | append $key }}
+          {{ $notes = $notes | append . }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ with sort $notes "Date" "desc" }}
+  <ul class="note-list">
+    {{ range . }}
+    <li>
+      <span class="date">{{ partial "notedate.html" . }}</span>
+      <p class="entry-title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <span class="talk-lang">{{ or .Params.lang_marker (upper .Language.Lang) }}</span>
+      </p>
+      {{ with .Params.standfirst }}<p class="entry-gloss">{{ . }}</p>{{ end }}
+    </li>
+    {{ end }}
+  </ul>
+  {{ end }}
+
+  {{ with .Params.aftertext }}<div class="aftertext">{{ . | markdownify }}</div>{{ end }}
+</article>
+{{ end }}
