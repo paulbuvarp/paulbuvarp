@@ -16,7 +16,6 @@
 # =========================================================================
 #  Built from your ORCID record, cross-checked against live sources.
 #  Verified = I opened it or the URL resolved to your piece.
-#  TODO     = I will not guess a title. Fill these four in.
 # =========================================================================
 
 # --- ESSAYS AND COMMENTARY ---
@@ -70,7 +69,6 @@
   kind: essay
   featured: true
   url: "https://www.samtiden.no/essay/nar-bildet-mister-evnen-til-a-vaere-metafor/1392699"
-  note: "Om fotografiet, KI og Gaza-krigen"
 
 - title: "Når stil blir mistenkelig"
   venue: "Aftenposten"
@@ -78,7 +76,6 @@
   kind: essay
   featured: false
   url: "https://www.aftenposten.no/meninger/debatt/i/Bxl8AE/nei-mitt-innlegg-var-ikke-betydelig-ki-generert"
-  note: "Om KI-anklager i skrivingen min"
 
 - title: "Asle Toje stiller feil spørsmål"
   venue: "Aftenposten"
@@ -135,7 +132,6 @@
   kind: essay
   featured: false
   url: "https://klassekampen.no/artikkel/2025-01-25/gaza-tiktok-og-det-umiddelbares-paradoks"
-  note: "ORCID: Gaza, TikTok and the Paradox of Immediacy, januar 2025"
 
 - title: "Mobilfrie skoler er ikke nok"
   venue: "NRK"
@@ -143,7 +139,6 @@
   kind: essay
   featured: false
   url: "https://www.nrk.no/ytring/mobilfrie-skoler-er-ikke-nok-1.17417559"
-  note: "Publisert 27. mai 2025"
 
 - title: "NRK må være der kampen om demokratiet står"
   venue: "Medier24"
@@ -206,7 +201,6 @@
   featured: false
   coauthors: "Eskil Grendahl Sivertsen, et al."
   url: "https://www.ffi.no/publikasjoner/arkiv/kartlegging-av-utenlandsk-informasjons-pavirkning-pa-sosiale-medier-for-under-og-etter-kommunestyre-og-fylkestingsvalget-2023"
-  note: "ORCID: Mapping Foreign Information Influence on Social Media Before, During, and After the 2023 Local Elections"
 
 - title: "Observasjoner hos Fylkesmannen i Nordland under øvelse Trident Juncture 2018"
   venue: "FFI-rapport"
@@ -223,7 +217,6 @@
   kind: broadcast
   featured: false
   url: "https://www.nrk.no/video/debatten_NNFA51043026?t=1"
-  note: "April 2026"
 
 - title: "Slik endrer kunstig intelligens påvirkning på nett"
   venue: "Ugradert (FFI-podkast)"
@@ -238,7 +231,6 @@
   kind: broadcast
   featured: false
   url: "https://tv.nrk.no/serie/dagsrevyen/sesong/202509/episode/NNFA19092325"
-  note: "April 2026"
 
 - title: "På front mot krigspropaganda og desinformasjon"
   venue: "Goffeng På Leting"
@@ -261,7 +253,6 @@
   kind: broadcast
   featured: false
   url: "https://open.spotify.com/episode/03i39ZXe57oHtxeEYwUGFY"
-  note: "Februar 2025"
 
 - title: "Driver Forsvaret med propaganda?"
   venue: "Forsvarspodden"
