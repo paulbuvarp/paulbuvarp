@@ -21,6 +21,8 @@
 
   {{ with .Params.attribution }}<p class="attribution">{{ . | markdownify }}</p>{{ end }}
 
+  {{ partial "note-concepts.html" . }}
+
   {{ $seen := slice }}
   {{ $notes := slice }}
   {{ range where site.RegularPages "Section" "notes" }}

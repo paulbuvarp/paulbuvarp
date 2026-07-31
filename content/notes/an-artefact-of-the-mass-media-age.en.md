@@ -2,6 +2,12 @@
 title: "An Artefact of the Mass Media Age"
 date: 2025-11-18
 lang_marker: "EN"
+# DRAFT — the concept assignment is Claude's reading of the piece, not yours.
+# Slugs, not titles; they are identical in both languages. Reorder or cut.
+concepts:
+  - tertiary-orality
+  - aletheic-breakdown
+  - gutenberg-parenthesis
 draft: false
 # DRAFT — Claude's wording. This is the sentence that carries the piece in the
 # index, in the feed and on the share card. Rewrite it.

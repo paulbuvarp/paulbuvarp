@@ -1,0 +1,46 @@
+{{/* Notes that use this concept, gathered from both language trees.
+
+     Marginalia is written once per piece, in one language, and listed on both
+     sites — so a Norwegian concept page lists an English note and vice versa,
+     with the same EN/NO marker used everywhere else. Entries are keyed by
+     translation base name so a piece that does exist in both languages is not
+     counted twice, with the current language winning the tie.
+
+     `slug` is the concept's filename without language or extension, which is
+     the same string in both languages by design: renaming a concept file
+     breaks the EN/NO toggle, and it would break these links too. */}}
+{{- $slug := .File.TranslationBaseName -}}
+{{- $seen := slice -}}
+{{- $hits := slice -}}
+{{- range where site.RegularPages "Section" "notes" -}}
+  {{- if in (.Params.concepts | default slice) $slug -}}
+    {{- $key := .File.TranslationBaseName -}}
+    {{- if not (in $seen $key) }}{{ $seen = $seen | append $key }}{{ $hits = $hits | append . }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- range site.Sites -}}
+  {{- if ne .Language.Lang site.Language.Lang -}}
+    {{- range where .RegularPages "Section" "notes" -}}
+      {{- if in (.Params.concepts | default slice) $slug -}}
+        {{- $key := .File.TranslationBaseName -}}
+        {{- if not (in $seen $key) }}{{ $seen = $seen | append $key }}{{ $hits = $hits | append . }}{{ end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- with sort $hits "Date" "desc" }}
+  {{- $notesIdx := site.GetPage "/notes" }}
+  {{ partial "sectionhead.html" (dict "label" $notesIdx.Title "url" $notesIdx.RelPermalink "linktext" $notesIdx.Title) }}
+  <ul class="note-list">
+    {{ range . }}
+    <li>
+      <span class="date">{{ partial "notedate.html" . }}</span>
+      <p class="entry-title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        <span class="talk-lang">{{ or .Params.lang_marker (upper .Language.Lang) }}</span>
+      </p>
+      {{ with .Params.standfirst }}<p class="entry-gloss">{{ . }}</p>{{ end }}
+    </li>
+    {{ end }}
+  </ul>
+{{- end -}}

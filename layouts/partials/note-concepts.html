@@ -1,0 +1,25 @@
+{{/* Concepts a note draws on. Front matter carries slugs, not titles, because
+     the slug is the one string that is identical in both languages:
+
+       concepts: ["tertiary-orality", "aletheic-breakdown"]
+
+     Order in the front matter is the order shown. A slug with no matching
+     page is skipped rather than rendered as a dead link, so a typo costs a
+     missing entry instead of a 404. */}}
+{{- $pages := slice -}}
+{{- range .Params.concepts -}}
+  {{- with site.GetPage (printf "/concepts/%s" .) }}{{ $pages = $pages | append . }}{{ end -}}
+{{- end -}}
+{{- with $pages }}
+  {{ partial "sectionhead.html" (dict "label" (i18n "concepts") "url" ("/concepts/" | relLangURL) "linktext" (i18n "concepts")) }}
+  <ul class="entries">
+    {{ range . }}
+    <li class="entry entry--plain">
+      <div>
+        <p class="entry-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+        {{ with .Params.gloss }}<p class="entry-gloss">{{ . }}</p>{{ end }}
+      </div>
+    </li>
+    {{ end }}
+  </ul>
+{{- end -}}

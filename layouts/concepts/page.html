@@ -19,6 +19,8 @@
     {{ .Content }}
     {{ with .Params.attribution }}<p class="attribution">{{ . | markdownify }}</p>{{ end }}
 
+    {{ partial "concept-notes.html" . }}
+
     {{ partial "citation.html" . }}
 
     {{ $sibs := sort (where site.RegularPages "Section" "concepts") "Params.order" }}
