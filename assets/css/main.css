@@ -67,14 +67,20 @@
                         rem       px     used for
      --fs-4xs          0.66      10.6    the photograph credit, set vertically
      --fs-3xs          0.75      12.0    the language badge, the copy button
-     --fs-2xs          0.82      13.1    eyebrows, the play label, form labels
-     --fs-xs           0.88      14.1    the wordmark, navigation, buttons
+     --fs-2xs          0.82      13.1    the play label, form labels
+     --fs-xs           0.88      14.1    eyebrows, the wordmark, navigation, buttons
+
+     One rule governs the ladder: a heading outranks what it heads. `h3` used
+     to sit at exactly the body size and the aftertext subhead sat below it,
+     which is what made a section look as though it were introduced by its own
+     footnote. Both were raised. Check any new heading against this before
+     assigning it a rung.
      --fs-sm           0.95      15.2    entry meta, glosses, sidenotes, footer
      --fs-md           1.03      16.5    attributions, citations, prev/next
      --fs-lg           1.12      17.9    standfirsts, entry titles, inputs
-     --fs-xl           1.31      21.0    h3, list titles — level with the body
+     --fs-xl           1.31      21.0    list titles, aftertext subheads
      --fs-base         1.3125    21.0    running prose
-     --fs-2xl          1.46      23.4    h2 on concept pages, definitions
+     --fs-2xl          1.46      23.4    h3, h2 on concept pages, definitions
      --fs-3xl          1.77      28.3    h2 in prose
 
      Not on the ladder, on purpose: the two page titles, which are fluid
@@ -420,7 +426,7 @@ h2 {
 }
 
 h3 {
-  font-size: var(--fs-xl);
+  font-size: var(--fs-2xl);
   margin: 2.25rem 0 0.6rem;
 }
 
@@ -435,7 +441,7 @@ h3 {
 }
 
 .eyebrow {
-  font-size: var(--fs-2xs);
+  font-size: var(--fs-xs);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-variant-numeric: lining-nums;
@@ -1411,7 +1417,7 @@ article.prose blockquote a:hover,
 /* --- Press kit ------------------------------------------------------------ */
 
 .aftertext h3 {
-  font-size: var(--fs-lg);
+  font-size: var(--fs-xl);
   margin: 2rem 0 0.5rem;
 }
 .aftertext blockquote {
