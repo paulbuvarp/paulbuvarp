@@ -110,6 +110,17 @@
     {{- $slug := replaceRE "/" "-" (strings.Trim .RelPermalink "/") -}}
     {{- if eq $slug "" }}{{ $slug = "home" }}{{ end -}}
     {{- $img = $img | resources.Copy (printf "og/%s.png" $slug) -}}
+
+    {{- /* Fingerprinted, and the reason is LinkedIn rather than caching.
+           LinkedIn keys its image cache on the image URL and holds it for
+           about a week, and re-scraping through the Post Inspector refreshes
+           the metadata while leaving the picture alone — which is how you end
+           up with a corrected byline above a stale card and no button to
+           press. A content hash in the filename means a changed card is a
+           different URL, so there is nothing stale to serve. It also gets the
+           file cached properly by browsers, since the name now changes only
+           when the contents do. */ -}}
+    {{- $img = $img | fingerprint "md5" -}}
     {{- $out = $img.Permalink -}}
   {{- end -}}
 {{- end -}}
