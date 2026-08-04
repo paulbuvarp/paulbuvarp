@@ -754,6 +754,107 @@ footer.foot a:hover {
   max-width: 15rem;
 }
 
+/* --- Video --------------------------------------------------------------
+   A click-to-play facade for the Vimeo embed in layouts/partials/video.html.
+   Nothing loads from Vimeo until the poster is clicked, so these rules also
+   describe the resting state, not just the player.
+
+   The poster image carries width="1280" as an HTML attribute. Without a
+   max-width here the browser honours that intrinsic width and the figure
+   walks straight out of the column — which is exactly what happened when
+   these rules went missing. `max-width: 100%` on the image is the load-
+   bearing line; everything else is presentation.
+   ------------------------------------------------------------------------ */
+
+.video {
+  margin: 2rem 0 2.5rem;
+  max-width: var(--measure);
+}
+
+.video__facade {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--mark);
+  border-radius: 2px;
+  /* it is a link, so it inherits prose link styling without this */
+  background-image: none;
+  text-decoration: none;
+}
+
+.video__facade img,
+.video__facade iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  border: 0;
+  object-fit: cover;
+}
+
+.video__facade img {
+  filter: grayscale(1) contrast(1.04);
+  transition: filter 0.25s ease, transform 0.4s ease;
+}
+.video__facade:hover img,
+.video__facade:focus-visible img {
+  filter: grayscale(0.35) contrast(1.02);
+  transform: scale(1.012);
+}
+
+.video__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--mark);
+  box-shadow: 0 2px 14px rgba(25, 28, 25, 0.22);
+  transition: transform 0.2s ease;
+}
+.video__play svg { margin-left: 3px; }   /* optical centring of the triangle */
+.video__facade:hover .video__play,
+.video__facade:focus-visible .video__play { transform: translate(-50%, -50%) scale(1.06); }
+
+.video__label {
+  position: absolute;
+  left: 1rem;
+  bottom: 0.9rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-shadow: 0 1px 6px rgba(25, 28, 25, 0.6);
+}
+
+.video figcaption {
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.55rem;
+}
+
+.video__facade:focus-visible {
+  outline: 2px solid var(--mark);
+  outline-offset: 3px;
+}
+
+@media print {
+  .video__play,
+  .video__label { display: none !important; }
+  .video { max-width: 100%; }
+  .video__facade { background: none; aspect-ratio: auto; }
+  .video__facade img { filter: grayscale(1); height: auto; }
+}
+
 /* --- Talks --------------------------------------------------------------- */
 
 .talk-date {
