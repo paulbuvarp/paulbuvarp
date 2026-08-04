@@ -30,6 +30,12 @@ other = "Upcoming"
 other = "Previously"
 [talks_none]
 other = "Nothing scheduled publicly at the moment."
+[talks_video_caption]
+other = "The Norwegian Influence Conference 2024"
+[talks_video]
+other = "Video"
+[video_play]
+other = "Play"
 [contact]
 other = "Contact"
 [form_name]

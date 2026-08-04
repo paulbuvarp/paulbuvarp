@@ -30,6 +30,12 @@ other = "Kommende"
 other = "Tidligere"
 [talks_none]
 other = "Ingenting er offentlig oppsatt for øyeblikket."
+[talks_video_caption]
+other = "Påvirkningskonferansen 2024"
+[talks_video]
+other = "Video"
+[video_play]
+other = "Spill av"
 [contact]
 other = "Kontakt"
 [form_name]

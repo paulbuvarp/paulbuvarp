@@ -161,6 +161,14 @@ article.prose > *,
    on the paragraph must not clip them. */
 article.prose > * > .sidenote { max-width: none; }
 
+/* The blanket rule above is a universal selector, which outranks a plain
+   class: `article.prose > *` scores higher than `.portrait`, so it silently
+   overrode the contact portrait's own 16rem and stretched it to the full
+   measure. Anything inside the prose column that has a deliberate width of
+   its own needs restating here, at matching depth, or the same thing will
+   happen to it. */
+article.prose > .portrait { max-width: var(--portrait-w); }
+
 /* --- Masthead ----------------------------------------------------------- */
 
 .masthead {
