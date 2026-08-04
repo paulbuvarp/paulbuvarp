@@ -47,10 +47,13 @@
   --display: "Fraunces", Georgia, serif;
   --text: "Spectral", Georgia, "Times New Roman", serif;
 
-  --measure: 40rem;        /* the single content width. 40rem puts Norwegian
-                              prose at about 76 characters a line, which is the
-                              top of the comfortable band — 46rem was measured
-                              at 88 and rejected. Do not widen further. */
+  /* The measure and the body size move together. What matters for reading is
+     characters a line, not pixels: 44rem at 21px body text and 40rem at 19px
+     both produce 76 Norwegian characters, but the first fills 704px of window
+     against 640px. So the column was widened by making the type bigger, not
+     by loosening the measure. Change one of these and you must change the
+     other, or the line length moves. */
+  --measure: 44rem;
   --wide: 46rem;           /* page container — indexes and lists use all of it */
   --step: 1.55rem;
 
@@ -99,7 +102,7 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--text);
-  font-size: 1.1875rem;
+  font-size: 1.3125rem;   /* 21px — see the note on --measure */
   line-height: 1.62;
   font-variant-numeric: oldstyle-nums;
   -webkit-font-smoothing: antialiased;
@@ -170,6 +173,20 @@ article.prose > * > .sidenote { max-width: none; }
   justify-content: space-between;
   gap: 1.5rem;
   flex-wrap: wrap;
+  /* The masthead used to span the full container while everything beneath it
+     stopped at the measure, so the navigation's right edge sat up to 232px
+     past the right edge of the content. That mismatch is what made the page
+     look as though the header belonged to a wider document. Capping it here
+     gives the wordmark, every page title and the last word of the navigation
+     a single left and right edge. The container stays wider than both,
+     because that difference is the sidenote gutter.
+
+     Padding rather than max-width: this element is also .wrap, and .wrap's
+     max-width is what centres the header block on the page. Overriding it
+     re-centres the masthead on its own narrower width, which pulls the
+     wordmark right and makes the misalignment worse. Pulling the right edge
+     in with padding leaves the centring alone. */
+  padding-right: max(1.5rem, calc(var(--wide) - var(--measure) - 1.5rem));
 }
 
 .sitename {
@@ -598,15 +615,29 @@ article.prose {
 /* --- Footer -------------------------------------------------------------- */
 
 footer.foot {
-  border-top: 1px solid var(--rule);
   margin-top: 4rem;
-  padding: 1.75rem 0 4rem;
+  /* The left padding is new. This rule's shorthand used to set it to zero,
+     which overrode .wrap and left the footer text sitting 24px to the left of
+     every other thing on the page. */
+  padding: 1.75rem 1.5rem 4rem;
+  padding-right: max(1.5rem, calc(var(--wide) - var(--measure) - 1.5rem));
   font-size: 0.84rem;
   color: var(--muted);
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
+
+  /* The rule above the footer is drawn as a background rather than as
+     border-top. A border always spans the whole border box, so padding cannot
+     shorten it — it would still have run past the right edge of the content.
+     A background gradient can be given an explicit width, so the line now
+     starts and stops exactly with the text above it. */
+  border-top: 0;
+  background-image: linear-gradient(var(--rule), var(--rule));
+  background-repeat: no-repeat;
+  background-size: var(--measure) 1px;
+  background-position: 1.5rem 0;
 }
 
 footer.foot a {
