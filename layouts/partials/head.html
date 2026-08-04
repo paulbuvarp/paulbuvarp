@@ -13,17 +13,42 @@
 <meta property="og:description" content="{{ $desc | plainify | truncate 180 }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ site.Params.displayName }}">
-<meta property="og:locale" content="{{ or site.Language.Params.ogLocale "en_GB" }}">
+{{- /* This fell back to en_GB on every Norwegian page, because ogLocale was
+       never set per language. Derived from the language code instead, so it
+       cannot drift again: nb-NO becomes nb_NO, en-GB becomes en_GB. */ -}}
+<meta property="og:locale" content="{{ or site.Language.Params.ogLocale (replace site.Language.LanguageCode "-" "_") }}">
+{{- range site.Sites }}{{ if ne .Language.Lang site.Language.Lang }}
+<meta property="og:locale:alternate" content="{{ replace .Language.LanguageCode "-" "_" }}">
+{{- end }}{{ end }}
 {{- $ogimg := partial "ogimage.html" . }}
 <meta property="og:image" content="{{ $ogimg }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
-<meta property="og:image:alt" content="{{ site.Params.displayName }}">
+<meta property="og:image:alt" content="{{ $title }}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc | plainify | truncate 180 }}">
 <meta name="twitter:image" content="{{ $ogimg }}">
+<meta name="twitter:image:alt" content="{{ $title }}">
 
+{{- /* Authorship. LinkedIn's inspector reports "no author" without these, and
+       an article card with no byline reads as syndicated rather than written.
+       `article:author` is the tag it actually looks for; `name="author"` is the
+       older convention several other scrapers still use. The LinkedIn profile
+       URL is pulled out of sameAs if it is there, since LinkedIn will link the
+       byline to a profile when given one. */ -}}
+<meta name="author" content="{{ site.Params.fullName }}">
+{{- if not $isHome }}
+<meta property="article:author" content="{{ site.Params.fullName }}">
+{{- range site.Params.sameAs }}
+  {{- if and .url (in (lower .url) "linkedin.com") }}
+<meta property="article:author" content="{{ .url }}">
+  {{- end }}
+{{- end }}
+{{- end }}
 {{- with .Params.date }}<meta property="article:published_time" content="{{ time.Format "2006-01-02" . }}">{{ end }}
+{{- if and (not $isHome) .Lastmod }}<meta property="article:modified_time" content="{{ time.Format "2006-01-02" .Lastmod }}">{{ end }}
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
