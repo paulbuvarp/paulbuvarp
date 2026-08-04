@@ -1,0 +1,49 @@
+{{- /* Article markup for a Marginalia note.
+
+   The point is the `author` line: it references the Person @id declared on
+   the homepage rather than describing a second Paul Buvarp. Talks already do
+   this via `performer`. This extends the same graph to the writing, which is
+   the thing you are actually known for.
+
+   `about` is populated from the note's existing `concepts:` front matter —
+   the same list that drives the reciprocal links — as schema.org DefinedTerm
+   entries pointing at the concept pages. That declares your vocabulary as a
+   vocabulary rather than as five more pages, and it costs nothing because the
+   data is already there. Invalid slugs are skipped, as elsewhere.
+
+   `image` reuses the generated share card, so the Article and the Open Graph
+   tags agree about what this piece looks like.
+
+   Deliberately absent: `publisher`. A publisher on a self-published essay
+   would be you again, which adds a node and asserts nothing. */ -}}
+
+{{- $person := printf "%s#person" site.BaseURL -}}
+
+{{- $about := slice -}}
+{{- range .Params.concepts -}}
+  {{- with site.GetPage (printf "/concepts/%s" .) -}}
+    {{- $term := dict "@type" "DefinedTerm" "name" .Title "url" .Permalink -}}
+    {{- with .Params.gloss }}{{ $term = merge $term (dict "description" .) }}{{ end -}}
+    {{- $about = $about | append $term -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $a := dict
+    "@context" "https://schema.org"
+    "@type" "Article"
+    "@id" (printf "%s#article" .Permalink)
+    "headline" .Title
+    "url" .Permalink
+    "mainEntityOfPage" (dict "@type" "WebPage" "@id" .Permalink)
+    "inLanguage" (or site.Language.LanguageCode site.Language.Lang)
+    "author" (dict "@id" $person)
+    "isAccessibleForFree" true
+-}}
+{{- with .Params.standfirst }}{{ $a = merge $a (dict "description" (. | plainify)) }}{{ end -}}
+{{- with .Date }}{{ $a = merge $a (dict "datePublished" (time.Format "2006-01-02" .)) }}{{ end -}}
+{{- with .Lastmod }}{{ $a = merge $a (dict "dateModified" (time.Format "2006-01-02" .)) }}{{ end -}}
+{{- with .WordCount }}{{ $a = merge $a (dict "wordCount" .) }}{{ end -}}
+{{- with $about }}{{ $a = merge $a (dict "about" .) }}{{ end -}}
+{{- $card := partial "ogimage.html" . -}}
+{{- with $card }}{{ $a = merge $a (dict "image" .) }}{{ end -}}
+<script type="application/ld+json">{{ $a | jsonify (dict "indent" "  ") | safeJS }}</script>

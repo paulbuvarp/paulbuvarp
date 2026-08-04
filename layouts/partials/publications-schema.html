@@ -1,0 +1,58 @@
+{{- /* The published record, marked up from data/publications.yaml.
+
+   Same principle as the notes and the talks: every item names the Person @id
+   as its author instead of repeating a name string. This is the half of your
+   output with the most external corroboration — ORCID, the venues' own sites,
+   the FFI staff page — so it is the half where a consistent author identifier
+   is worth most.
+
+   `kind` picks the type. Anything in the data that is not listed here falls
+   back to Article, so adding a new kind to publications.yaml cannot break
+   this file — it will simply be typed conservatively until you add a line.
+
+   Emitted as one @graph rather than a script per item, so the page carries a
+   single block.
+
+   Only `title` is required. Entries with no year, venue or url still appear;
+   the fields are simply omitted rather than emitted empty. */ -}}
+
+{{- $person := printf "%s#person" site.BaseURL -}}
+{{- $types := dict
+    "academic"  "ScholarlyArticle"
+    "peer"      "ScholarlyArticle"
+    "journal"   "ScholarlyArticle"
+    "report"    "Report"
+    "essay"     "Article"
+    "oped"      "OpinionNewsArticle"
+    "op-ed"     "OpinionNewsArticle"
+    "commentary" "OpinionNewsArticle"
+    "media"     "NewsArticle"
+    "chapter"   "Chapter"
+    "book"      "Book"
+-}}
+
+{{- $items := slice -}}
+{{- range site.Data.publications -}}
+  {{- if .title -}}
+    {{- $type := index $types (lower (or .kind "")) | default "Article" -}}
+    {{- $it := dict
+        "@type" $type
+        "headline" .title
+        "name" .title
+        "author" (dict "@id" $person)
+    -}}
+    {{- with .year }}{{ $it = merge $it (dict "datePublished" (printf "%v" .)) }}{{ end -}}
+    {{- with .url }}{{ $it = merge $it (dict "url" .) }}{{ end -}}
+    {{- with .venue -}}
+      {{- $it = merge $it (dict "isPartOf" (dict "@type" "Periodical" "name" .)) -}}
+    {{- end -}}
+    {{- with .coauthors -}}
+      {{- $it = merge $it (dict "creator" (slice (dict "@id" $person) (dict "@type" "Person" "name" .))) -}}
+    {{- end -}}
+    {{- $items = $items | append $it -}}
+  {{- end -}}
+{{- end -}}
+
+{{- with $items -}}
+<script type="application/ld+json">{{ (dict "@context" "https://schema.org" "@graph" .) | jsonify (dict "indent" "  ") | safeJS }}</script>
+{{- end -}}

@@ -1,4 +1,5 @@
 {{ define "main" }}
+{{ partial "publications-schema.html" . }}
 <article class="prose">
   <h1 class="page-title">{{ .Title }}</h1>
   {{ with .Params.standfirst }}<p class="standfirst">{{ . | markdownify }}</p>{{ end }}
