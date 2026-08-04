@@ -1,0 +1,43 @@
+{{- /* A lead image, sitting between the title and the standfirst.
+
+   Front matter:
+
+     hero:       assets-relative path, e.g. img/hvem-eier-overfloden.jpg
+     heroAlt:    what it shows, for a reader who cannot see it. Required —
+                 the image is skipped without it, because an undescribed
+                 decorative image on an argumentative essay is worse than no
+                 image at all.
+     heroCredit: the line beneath. Optional, but see the note below.
+
+   Hugo resizes at build time and serves webp, with a jpeg fallback for the
+   handful of clients that still need one, and srcset so a phone does not
+   download a desktop-sized file.
+
+   On the credit line: if the image was generated rather than photographed or
+   commissioned, say so there. Not as a legal matter — as a practical one.
+   This site belongs to someone who has had to rebut an accusation of AI
+   authorship in public, and an unlabelled synthetic image is exactly the
+   detail a second accusation would be built on. Labelled, it is evidence of
+   the transparency the essays argue for. */ -}}
+
+{{- with .Params.hero -}}
+  {{- $src := resources.Get . -}}
+  {{- $alt := $.Params.heroAlt -}}
+  {{- if and $src $alt -}}
+    {{- $w1400 := $src.Resize "1400x webp q82" -}}
+    {{- $w900  := $src.Resize "900x webp q82" -}}
+    {{- $w600  := $src.Resize "600x webp q82" -}}
+    {{- $jpg   := $src.Resize "1400x jpg q82" -}}
+    <figure class="hero">
+      <picture>
+        <source type="image/webp"
+                srcset="{{ $w600.RelPermalink }} 600w, {{ $w900.RelPermalink }} 900w, {{ $w1400.RelPermalink }} 1400w"
+                sizes="(max-width: 46rem) 100vw, 44rem">
+        <img src="{{ $jpg.RelPermalink }}" alt="{{ $alt }}"
+             width="{{ $w1400.Width }}" height="{{ $w1400.Height }}"
+             loading="eager" decoding="async">
+      </picture>
+      {{- with $.Params.heroCredit }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+    </figure>
+  {{- end -}}
+{{- end -}}

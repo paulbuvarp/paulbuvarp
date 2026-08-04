@@ -15,15 +15,17 @@
   </p>
 
   <h1 class="page-title page-title--tight">{{ .Title }}</h1>
+  {{ partial "hero.html" . }}
+
   {{ with .Params.standfirst }}<p class="standfirst">{{ . | markdownify }}</p>{{ end }}
 
   {{ .Content }}
 
   {{ with .Params.attribution }}<p class="attribution">{{ . | markdownify }}</p>{{ end }}
 
-  {{ partial "note-concepts.html" . }}
-
   {{ partial "share.html" . }}
+
+  {{ partial "note-concepts.html" . }}
 
   {{ $seen := slice }}
   {{ $notes := slice }}

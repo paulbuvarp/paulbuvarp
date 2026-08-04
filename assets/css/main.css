@@ -1693,6 +1693,41 @@ article.prose .share .share-link:hover { color: var(--mark); }
 
 @media print { .share { display: none !important; } }
 
+/* --- Lead image ---------------------------------------------------------
+   A hero between the title and the standfirst. Kept to the measure like
+   everything else in the column, so it does not become the one element that
+   breaks the alignment the rest of the page was rebuilt to hold.
+
+   The credit line matters more here than on the portrait: it is where the
+   provenance of the image is stated, and on this site that is not a
+   formality.
+   ------------------------------------------------------------------------ */
+
+.hero {
+  margin: 1.6rem 0 1.9rem;
+  max-width: var(--measure);
+}
+.hero picture,
+.hero img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 2px;
+}
+.hero figcaption {
+  font-size: var(--fs-2xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.55rem;
+}
+
+@media print {
+  .hero { max-width: 100%; }
+  .hero img { filter: grayscale(1); }
+}
+
 /* --- Print ---------------------------------------------------------------
    A site about what print did to knowledge should print properly.
    ------------------------------------------------------------------------ */
