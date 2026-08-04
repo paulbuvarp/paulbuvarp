@@ -1654,6 +1654,45 @@ article.prose p.noteback a:hover { color: var(--mark); }
   .noteback { display: none !important; }
 }
 
+/* --- Share --------------------------------------------------------------
+   A row of plain links at the foot of a note. Styled as chrome rather than
+   prose: no underline gradient, muted until hovered. The button is made to
+   match the anchors exactly so the row reads as one set of three.
+
+   `article.prose p a` outranks a bare class, so the reset has to match its
+   depth — the same trap that put a green block behind the back link.
+   ------------------------------------------------------------------------ */
+
+.share {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin: 2.5rem 0 0;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--rule);
+  max-width: var(--measure);
+}
+.share-label { margin: 0; opacity: 0.8; }
+
+.share-link,
+article.prose .share .share-link {
+  font-family: var(--sans, inherit);
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  background: none;
+  background-image: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+.share-link:hover,
+article.prose .share .share-link:hover { color: var(--mark); }
+.share-link:focus-visible { outline: 2px solid var(--mark); outline-offset: 3px; }
+
+@media print { .share { display: none !important; } }
+
 /* --- Print ---------------------------------------------------------------
    A site about what print did to knowledge should print properly.
    ------------------------------------------------------------------------ */

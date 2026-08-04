@@ -1,0 +1,42 @@
+{{- /* Share links for a note.
+
+   Plain anchors to each platform's own share endpoint, plus a copy button
+   that uses the clipboard API already present in `citation.html`. No script
+   is loaded from anybody else, no iframe, no button that phones home before
+   it is clicked. That matters here beyond taste: the colophon makes a claim
+   about self-hosted fonts and GDPR, and a Facebook or Twitter share widget
+   would quietly contradict it on every page it appeared.
+
+   Two platforms only. LinkedIn is where your readers are, Bluesky is where
+   the argument travels. Mastodon is left out because sharing to it requires
+   the reader to type their instance, which is a worse experience than
+   copying the link. Facebook is left out because you would not post there.
+
+   The copy button falls back to doing nothing visible if the clipboard API
+   is unavailable, which is the same behaviour the citation block already has. */ -}}
+
+{{- $url := .Permalink -}}
+{{- $title := .Title -}}
+<div class="share">
+  <span class="eyebrow share-label">{{ i18n "share" }}</span>
+  <a class="share-link"
+     href="https://www.linkedin.com/sharing/share-offsite/?url={{ $url | urlquery }}"
+     target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  <a class="share-link"
+     href="https://bsky.app/intent/compose?text={{ (printf "%s %s" $title $url) | urlquery }}"
+     target="_blank" rel="noopener noreferrer">Bluesky</a>
+  <button class="share-link share-copy" type="button" data-url="{{ $url }}">{{ i18n "copy_link" }}</button>
+</div>
+<script>
+(function () {
+  var b = document.currentScript.previousElementSibling.querySelector('.share-copy');
+  if (!b || !navigator.clipboard) return;
+  b.addEventListener('click', function () {
+    navigator.clipboard.writeText(b.dataset.url).then(function () {
+      var was = b.textContent;
+      b.textContent = {{ i18n "copied" }};
+      setTimeout(function () { b.textContent = was; }, 1800);
+    });
+  });
+})();
+</script>

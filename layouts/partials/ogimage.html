@@ -2,17 +2,26 @@
 
    Order of preference:
      1. an explicit `image:` in the page's front matter
-     2. a card generated at build time from the page title
-     3. the existing /og-default.png
+     2. a card generated at build time
+     3. /og-default.png
 
-   Step 2 needs a TTF or OTF font, because Hugo's text filter cannot read
-   woff2. Put `spectral.ttf` (or Fraunces) at assets/fonts/spectral.ttf —
-   both are free from Google Fonts. Until that file exists this partial falls
-   straight through to og-default.png, so it is safe to install now and add
-   the font later. Nothing breaks in the meantime.
+   The card is the site's own furniture rather than a coloured rectangle. The
+   background at assets/og/base.png carries an oversized parenthesis pair, so
+   the whole card sits inside the mark, plus a hairline above the footer row
+   and a short spruce rule under the eyebrow. Only text is drawn here, because
+   Hugo's image filters can set type but cannot draw shapes — anything
+   geometric has to be baked into the base.
 
-   Titles are wrapped by hand: Hugo's images.Text draws a string, it does not
-   flow one. Roughly 24 characters a line at 64px on a 1200px card. */ -}}
+   Titles are set in Fraunces, the display face, and everything else in
+   Spectral, which is the same division the site itself uses. Both need to be
+   TTF: Hugo's text filter cannot read woff2.
+
+   Layout, at 1200x630 with the text inset to clear the brackets:
+     eyebrow     y 100    the section, or the site name on the front page
+     title       y 190    up to three lines at 88px leading
+     standfirst  under    up to two lines, muted
+     footer      y 556    the domain, under a hairline at 540
+*/ -}}
 
 {{- $out := "" -}}
 
@@ -20,16 +29,31 @@
   {{- $out = absURL . -}}
 {{- else -}}
   {{- $base := resources.Get "og/base.png" -}}
-  {{- $font := or (resources.Get "fonts/spectral.ttf") (resources.Get "fonts/fraunces.ttf") -}}
-  {{- if and $base $font -}}
+  {{- $display := or (resources.Get "fonts/fraunces.ttf") (resources.Get "fonts/spectral.ttf") -}}
+  {{- $text := or (resources.Get "fonts/spectral.ttf") $display -}}
 
+  {{- if and $base $display -}}
+    {{- $img := $base -}}
+    {{- $x := 150 -}}
+
+    {{- /* Eyebrow: the section on an inner page, the name on the front. */ -}}
+    {{- $eyebrow := site.Params.displayName -}}
+    {{- if not .IsHome -}}
+      {{- with .CurrentSection -}}{{ with .Title }}{{ $eyebrow = . }}{{ end }}{{- end -}}
+    {{- end -}}
+    {{- with $eyebrow -}}
+      {{- $img = $img.Filter (images.Text (upper .) (dict
+          "color" "#6A6E67" "size" 25 "x" $x "y" 100 "font" $text)) -}}
+    {{- end -}}
+
+    {{- /* Title. Hugo draws a string, it does not flow one, so the wrap is
+           done here. About 23 characters a line at 76px in Fraunces. */ -}}
     {{- $title := cond .IsHome site.Params.displayName .Title -}}
-    {{- $words := split $title " " -}}
     {{- $lines := slice -}}
     {{- $cur := "" -}}
-    {{- range $words -}}
+    {{- range (split $title " ") -}}
       {{- $try := cond (eq $cur "") . (printf "%s %s" $cur .) -}}
-      {{- if gt (len $try) 24 -}}
+      {{- if gt (len $try) 23 -}}
         {{- if ne $cur "" }}{{ $lines = $lines | append $cur }}{{ end -}}
         {{- $cur = . -}}
       {{- else -}}
@@ -37,34 +61,55 @@
       {{- end -}}
     {{- end -}}
     {{- if ne $cur "" }}{{ $lines = $lines | append $cur }}{{ end -}}
-    {{- $lines = first 4 $lines -}}
+    {{- $lines = first 3 $lines -}}
 
-    {{- $img := $base -}}
-    {{- $y := 150 -}}
+    {{- $y := 190 -}}
     {{- range $lines -}}
       {{- $img = $img.Filter (images.Text . (dict
-          "color" "#2E4B3C" "size" 62 "x" 90 "y" $y "font" $font)) -}}
-      {{- $y = add $y 82 -}}
+          "color" "#2E4B3C" "size" 76 "x" $x "y" $y "font" $display)) -}}
+      {{- $y = add $y 88 -}}
     {{- end -}}
 
-    {{- /* section label above the title, domain below */ -}}
-    {{- with $.CurrentSection -}}
-      {{- if and .Title (not $.IsHome) -}}
-        {{- $img = $img.Filter (images.Text (upper .Title) (dict
-            "color" "#6A6E67" "size" 24 "x" 92 "y" 92 "font" $font)) -}}
+    {{- /* Standfirst, two lines, filling the space the old card left empty.
+           Skipped when the title already runs to three lines. */ -}}
+    {{- $sf := .Params.standfirst | default .Params.gloss | plainify -}}
+    {{- if and $sf (lt (len $lines) 3) -}}
+      {{- $slines := slice -}}
+      {{- $scur := "" -}}
+      {{- range (split $sf " ") -}}
+        {{- $try := cond (eq $scur "") . (printf "%s %s" $scur .) -}}
+        {{- if gt (len $try) 62 -}}
+          {{- if ne $scur "" }}{{ $slines = $slines | append $scur }}{{ end -}}
+          {{- $scur = . -}}
+        {{- else -}}
+          {{- $scur = $try -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if ne $scur "" }}{{ $slines = $slines | append $scur }}{{ end -}}
+      {{- $shown := first 2 $slines -}}
+      {{- $sy := add $y 22 -}}
+      {{- range $i, $l := $shown -}}
+        {{- /* An ellipsis when the standfirst has been cut, so the card does
+               not appear to end mid-sentence. */ -}}
+        {{- $txt := $l -}}
+        {{- if and (eq $i (sub (len $shown) 1)) (gt (len $slines) (len $shown)) -}}
+          {{- $txt = printf "%s …" $l -}}
+        {{- end -}}
+        {{- $img = $img.Filter (images.Text $txt (dict
+            "color" "#6A6E67" "size" 27 "x" $x "y" $sy "font" $text)) -}}
+        {{- $sy = add $sy 40 -}}
       {{- end -}}
     {{- end -}}
-    {{- $img = $img.Filter (images.Text "paulbuvarp.com" (dict
-        "color" "#6A6E67" "size" 26 "x" 92 "y" 520 "font" $font)) -}}
 
-    {{- /* Named from the permalink, not from .File — the 404 page and the
-           taxonomy pages have no File, and reaching for it there kills the
-           whole build. The permalink already carries the language, so no
-           separate suffix is needed. */ -}}
+    {{- /* Footer, below the hairline baked into the base. */ -}}
+    {{- $img = $img.Filter (images.Text "( ) paulbuvarp.com" (dict
+        "color" "#6A6E67" "size" 26 "x" $x "y" 556 "font" $text)) -}}
+
+    {{- /* Named from the permalink, not from .File — the 404 and taxonomy
+           pages have no File, and reaching for it there kills the build. */ -}}
     {{- $slug := replaceRE "/" "-" (strings.Trim .RelPermalink "/") -}}
     {{- if eq $slug "" }}{{ $slug = "home" }}{{ end -}}
-    {{- $name := printf "og/%s.png" $slug -}}
-    {{- $img = $img | resources.Copy $name -}}
+    {{- $img = $img | resources.Copy (printf "og/%s.png" $slug) -}}
     {{- $out = $img.Permalink -}}
   {{- end -}}
 {{- end -}}
