@@ -1,23 +1,63 @@
-{{/* Event structured data, so talks can surface in search results. */}}
+{{/* Event structured data, so talks can surface in search results.
+
+   Changes from the previous version, all of them answering the Search Console
+   report or the thing it did not mention:
+
+   endDate      now always emitted. Single-day talks end the day they start;
+                `until` still handles multi-day ones. This was the warning.
+   organizer    gains `url` when the entry carries `organizerURL`. Second
+                warning. The fallback to `.event` for entries with no named
+                organiser is kept — it is right for Sikkerhetsfestivalen.
+   performer    now references the site's Person @id rather than describing a
+                second, unconnected Person. This is the part that matters:
+                it attaches every appearance to the same entity that carries
+                the ORCID and the FFI affiliation, instead of leaving a run of
+                identical name strings for Google to reconcile.
+   location     Place name is now the city. It was the festival name, and a
+                festival is not a place. The festival is still on the visible
+                page; it has simply left the markup, where it was claiming to
+                be somewhere you could stand.
+   past talks   now included. The page shows them, so the markup should
+                describe them, and an appearance that has happened is still a
+                fact about who you are. To go back to upcoming-only, restore
+                the two commented lines below.
+
+   Deliberately absent: `offers` and `image`, which exist for ticketed
+   commercial events — a zero-price offer on a public panel would be markup
+   asserting something untrue, and Google treats inaccurate structured data
+   more harshly than missing structured data. `description` is emitted only
+   when an entry carries a `summary` field. */}}
+
+{{- $talks := site.Data.talks -}}
+{{/*  upcoming-only, if you prefer:
 {{- $today := now.Format "2006-01-02" -}}
-{{- $up := where site.Data.talks "date" "ge" $today -}}
-{{- with $up }}
+{{- $talks = where site.Data.talks "date" "ge" $today -}}  */}}
+
+{{- with $talks }}
 {{- $events := slice -}}
 {{- range . -}}
+  {{- /* Inside a range, `$` is the page rather than the item, so anything
+         needed in a nested block is captured first. */ -}}
+  {{- $orgName := or .organizer .event "" -}}
+  {{- $orgURL := .organizerURL -}}
   {{- $e := dict
-      "@context" "https://schema.org"
       "@type" "Event"
       "name" .title
       "startDate" .date
+      "endDate" (or .until .date)
       "eventStatus" "https://schema.org/EventScheduled"
       "eventAttendanceMode" "https://schema.org/OfflineEventAttendanceMode"
-      "location" (dict "@type" "Place" "name" (or .event "") "address" (dict "@type" "PostalAddress" "addressLocality" (or .city "") "addressCountry" "NO"))
-      "performer" (dict "@type" "Person" "name" site.Params.fullName "url" site.BaseURL)
-      "organizer" (dict "@type" "Organization" "name" (or .organizer .event ""))
+      "location" (dict "@type" "Place" "name" (or .city "") "address" (dict "@type" "PostalAddress" "addressLocality" (or .city "") "addressCountry" "NO"))
+      "performer" (dict "@id" (printf "%s#person" site.BaseURL))
   -}}
-  {{- with .until }}{{ $e = merge $e (dict "endDate" .) }}{{ end -}}
+  {{- with $orgName -}}
+    {{- $org := dict "@type" "Organization" "name" . -}}
+    {{- with $orgURL }}{{ $org = merge $org (dict "url" .) }}{{ end -}}
+    {{- $e = merge $e (dict "organizer" $org) -}}
+  {{- end -}}
   {{- with .url }}{{ $e = merge $e (dict "url" .) }}{{ end -}}
+  {{- with .summary }}{{ $e = merge $e (dict "description" .) }}{{ end -}}
   {{- $events = $events | append $e -}}
 {{- end }}
-<script type="application/ld+json">{{ $events | jsonify (dict "indent" "  ") | safeJS }}</script>
+<script type="application/ld+json">{{ (dict "@context" "https://schema.org" "@graph" $events) | jsonify (dict "indent" "  ") | safeJS }}</script>
 {{- end }}

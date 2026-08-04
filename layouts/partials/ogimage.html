@@ -1,0 +1,75 @@
+{{- /* Returns the URL of this page's share card.
+
+   Order of preference:
+     1. an explicit `image:` in the page's front matter
+     2. a card generated at build time from the page title
+     3. the existing /og-default.png
+
+   Step 2 needs a TTF or OTF font, because Hugo's text filter cannot read
+   woff2. Put `spectral.ttf` (or Fraunces) at assets/fonts/spectral.ttf —
+   both are free from Google Fonts. Until that file exists this partial falls
+   straight through to og-default.png, so it is safe to install now and add
+   the font later. Nothing breaks in the meantime.
+
+   Titles are wrapped by hand: Hugo's images.Text draws a string, it does not
+   flow one. Roughly 24 characters a line at 64px on a 1200px card. */ -}}
+
+{{- $out := "" -}}
+
+{{- with .Params.image -}}
+  {{- $out = absURL . -}}
+{{- else -}}
+  {{- $base := resources.Get "og/base.png" -}}
+  {{- $font := or (resources.Get "fonts/spectral.ttf") (resources.Get "fonts/fraunces.ttf") -}}
+  {{- if and $base $font -}}
+
+    {{- $title := cond .IsHome site.Params.displayName .Title -}}
+    {{- $words := split $title " " -}}
+    {{- $lines := slice -}}
+    {{- $cur := "" -}}
+    {{- range $words -}}
+      {{- $try := cond (eq $cur "") . (printf "%s %s" $cur .) -}}
+      {{- if gt (len $try) 24 -}}
+        {{- if ne $cur "" }}{{ $lines = $lines | append $cur }}{{ end -}}
+        {{- $cur = . -}}
+      {{- else -}}
+        {{- $cur = $try -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if ne $cur "" }}{{ $lines = $lines | append $cur }}{{ end -}}
+    {{- $lines = first 4 $lines -}}
+
+    {{- $img := $base -}}
+    {{- $y := 150 -}}
+    {{- range $lines -}}
+      {{- $img = $img.Filter (images.Text . (dict
+          "color" "#2E4B3C" "size" 62 "x" 90 "y" $y "font" $font)) -}}
+      {{- $y = add $y 82 -}}
+    {{- end -}}
+
+    {{- /* section label above the title, domain below */ -}}
+    {{- with $.CurrentSection -}}
+      {{- if and .Title (not $.IsHome) -}}
+        {{- $img = $img.Filter (images.Text (upper .Title) (dict
+            "color" "#6A6E67" "size" 24 "x" 92 "y" 92 "font" $font)) -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $img = $img.Filter (images.Text "paulbuvarp.com" (dict
+        "color" "#6A6E67" "size" 26 "x" 92 "y" 520 "font" $font)) -}}
+
+    {{- /* Named from the permalink, not from .File — the 404 page and the
+           taxonomy pages have no File, and reaching for it there kills the
+           whole build. The permalink already carries the language, so no
+           separate suffix is needed. */ -}}
+    {{- $slug := replaceRE "/" "-" (strings.Trim .RelPermalink "/") -}}
+    {{- if eq $slug "" }}{{ $slug = "home" }}{{ end -}}
+    {{- $name := printf "og/%s.png" $slug -}}
+    {{- $img = $img | resources.Copy $name -}}
+    {{- $out = $img.Permalink -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if eq $out "" -}}
+  {{- $out = absURL (or site.Params.ogImage "/og-default.png") -}}
+{{- end -}}
+{{- $out -}}

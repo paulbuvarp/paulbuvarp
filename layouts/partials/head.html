@@ -14,7 +14,7 @@
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ site.Params.displayName }}">
 <meta property="og:locale" content="{{ or site.Language.Params.ogLocale "en_GB" }}">
-{{- $ogimg := absURL (or .Params.image site.Params.ogImage "/og-default.png") }}
+{{- $ogimg := partial "ogimage.html" . }}
 <meta property="og:image" content="{{ $ogimg }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">

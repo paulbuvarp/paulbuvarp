@@ -7,6 +7,8 @@
 #   until:  YYYY-MM-DD. Optional, for multi-day events.
 #   role:   what you are doing there. Optional.
 #   url:    programme or registration page. Optional.
+#   organizerURL: the organiser's own site. Optional; feeds schema.org.
+#   summary: one sentence on the talk. Optional; feeds schema.org.
 #   lang:   "no" or "en". Optional; shown as a small marker.
 #
 # Delete the two examples below once you have real entries.
@@ -16,6 +18,7 @@
   title: "Hva vi glemmer når verden brenner"
   event: "Arendalsuka"
   organizer: "Fredssentrene"
+  organizerURL: ""   # TODO — Claude did not guess this one
   city: "Arendal"
   role: "Panelist"
   lang: "no"
@@ -25,6 +28,7 @@
   title: "Nordic resilience in antagonistic times"
   event: "Arendalsuka"
   organizer: "Nordforsk"
+  organizerURL: "https://www.nordforsk.org/"        # CONFIRM
   city: "Arendal"
   role: "Ordstyrer"
   lang: "en"
@@ -34,6 +38,7 @@
   title: "Universitetenes rolle i å bygge demokratisk motstandskraft i samfunnet"
   event: "Arendalsuka"
   organizer: "Universitetet i Agder"
+  organizerURL: "https://www.uia.no/"               # CONFIRM
   city: "Arendal"
   role: "Ordstyrer"
   lang: "no"
@@ -43,6 +48,7 @@
   title: "Hvordan påvirker endrede nyhetsvaner Norges totalberedskap?"
   event: "Arendalsuka"
   organizer: "Medietilsynet"
+  organizerURL: "https://www.medietilsynet.no/"      # CONFIRM
   city: "Arendal"
   role: "Panelist"
   lang: "no"
@@ -52,6 +58,7 @@
   title: "Stortings- og sametingsvalget 2025 - ble vi utsatt for mer uønsket påvirkning enn vi var klar over?"
   event: "Arendalsuka"
   organizer: "Folk og forsvar"
+  organizerURL: "https://folkogforsvar.no/"          # CONFIRM
   city: "Arendal"
   role: "Foredragsholder"
   lang: "no"
@@ -61,6 +68,7 @@
   title: "Får vi en generasjon som ikke stoler på skolen og media?"
   event: "Arendalsuka"
   organizer: "Utdanningsforbundet og Norsk journalistlag"
+  organizerURL: ""   # TODO — Claude did not guess this one
   city: "Arendal"
   role: "Panelist"
   lang: "no"
@@ -70,6 +78,7 @@
   title: "Workshop om FIMI"
   event: "Dialog- og demokratidag"
   organizer: "EDDA"
+  organizerURL: ""   # TODO — Claude did not guess this one
   city: "Oslo"
   role: "Foredragsholder"
   lang: "no"
