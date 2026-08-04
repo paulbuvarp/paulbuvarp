@@ -47,7 +47,10 @@
   --display: "Fraunces", Georgia, serif;
   --text: "Spectral", Georgia, "Times New Roman", serif;
 
-  --measure: 34rem;        /* prose column — do not widen, it is the reading measure */
+  --measure: 40rem;        /* the single content width. 40rem puts Norwegian
+                              prose at about 76 characters a line, which is the
+                              top of the comfortable band — 46rem was measured
+                              at 88 and rejected. Do not widen further. */
   --wide: 46rem;           /* page container — indexes and lists use all of it */
   --step: 1.55rem;
 
@@ -130,22 +133,30 @@ main.wrap { padding-top: 4rem; }
   :root { --wide: 56rem; }
 }
 
-/* Prose keeps a readable measure inside the wider page. Lists and indexes
-   spread to the full container, which is what makes the page feel less
-   like a phone column on a desktop. */
-article.prose > p,
-article.prose > h2,
-article.prose > h3,
-article.prose > blockquote,
-article.prose > ol,
-article.prose > .definition,
-article.prose > .standfirst,
-article.prose > .attribution,
+/* One content width for everything.
+
+   This used to be two: prose at 34rem and lists at the full container, on the
+   reasoning that indexes spreading wide stopped the page feeling like a phone
+   column. In practice it produced a ragged right edge — a slim standfirst
+   sitting above a wide list — which read as unresolved rather than composed.
+
+   Everything is now the measure. 40rem was chosen by counting: Norwegian runs
+   at roughly 76 characters a line there, against a comfortable ceiling of 75
+   and 88 at the full container. Norwegian is the binding constraint, because
+   compound words push it past the English.
+
+   The container stays wider than the measure on purpose. That difference is
+   the gutter the sidenotes live in, not waste. */
+article.prose > *,
 .aftertext > *,
 .parenthetical-text > p,
 .parenthetical > p {
   max-width: var(--measure);
 }
+
+/* Sidenotes are floated out of the prose by a negative margin, so a max-width
+   on the paragraph must not clip them. */
+article.prose > * > .sidenote { max-width: none; }
 
 /* --- Masthead ----------------------------------------------------------- */
 
