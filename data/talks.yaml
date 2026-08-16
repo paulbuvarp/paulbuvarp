@@ -11,14 +11,24 @@
 #   summary: one sentence on the talk. Optional; feeds schema.org.
 #   lang:   "no" or "en". Optional; shown as a small marker.
 #
-# Delete the two examples below once you have real entries.
+# HOW "AUTOMATIC" ACTUALLY WORKS. Hugo decides what is upcoming by comparing
+# each date to the moment the site is BUILT, not the moment somebody visits.
+# GitHub Pages builds when you push — so without help, a talk stays under
+# Kommende until your next push, however long that is.
+#
+# .github/workflows/scheduled-build.yml rebuilds the site every morning to
+# close that gap. If that file is ever deleted, this page silently goes stale
+# again, and nothing will warn you.
+#
+# A talk with `until` stays upcoming until the day after it ends, so nothing is
+# filed under Tidligere while you are still standing there.
 # ---------------------------------------------------------------------------
 
 - date: "2026-08-10"
   title: "Hva vi glemmer når verden brenner"
   event: "Arendalsuka"
   organizer: "Fredssentrene"
-  organizerURL: ""  
+  organizerURL: ""
   city: "Arendal"
   role: "Panelist"
   lang: "no"
@@ -28,7 +38,7 @@
   title: "Norway and Ukraine: On the right side of history"
   event: "Arendalsuka"
   organizer: "Norsk-ukrainsk venneforening"
-  organizerURL: ""  
+  organizerURL: ""
   city: "Arendal"
   role: "Panelist"
   lang: "en"
@@ -39,7 +49,7 @@
   title: "Nordic resilience in antagonistic times"
   event: "Arendalsuka"
   organizer: "Nordforsk"
-  organizerURL: "https://www.nordforsk.org/"        
+  organizerURL: "https://www.nordforsk.org/"
   city: "Arendal"
   role: "Ordstyrer"
   lang: "en"

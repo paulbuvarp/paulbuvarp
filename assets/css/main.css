@@ -35,14 +35,27 @@
 }
 
 :root {
-  --paper: #edede7;
-  --ink: #191c19;
-  --rule: #c9c9c0;
-  --muted: #6a6e67;
-  --mark: #2e4b3c;
-  --mark-tint: rgba(46, 75, 60, 0.09);
-  --link: #2f6b52;                      /* inline links inside prose */
-  --link-rule: rgba(47, 107, 82, 0.38);
+  /* The site is dark, always, rather than following the reader's system
+     setting. That is a deliberate choice: the palette was designed here and
+     the light variant was the fallback, not the other way round.
+
+     The light values are kept below in comments rather than deleted, because
+     reversing this decision should not mean reconstructing six hex codes from
+     memory:
+       --paper #edede7  --ink #191c19  --rule #c9c9c0  --muted #6a6e67
+       --mark  #2e4b3c  --link #2f6b52
+       --mark-tint rgba(46,75,60,0.09)  --link-rule rgba(47,107,82,0.38)
+
+     Paper still means the page and ink still means the type. The words have
+     swapped luminance, not meaning. */
+  --paper: #141714;
+  --ink: #e2e3dd;
+  --rule: #35392f;
+  --muted: #9aa094;
+  --mark: #8fb69c;
+  --mark-tint: rgba(143, 182, 156, 0.12);
+  --link: #a3cdb2;                      /* inline links inside prose */
+  --link-rule: rgba(163, 205, 178, 0.42);
 
 
   /* --- Type scale ---------------------------------------------------------
@@ -122,25 +135,15 @@
   --bleed-h: 42rem;        /* the frame's height; the fade is a share of it */
   --bleed-hold: 78%;       /* how far down before the bottom fade begins */
   --bleed-focus: 50% 22%;  /* which part of the photograph is centred */
-  --bleed-filter: grayscale(1) contrast(1.06);
+  /* A greyscale photograph on a near-black ground loses its midtones, so it
+     is lifted rather than the whole thing being dimmed further. This was a
+     dark-mode override; with the site always dark it is simply the value. */
+  --bleed-filter: grayscale(1) contrast(1.22) brightness(1.45);
   --bleed-overhang: 3rem;  /* how far past the right edge it runs */
   --bleed-top: 0.5rem;
-  --bleed-opacity: 0.5;
+  --bleed-opacity: 0.675;   /* was 0.5, times the 1.35 dark-mode factor */
   --bleed-fade: 86%;       /* where the leftward fade completes */
   --portrait-w: 16rem;     /* the contact-page portrait */
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --paper: #141714;
-    --ink: #e2e3dd;
-    --rule: #35392f;
-    --muted: #9aa094;
-    --mark: #8fb69c;
-    --mark-tint: rgba(143, 182, 156, 0.12);
-    --link: #a3cdb2;
-    --link-rule: rgba(163, 205, 178, 0.42);
-  }
 }
 
 *,
@@ -148,6 +151,10 @@
 *::after {
   box-sizing: border-box;
 }
+
+/* Without this the browser still paints scrollbars, form fields, autofill
+   backgrounds and the like as light-theme widgets on a dark page. */
+html { color-scheme: dark; }
 
 html {
   -webkit-text-size-adjust: 100%;
@@ -1234,15 +1241,6 @@ footer.foot a:hover {
     white-space: nowrap;
     pointer-events: none;
   }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* A greyscale photograph on a near-black ground loses its midtones.
-       Lift them rather than dimming the whole thing further. */
-    --bleed-filter: grayscale(1) contrast(1.22) brightness(1.45);
-  }
-  .portrait-bleed { opacity: calc(var(--bleed-opacity) * 1.35); }
 }
 
 @media (max-width: 77.99rem) {

@@ -1,0 +1,87 @@
+# Rebuilds and redeploys the site every morning, whether or not anything has
+# been pushed.
+#
+# Why this exists: the Talks page decides what is upcoming by comparing each
+# date to `now`, and `now` is the moment Hugo runs — not the moment somebody
+# visits. A static site has no other way to know the date. So without a
+# scheduled build, a talk stays under Kommende until the next time you happen
+# to push, which is how nine Arendalsuka appearances were still listed as
+# upcoming days after they finished.
+#
+# This is also what keeps the copyright year in the footer honest, and any
+# future page that depends on the current date.
+#
+# The same reasoning applies to your existing deploy workflow: this one does
+# not replace it, it runs alongside it. Pushes still deploy immediately.
+
+name: Scheduled rebuild
+
+on:
+  schedule:
+    # 05:12 UTC daily. Deliberately not on the hour: GitHub queues cron jobs
+    # and the top of the hour is the most contended slot, so an odd minute
+    # runs closer to on time. In Norwegian terms this is 06:12 or 07:12
+    # depending on the season, so the site is current before anyone reads it.
+    - cron: "12 5 * * *"
+  # and a button in the Actions tab, for when you want it now
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# If a push-triggered deploy is already running, let it finish rather than
+# cancelling it — this job has no deadline.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # Keep this in step with the version you build with locally. Hugo's
+      # output changes between minor versions and a surprise upgrade is not
+      # something you want arriving on a schedule at six in the morning.
+      HUGO_VERSION: 0.148.2
+    steps:
+      - name: Install Hugo
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb \
+            https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
+          sudo dpkg -i ${{ runner.temp }}/hugo.deb
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          # Needed if any template uses .Lastmod from git history
+          fetch-depth: 0
+
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build
+        env:
+          HUGO_ENVIRONMENT: production
+          TZ: Europe/Oslo
+        run: |
+          hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

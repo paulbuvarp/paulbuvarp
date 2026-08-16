@@ -13,10 +13,29 @@
       "caption" (i18n "talks_video_caption")
   ) }}
 
+  {{/* `now` is the moment of the BUILD, not the moment of the visit. A static
+       site cannot know today's date any other way, so this page is only as
+       current as the last deploy — which is why a talk can sit under Upcoming
+       for a fortnight after it happened.
+
+       The fix is not here; it is .github/workflows/scheduled-build.yml, which
+       rebuilds the site every morning whether or not anything was pushed.
+       If that workflow is ever removed, this page goes stale again.
+
+       A multi-day event stays upcoming until the day after it ends, so a talk
+       is not filed under Previously while you are still at it. */}}
   {{ $today := now.Format "2006-01-02" }}
   {{ $all := site.Data.talks }}
-  {{ $upcoming := where $all "date" "ge" $today }}
-  {{ $past := where $all "date" "lt" $today }}
+  {{ $upcoming := slice }}
+  {{ $past := slice }}
+  {{ range $all }}
+    {{ $ends := or .until .date }}
+    {{ if ge $ends $today }}
+      {{ $upcoming = $upcoming | append . }}
+    {{ else }}
+      {{ $past = $past | append . }}
+    {{ end }}
+  {{ end }}
 
   {{ partial "sectionhead.html" (dict "label" (i18n "talks_upcoming")) }}
   {{ if $upcoming }}

@@ -21,6 +21,13 @@
 # --- ESSAYS AND COMMENTARY ---
 
 
+- title: "Tillit er ingen kvittering"
+  venue: "Dagsavisen"
+  year: 2026
+  kind: essay
+  featured: true
+  url: "https://www.dagsavisen.no/debatt/tillit-er-ingen-kvittering/10478863"
+
 - title: "Da språkmodellen ble et våpen"
   venue: "Altinget"
   year: 2026
@@ -32,7 +39,7 @@
   venue: "Minerva"
   year: 2026
   kind: essay
-  featured: true
+  featured: false
   url: "https://www.minerva.no/barn-sosiale-medier-teknologi/om-sosiale-medier-er-skadelig-for-barn-er-ikke-det-viktigste-sporsmalet/509327"
 
 - title: "Maktens oversettelsesmaskin"
