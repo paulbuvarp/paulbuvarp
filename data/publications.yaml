@@ -21,6 +21,13 @@
 # --- ESSAYS AND COMMENTARY ---
 
 
+- title: "Om balkanisering: Hvordan leve side om side i en splittet verden"
+  venue: "Agenda Magasin"
+  year: 2026
+  kind: essay
+  featured: true
+  url: "https://agendamagasin.no/artikler/om-balkanisering-hvordan-leve-side-om-side-i-en-splittet-verden/"
+
 - title: "Tillit er ingen kvittering"
   venue: "Dagsavisen"
   year: 2026
@@ -32,7 +39,7 @@
   venue: "Altinget"
   year: 2026
   kind: essay
-  featured: true
+  featured: false
   url: "https://www.altinget.no/artikkel/da-spraakmodellen-ble-et-vaapen"
 
 - title: "Om sosiale medier er skadelig for barn er ikke det viktigste spørsmålet"
